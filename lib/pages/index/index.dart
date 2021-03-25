@@ -1,10 +1,11 @@
-import 'package:conic/pages/coin_list/coin_list.dart';
 import 'package:conic/pages/index/widgets/widgets.dart';
-import 'package:conic/pages/news/news.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Index extends StatelessWidget {
+  final CupertinoTabController controller;
+
+  const Index({Key? key, required this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
@@ -22,12 +23,7 @@ class Index extends StatelessWidget {
         BoxTextTitle(
           title: "Top Coins",
           onPressSeeAll: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => CoinList(),
-              ),
-            );
+            controller.index = 1;
           },
         ),
         TopCoinList(),
@@ -41,16 +37,13 @@ class Index extends StatelessWidget {
           title: "News",
           subTitle: "Last trend and breakding news",
           onPressSeeAll: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => News(),
-              ),
-            );
+            controller.index = 3;
           },
         ),
         IndexNewsList(),
-        SeeAllNews(),
+        SeeAllNews(onPress: () {
+          controller.index = 3;
+        }),
         SliverPadding(
           padding: EdgeInsets.symmetric(vertical: 50),
         )

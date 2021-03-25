@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeTabBar extends StatelessWidget {
+  final CupertinoTabController controller = CupertinoTabController();
   @override
   Widget build(BuildContext context) {
     return CupertinoTheme(
@@ -15,6 +16,7 @@ class HomeTabBar extends StatelessWidget {
         primaryColor: Colors.red,
       ),
       child: CupertinoTabScaffold(
+        controller: controller,
         tabBar: CupertinoTabBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home_filled)),
@@ -27,7 +29,7 @@ class HomeTabBar extends StatelessWidget {
         tabBuilder: (context, index) {
           switch (index) {
             case 0:
-              return Index();
+              return Index(controller:controller);
             case 1:
               return CoinList();
             case 2:
@@ -37,7 +39,7 @@ class HomeTabBar extends StatelessWidget {
             case 4:
               return More();
             default:
-              return Index();
+              return Index(controller:controller);
           }
         },
       ),

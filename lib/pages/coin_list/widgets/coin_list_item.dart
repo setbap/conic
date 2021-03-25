@@ -1,4 +1,3 @@
-
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -42,83 +41,92 @@ class CoinListItem extends StatelessWidget {
               radius: 20,
               child: Image.network(
                 imageSrc,
+                errorBuilder: (context, error, stackTrace) => Placeholder(),
               ),
             ),
           ),
           Expanded(
               child: Column(
+            children: [
+              Row(
+                children: [
+                  Text(
+                    name,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                  Image.network(
+                    chartSrc,
+                    height: 24,
+                    color: Colors.green,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      child: Text(
+                        "error in connection",
+                        style: TextStyle(
+                          color: Colors.red,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(),
+                  Text(
+                    "$price\$",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 1.1,
+                    ),
+                  ),
+                ],
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Row(
                 children: [
                   Row(
                     children: [
-                      Text(
-                        name,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.1,
+                      Container(
+                        child: Text(
+                          '$rank',
+                          style: TextStyle(fontSize: 10),
+                        ),
+                        decoration: BoxDecoration(
+                          color: DarkPrimaryColor,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          vertical: 2,
+                          horizontal: 10,
+                        ),
+                        margin: EdgeInsets.only(
+                          right: 6,
                         ),
                       ),
-                      Image.network(
-                        chartSrc,
-                        height: 24,
-                        color: Colors.green,
-                      ),
-                      SizedBox(),
                       Text(
-                        "$price\$",
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.1,
-                        ),
-                      ),
-                    ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  ),
-                  SizedBox(
-                    height: 4,
-                  ),
-                  Row(
-                    children: [
-                      Row(
-                        children: [
-                          Container(
-                            child: Text(
-                              '$rank',
-                              style: TextStyle(fontSize: 10),
-                            ),
-                            decoration: BoxDecoration(
-                              color: DarkPrimaryColor,
-                              borderRadius: BorderRadius.circular(6),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 2,
-                              horizontal: 10,
-                            ),
-                            margin: EdgeInsets.only(
-                              right: 6,
-                            ),
-                          ),
-                          Text(
-                            id,
-                            style:
+                        id,
+                        style:
                             TextStyle(fontSize: 12, color: DarkTextForeground),
-                          ),
-                          SizedBox(
-                            width: 4,
-                          ),
-                          ChangeShow(change:change)
-                        ],
                       ),
-                      Text(
-                        'MCap $marketCap ',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(fontSize: 12, color: DarkTextForeground),
+                      SizedBox(
+                        width: 4,
                       ),
+                      ChangeShow(change: change)
                     ],
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  ),
+                  Text(
+                    'MCap $marketCap ',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(fontSize: 12, color: DarkTextForeground),
                   ),
                 ],
-              )),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ),
+            ],
+          )),
           Container(
             child: CupertinoButton(
               padding: const EdgeInsets.all(2),

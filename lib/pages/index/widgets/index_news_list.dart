@@ -51,6 +51,10 @@ class NewsItem extends StatelessWidget {
                   width: 50,
                   height: 50,
                   fit: BoxFit.fill,
+                  errorBuilder: (context, error, stackTrace) => Placeholder(
+                    fallbackWidth: 50,
+                    fallbackHeight: 50,
+                  ),
                 ),
               ),
               SizedBox(width: 16),

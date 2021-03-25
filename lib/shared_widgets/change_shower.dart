@@ -2,8 +2,10 @@
 import 'package:flutter/material.dart';
 
 class ChangeShow extends StatelessWidget {
+  final MainAxisAlignment mainAxisAlignment;
   const ChangeShow({
     Key? key,
+    this.mainAxisAlignment=MainAxisAlignment.start,
     required this.change,
   }) : super(key: key);
 
@@ -14,7 +16,7 @@ class ChangeShow extends StatelessWidget {
     return Container(
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: mainAxisAlignment,
         children: [
           Text(
             change.toStringAsFixed(4),

@@ -33,7 +33,7 @@ class BoxTextTitle extends StatelessWidget {
                     ? CupertinoButton(
                         padding: EdgeInsets.all(0),
                         minSize: 32,
-                        onPressed:onPressSeeAll,
+                        onPressed: onPressSeeAll,
                         child: Text(
                           "See All",
                           style: Theme.of(context).textTheme.caption!.copyWith(
@@ -47,7 +47,7 @@ class BoxTextTitle extends StatelessWidget {
             ),
             subTitle != null
                 ? Text(
-                    "Based on search in 24h",
+                    subTitle!,
                     style: Theme.of(context).textTheme.caption,
                     textAlign: TextAlign.start,
                   )

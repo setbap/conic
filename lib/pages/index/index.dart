@@ -12,6 +12,7 @@ class Index extends StatelessWidget {
       slivers: [
         SliverAppBar(
           title: Text("Index"),
+          pinned: true,
           actions: [
             CupertinoButton(
               onPressed: () {},

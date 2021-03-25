@@ -28,9 +28,9 @@ class HomeTabBar extends StatelessWidget {
         ),
         tabBuilder: (context, index) {
           switch (index) {
-            case 0:
-              return Index(controller:controller);
             case 1:
+              return Index(controller: controller);
+            case 0:
               return CoinList();
             case 2:
               return Portfolio();
@@ -39,7 +39,7 @@ class HomeTabBar extends StatelessWidget {
             case 4:
               return More();
             default:
-              return Index(controller:controller);
+              return Index(controller: controller);
           }
         },
       ),

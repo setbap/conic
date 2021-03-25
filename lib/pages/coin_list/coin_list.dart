@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:conic/pages/coin_list/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,32 @@ class _CoinListState extends State<CoinList>
               controller: tabController,
               physics: BouncingScrollPhysics(),
               children: [
-                Tab(icon: Icon(Icons.directions_car)),
+                Container(
+                  child: ListView.separated(
+                    padding: const EdgeInsets.only(
+                      left: 8,
+                      right: 8,
+                      bottom: 94,
+                      top: 16,
+                    ),
+                    itemBuilder: (context, index) {
+                      return CoinListItem(
+                        imageSrc:
+                            'https://s2.coinmarketcap.com/static/img/coins/64x64/$index.png',
+                        name: 'bitcoin',
+                        chartSrc:
+                            'https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/1.png',
+                        change: Random().nextDouble() * 10 - 5,
+                        id: 'btc',
+                        marketCap: 123123123,
+                        price: 1234,
+                        rank: index,
+                      );
+                    },
+                    separatorBuilder: (context, index) => Divider(),
+                    itemCount: 20,
+                  ),
+                ),
                 Tab(icon: Icon(Icons.directions_transit)),
               ],
             ),

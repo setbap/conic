@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:conic/pages/coin_list/widgets/widgets.dart';
+import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,7 @@ class _CoinListState extends State<CoinList>
       length: widget._kTabCount,
       child: CustomScrollView(
         slivers: [
-          CoinListAppBar(tabController: tabController),
+          CoinExchangeAppBar(tabController: tabController),
           SliverFillRemaining(
             child: TabBarView(
               controller: tabController,

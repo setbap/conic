@@ -27,7 +27,12 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
         setState(() {
           textOpacity = (offset.clamp(30, 70) - 30) / 40;
         });
-      } else if (offset < 70 && textOpacity < 0.98) {
+      } else if (offset < 0 && textOpacity < 0.01) {
+        //when scroll so fast
+        setState(() {
+          textOpacity = 0;
+        });
+      }  else if (offset > 70 && textOpacity < 0.98) {
         //when scroll so fast
         setState(() {
           textOpacity = 1;

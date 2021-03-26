@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class CoinListAppBar extends StatelessWidget {
-  const CoinListAppBar({
+class CoinExchangeAppBar extends StatelessWidget {
+  final bool showSearch;
+  const CoinExchangeAppBar({
     Key? key,
+    this.showSearch=true,
     required this.tabController,
   }) : super(key: key);
 
@@ -14,10 +16,10 @@ class CoinListAppBar extends StatelessWidget {
       centerTitle: false,
       pinned: true,
       actions: [
-        IconButton(
+        showSearch? IconButton(
           icon: Icon(Icons.search),
           onPressed: () {},
-        )
+        ):SizedBox()
       ],
       title: Container(
         width: 220,

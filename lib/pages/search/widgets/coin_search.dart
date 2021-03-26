@@ -1,17 +1,137 @@
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'dart:convert';
+import 'package:conic/models/models.dart';
+import 'package:conic/utils/colors.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class CoinSearch extends StatelessWidget {
+List<SimpleCoin> parseCoins(String string) {
+  final parsed = jsonDecode(string).cast<Map<String, dynamic>>();
+  return parsed.map<SimpleCoin>((json) => SimpleCoin.fromMap(json)).toList();
+}
+
+class CoinSearch extends StatefulWidget {
+  @override
+  _CoinSearchState createState() => _CoinSearchState();
+}
+
+class _CoinSearchState extends State<CoinSearch> {
+  String searchText = '';
+  final _textController = TextEditingController();
+  Future<List<SimpleCoin>> fetchCoins() async {
+    final String response = await rootBundle.loadString('assets/coins.json');
+    return compute(parseCoins, response);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _textController.addListener(() {
+      setState(() {
+        searchText = _textController.text;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        BoxTextTitle(
-          title: "Top Coins",
-          onPressSeeAll: () {},
-        ),
-        TopCoinList(),
-      ],
-    );
+    return Scaffold(
+        backgroundColor: Colors.black,
+        body: FutureBuilder<List<SimpleCoin>>(
+          future: fetchCoins(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) print(snapshot.error);
+            if (!snapshot.hasData) {
+              return Center(child: CircularProgressIndicator());
+            } else {
+              final data = snapshot.data!
+                  .where(
+                    (element) =>
+                        element.name
+                            .toLowerCase()
+                            .startsWith(searchText.toLowerCase()) ||
+                        element.id
+                            .toLowerCase()
+                            .startsWith(searchText.toLowerCase()) ||
+                        element.symbol.toLowerCase().startsWith(
+                              searchText.toLowerCase(),
+                            ),
+                  )
+                  .toList();
+              return Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.all(8),
+                    padding: EdgeInsets.all(0),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: DarkForeground,
+                    ),
+                    child: TextField(
+                      controller: _textController,
+                      decoration: InputDecoration(
+                        suffixIcon: Icon(Icons.search),
+                        hintText: "coin name or id or symbol",
+                        contentPadding: EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 2,
+                        ),
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                          borderRadius: BorderRadius.circular(4),
+                          gapPadding: 0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (ctx, index) {
+                        return ListTile(
+                          onTap: () {},
+                          leading: CircleAvatar(
+                            backgroundColor: Colors.transparent,
+                            child: Image.network(
+                              data[index].largeThumb,
+                              errorBuilder: (context, error, stackTrace) =>
+                                  Container(
+                                color: Colors.orangeAccent,
+                              ),
+                            ),
+                            radius: 16,
+                          ),
+                          title: Text(
+                            data[index].name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          trailing: Container(
+                            decoration: BoxDecoration(
+                              color: DarkForeground,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              vertical: 3,
+                              horizontal: 10,
+                            ),
+                            child: Text(
+                              data[index].symbol,
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ),
+                        );
+                      },
+                      itemCount: data.length,
+                    ),
+                  ),
+                ],
+              );
+            }
+          },
+        ));
   }
 }

@@ -11,6 +11,13 @@ List<SimpleCoin> parseCoins(String string) {
 }
 
 class CoinSearch extends StatefulWidget {
+  final bool hasArrow;
+
+  const CoinSearch({
+    Key? key,
+    this.hasArrow = false,
+  }) : super(key: key);
+
   @override
   _CoinSearchState createState() => _CoinSearchState();
 }
@@ -100,28 +107,42 @@ class _CoinSearchState extends State<CoinSearch> {
                             ),
                             radius: 16,
                           ),
-                          title: Text(
-                            data[index].name,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                          title: Padding(
+                            padding: const EdgeInsets.only(bottom: 4),
+                            child: Text(
+                              data[index].name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                          trailing: Container(
-                            decoration: BoxDecoration(
-                              color: DarkForeground,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 3,
-                              horizontal: 10,
-                            ),
-                            child: Text(
-                              data[index].symbol,
-                              style: TextStyle(fontSize: 10),
-                            ),
+                          trailing:widget.hasArrow? Icon(
+                            Icons.keyboard_arrow_right_sharp,
+                            color: Colors.white,
+                          ):SizedBox(),
+                          subtitle: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Container(
+                                width: 40,
+                                height: 15,
+                                decoration: BoxDecoration(
+                                  color: DarkForeground,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  vertical: 1,
+                                  horizontal: 10,
+                                ),
+                                child: Text(
+                                  data[index].symbol,
+                                  style: TextStyle(fontSize: 9),
+                                ),
+                              ),
+                            ],
                           ),
                         );
                       },

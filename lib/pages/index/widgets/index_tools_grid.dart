@@ -1,4 +1,3 @@
-import 'package:conic/pages/watch_list/watch_list.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +14,12 @@ class IndexToolsList extends StatelessWidget {
           color: Colors.white,
         ),
         onPress: () {
-          Navigator.push(
-            context,
-            CupertinoPageRoute(
-              builder: (context) => WatchList(),
-            ),
-          );
+          // Navigator.push(
+          //   context,
+          //   CupertinoPageRoute(
+          //     builder: (context) => WatchList(),
+          //   ),
+          // );
         },
       ),
       IndexToolsItem(
@@ -31,12 +30,12 @@ class IndexToolsList extends StatelessWidget {
             color: Colors.white,
           ),
           onPress: () {
-            Navigator.push(
-              context,
-              CupertinoPageRoute(
-                builder: (context) => WatchList(),
-              ),
-            );
+            // Navigator.push(
+            //   context,
+            //   CupertinoPageRoute(
+            //     builder: (context) => WatchList(),
+            //   ),
+            // );
           }),
     ];
     return SliverGrid(

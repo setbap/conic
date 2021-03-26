@@ -1,9 +1,9 @@
+import 'package:conic/pages/add_transaction/add_transaction.dart';
 import 'package:conic/pages/coin_list/coin_list.dart';
 import 'package:conic/pages/index/index.dart';
 import 'package:conic/pages/more/more.dart';
 import 'package:conic/pages/news/news.dart';
 import 'package:conic/pages/portfolio/portfolio.dart';
-import 'package:conic/pages/search/search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +29,10 @@ class HomeTabBar extends StatelessWidget {
         ),
         tabBuilder: (context, index) {
           switch (index) {
+            // case 0:
+            //   return Search();
             case 0:
-              return Search();
+              return AddTransaction();
             // case 0:
             //   return Index(controller: controller);
             case 1:

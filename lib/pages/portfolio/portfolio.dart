@@ -1,180 +1,93 @@
 import 'dart:math';
-
-import 'package:conic/shared_widgets/change_shower.dart';
+import 'package:conic/pages/portfolio/widgets/widgets.dart';
+import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class Portfolio extends StatelessWidget {
+class Portfolio extends StatefulWidget {
+  @override
+  _PortfolioState createState() => _PortfolioState();
+}
+
+class _PortfolioState extends State<Portfolio> {
+  ScrollController controller = ScrollController();
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [
-      SliverAppBar(
-        pinned: true,
-        backgroundColor: Colors.black,
-        title: Text(
-          "\$ 432.23",
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
+    return CustomScrollView(
+      controller: controller,
+      slivers: [
+        PortfolioAppBar(
+          price: 432,
+          controller: controller,
+          onPress: () {},
         ),
-        actions: [
-          CupertinoButton(
-            child: Icon(
-              Icons.add_circle_outlined,
-              color: Colors.white,
-            ),
-            onPressed: () {},
-          )
-        ],
-      ),
-      SliverToBoxAdapter(
-        child: Row(
-          children: [
-            Expanded(
-              child: Container(
-                margin: const EdgeInsets.only(left: 8),
-                child: Text(
-                  "Asset",
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              flex: 2,
-            ),
-            Expanded(
-                child: Text(
-              "Price",
-              textAlign: TextAlign.center,
-            )),
-            Expanded(
-                child: Container(
-              margin: EdgeInsets.only(right: 8),
-              child: Text(
-                "Holdings",
-                textAlign: TextAlign.end,
-              ),
-            )),
-          ],
-        ),
-      ),
-      SliverToBoxAdapter(
-          child: Divider(
-        thickness: 3,
-      )),
-      SliverList(
-        delegate: SliverChildBuilderDelegate(
-          (ctx, index) => CupertinoButton(
-            padding: EdgeInsets.zero,
-            onPressed: () {},
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                Text(
+                  "Current Balance",
+                  style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                      color: DarkTextForeground),
+                ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
-                      child: Row(
-                        children: [
-                          SizedBox(
-                            width: 6,
-                          ),
-                          Container(
-                            child: CircleAvatar(
-                              child: Image.network(
-                                'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
-                                height: 32,
-                                width: 32,
-                                errorBuilder: (_, __, ___) =>
-                                    Container(color: Colors.yellow),
-                              ),
-                            ),
-                            height: 48,
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Cardano",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              Text(
-                                "Ada",
-                                style: TextStyle(
-                                    fontSize: 12, color: DarkTextForeground),
-                                textAlign: TextAlign.start,
-                              )
-                            ],
-                          )
-                        ],
-                      ),
-                      flex: 2,
-                    ),
-                    Expanded(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text(
-                            "\$132.12",
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                          Center(
-                            child: ChangeShow(
-                              change: Random().nextDouble() - 0.5,
-                              mainAxisAlignment: MainAxisAlignment.center,
-                            ),
-                          )
-                        ],
+                    Text(
+                      "${439.21} \$",
+                      style: TextStyle(
+                        fontSize: 28,
                       ),
                     ),
-                    Expanded(
-                      child: Container(
-                        margin: EdgeInsets.only(right: 8),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            Text(
-                              "\$132.12",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                              ),
-                              textAlign: TextAlign.end,
-                            ),
-                            Text(
-                              "123 ADA",
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: DarkTextForeground,
-                              ),
-                              textAlign: TextAlign.end,
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
+                    ChangeShow(
+                      change: 23,
+                    )
                   ],
                 ),
-                Divider(
-                  thickness: 1,
-                )
               ],
             ),
           ),
-          childCount: 5,
         ),
-      )
-    ]);
+        SliverChartBox(),
+        PortfollioTableHeader(),
+        SliverToBoxAdapter(
+            child: Divider(
+          thickness: 3,
+        )),
+        SliverList(
+          delegate: SliverChildBuilderDelegate(
+            (ctx, index) => PortfolioTableDataRow(
+              imageSrc:
+                  'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+              price: 100,
+              id: 'btc',
+              name: 'bitcoin',
+              change: Random().nextDouble() - 0.5,
+              coinCount: 12,
+              onPress: () {},
+            ),
+            childCount: 5,
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: ElevatedButton(
+            child: Padding(
+              padding: const EdgeInsets.all(12),
+              child: Text(
+                "Add Transaction",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            onPressed: () {},
+          ),
+        ),
+        SliverPadding(padding: EdgeInsets.only(top: 100))
+      ],
+    );
   }
 }

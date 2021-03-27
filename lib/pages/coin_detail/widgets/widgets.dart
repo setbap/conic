@@ -1,0 +1,1 @@
+export 'coin_detail_app_bar.dart';

@@ -32,13 +32,19 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
         setState(() {
           textOpacity = 0;
         });
-      }  else if (offset > 70 && textOpacity < 0.98) {
+      } else if (offset > 70 && textOpacity < 0.98) {
         //when scroll so fast
         setState(() {
           textOpacity = 1;
         });
       }
     });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
   }
 
   @override

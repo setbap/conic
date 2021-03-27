@@ -1,21 +1,29 @@
+import 'package:conic/pages/coin_detail/widgets/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class CoinDetail extends StatelessWidget {
+class CoinDetail extends StatefulWidget {
+  @override
+  _CoinDetailState createState() => _CoinDetailState();
+}
+
+class _CoinDetailState extends State<CoinDetail> {
+  final ScrollController _controller = ScrollController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        leading: Center(child: Text('CoinDetail page')),
-      ),
-      child: Center(
-        child: ElevatedButton(
-          onPressed: () {},
-          child: Container(
-            child: Text("CoinDetail page"),
-          ),
-        ),
-      ),
+    return CustomScrollView(
+      slivers: [
+        CoinDetailAppBar(
+          controller: _controller,
+        )
+      ],
     );
   }
 }

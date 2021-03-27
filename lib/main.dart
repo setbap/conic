@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Conic',
       locale: DevicePreview.locale(context), // Add the locale here
       builder: DevicePreview.appBuilder,
       theme: ThemeData(

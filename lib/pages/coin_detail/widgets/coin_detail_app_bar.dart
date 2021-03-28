@@ -59,13 +59,13 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
             opacity: textOpacity,
             child: Row(
               children: [
-                SizedBox(
-                  width: 12,
-                ),
-                Text(
-                  "BTC",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w700),
+
+                FittedBox(
+                  child: Text(
+                    "BTC",
+                    style: TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.w500),
+                  ),
                 ),
                 SizedBox(
                   width: 12,
@@ -90,9 +90,7 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(
-                  width: 12,
-                ),
+
               ],
             ),
           ),

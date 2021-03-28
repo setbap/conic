@@ -1,7 +1,6 @@
 import 'dart:math';
 import 'package:conic/pages/portfolio/widgets/widgets.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -29,36 +28,9 @@ class _PortfolioState extends State<Portfolio> {
           controller: controller,
           onPress: () {},
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Current Balance",
-                  style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                      color: DarkTextForeground),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "${439.21} \$",
-                      style: TextStyle(
-                        fontSize: 28,
-                      ),
-                    ),
-                    ChangeShow(
-                      change: 23,
-                    )
-                  ],
-                ),
-              ],
-            ),
-          ),
+        PriceChange(
+          change: 2,
+          price: 439.21,
         ),
         SliverChartBox(),
         PortfollioTableHeader(),

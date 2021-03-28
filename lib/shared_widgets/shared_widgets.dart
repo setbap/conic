@@ -5,3 +5,5 @@ export 'coin_square.dart';
 export 'see_all_news.dart';
 export 'top_coin_list.dart';
 export 'coin_search.dart';
+export 'price_change.dart';
+export 'chart_box.dart';

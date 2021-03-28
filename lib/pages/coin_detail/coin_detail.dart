@@ -2,7 +2,6 @@ import 'package:conic/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class CoinDetail extends StatefulWidget {
@@ -115,32 +114,52 @@ class _CoinDetailState extends State<CoinDetail> {
                 ExpansionTile(
                   title: Text("What is VECHAIN"),
                   leading: Icon(Icons.add_circle_outlined),
+                  childrenPadding: EdgeInsets.symmetric(
+                    vertical: 16,
+                    horizontal: 8,
+                  ),
+                  expandedAlignment: Alignment.centerLeft,
                   children: [
-                    Text("What is VECHAIN"),
-                    Text("What is VECHAIN"),
-                    Text("What is VECHAIN"),
+                    Text(
+                        "lorem adha siud aa oasd pASYD asdpYASPD  ya sdpAYS DPUCL HCIU DH"),
+                    SizedBox(height: 16),
+                    Wrap(
+                      spacing: 8,
+                      crossAxisAlignment: WrapCrossAlignment.start,
+                      children: [
+                        customChip("test"),
+                        customChip("asda"),
+                        customChip("test"),
+                      ],
+                    ),
                   ],
                 ),
-                ExpansionTile(
+                Divider(),
+
+                ListTile(
                   title: Text("What is VECHAIN"),
                   leading: Icon(Icons.add_circle_outlined),
-                  childrenPadding: EdgeInsets.all(16),
-                  expandedAlignment: Alignment.topLeft,
-                  children: [
-                    Text("What is VECHAIN"),
-                    Text("What is VECHAIN"),
-                    SizedBox(height: 24,),
-                    Text("What is VECHAIN"),
-                  ],
                 ),
-                ExpansionTile(
-                  title: Text("What is VECHAIN"),
+                Divider(),
+
+                ListTile(
+                  title: Text("Reddit"),
                   leading: Icon(Icons.add_circle_outlined),
-                  children: [
-                    Text("What is VECHAIN"),
-                    Text("What is VECHAIN"),
-                    Text("What is VECHAIN"),
-                  ],
+                ),                Divider(),
+
+                ListTile(
+                  title: Text("Source"),
+                  leading: Icon(Icons.add_circle_outlined),
+                ),                Divider(),
+
+                ListTile(
+                  title: Text("Twitter"),
+                  leading: Icon(Icons.add_circle_outlined),
+                ),
+                Divider(),
+                ListTile(
+                  title: Text("Chat"),
+                  leading: Icon(Icons.add_circle_outlined),
                 ),
               ],
             ),
@@ -152,6 +171,17 @@ class _CoinDetailState extends State<CoinDetail> {
           ),
         ),
       ],
+    );
+  }
+
+  Chip customChip(String text) {
+    return Chip(
+      label: Text(text),
+      backgroundColor: Colors.black,
+      shape: RoundedRectangleBorder(
+        side: BorderSide(width: 1, color: DarkForeground,),
+        borderRadius: BorderRadius.circular(8)
+      ),
     );
   }
 }

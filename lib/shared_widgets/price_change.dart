@@ -32,7 +32,7 @@ class PriceChange extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "${price} \$",
+                  "$price \$",
                   style: TextStyle(
                     fontSize: 28,
                   ),

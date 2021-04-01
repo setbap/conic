@@ -1,4 +1,3 @@
-import 'package:conic/pages/coin_detail/coin_detail.dart';
 import 'package:conic/pages/coin_list/coin_list.dart';
 import 'package:conic/pages/index/index.dart';
 import 'package:conic/pages/more/more.dart';
@@ -31,10 +30,12 @@ class HomeTabBar extends StatelessWidget {
           switch (index) {
             // case 0:
             //   return Search();
-            case 0:
-              return CoinDetail();
             // case 0:
-            //   return Index(controller: controller);
+            //   return CoinDetail();
+            // case 0:
+            //   return BuyCoin();
+            case 0:
+              return Index(controller: controller);
             case 1:
               return CoinList();
             case 2:

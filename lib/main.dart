@@ -1,5 +1,4 @@
 import 'package:conic/home.dart';
-import 'package:conic/utils/colors.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -23,7 +22,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.dark(
-          primary: DarkPrimaryColor,
+          primary: Colors.red,
           secondary: Colors.green,
           brightness: Brightness.dark,
         ),

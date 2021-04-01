@@ -1,5 +1,7 @@
+import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
 class IndexNewsList extends StatelessWidget {
   const IndexNewsList({
@@ -10,12 +12,16 @@ class IndexNewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (ctx, index) => NewsItem(
-          title:
-              'New crypto  could New crypto regulations could ld New crypto regulations could ',
-          categoryName: "bitcoin",
-          imgSrc:
-              'https://u.today/sites/default/files/2019-12/Cryptocurrency%20News.jpg',
+        (ctx, index) => LoadingShimmer(
+          loadingWidget: NewsItemLoading(),
+          loading: true,
+          dataWidget:  NewsItemData(
+            title:
+                'New crypto  could New crypto regulations could ld New crypto regulations could ',
+            categoryName: "bitcoin",
+            imgSrc:
+                'https://u.today/sites/default/files/2019-12/Cryptocurrency%20News.jpg',
+          ),
         ),
         childCount: 6,
       ),
@@ -23,11 +29,11 @@ class IndexNewsList extends StatelessWidget {
   }
 }
 
-class NewsItem extends StatelessWidget {
+class NewsItemData extends StatelessWidget {
   final String title;
   final String imgSrc;
   final String categoryName;
-  const NewsItem({
+  const NewsItemData({
     Key? key,
     required this.title,
     required this.imgSrc,
@@ -82,6 +88,46 @@ class NewsItem extends StatelessWidget {
                 ),
               )
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
+class NewsItemLoading extends StatelessWidget {
+
+  const NewsItemLoading({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: Padding(
+        padding: EdgeInsets.all(8),
+        child: Shimmer.fromColors(
+          baseColor: shimmerBaseColor,
+          highlightColor: shimmerHighlightColor,
+          child: Container(
+            child: Row(
+              children: [
+                CircleShimmer(radius: 28),
+                SizedBox(width: 16),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BoxShimmer(height: 20, width: double.infinity-4, radius: 4),
+                      SizedBox(height: 4),
+                      BoxShimmer(height: 16, width: 40, radius: 4),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

@@ -34,9 +34,9 @@ class HomeTabBar extends StatelessWidget {
             //   return CoinDetail();
             // case 0:
             //   return BuyCoin();
-            case 0:
-              return Index(controller: controller);
             case 1:
+              return Index(controller: controller);
+            case 0:
               return CoinList();
             case 2:
               return Portfolio();

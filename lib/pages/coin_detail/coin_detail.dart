@@ -27,10 +27,7 @@ class _CoinDetailState extends State<CoinDetail> {
         CoinDetailAppBar(
           controller: _controller,
         ),
-        PriceChange(
-          change: 2,
-          price: 439.21,
-        ),
+        PriceChange(),
         SliverChartBox(),
         SliverToBoxAdapter(
           child: Container(
@@ -135,23 +132,21 @@ class _CoinDetailState extends State<CoinDetail> {
                   ],
                 ),
                 Divider(),
-
                 ListTile(
                   title: Text("What is VECHAIN"),
                   leading: Icon(Icons.add_circle_outlined),
                 ),
                 Divider(),
-
                 ListTile(
                   title: Text("Reddit"),
                   leading: Icon(Icons.add_circle_outlined),
-                ),                Divider(),
-
+                ),
+                Divider(),
                 ListTile(
                   title: Text("Source"),
                   leading: Icon(Icons.add_circle_outlined),
-                ),                Divider(),
-
+                ),
+                Divider(),
                 ListTile(
                   title: Text("Twitter"),
                   leading: Icon(Icons.add_circle_outlined),
@@ -179,9 +174,11 @@ class _CoinDetailState extends State<CoinDetail> {
       label: Text(text),
       backgroundColor: Colors.black,
       shape: RoundedRectangleBorder(
-        side: BorderSide(width: 1, color: DarkForeground,),
-        borderRadius: BorderRadius.circular(8)
-      ),
+          side: BorderSide(
+            width: 1,
+            color: DarkForeground,
+          ),
+          borderRadius: BorderRadius.circular(8)),
     );
   }
 }

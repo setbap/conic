@@ -1,11 +1,31 @@
+import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class PortfolioAppBar extends StatefulWidget {
+class PortfolioAppBar extends StatelessWidget {
+  final ScrollController controller;
+
+  const PortfolioAppBar({Key? key, required this.controller}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return LoadingShimmer(
+      loadingWidget: PortfolioAppBarLoading(),
+      dataWidget: PortfolioAppBarData(
+        price: 432,
+        controller: controller,
+        onPress: () {},
+      ),
+      loading: true,
+    );
+  }
+}
+
+class PortfolioAppBarData extends StatefulWidget {
   final ScrollController controller;
   final double price;
   final VoidCallback onPress;
-  const PortfolioAppBar({
+  const PortfolioAppBarData({
     Key? key,
     required this.controller,
     required this.price,
@@ -13,10 +33,10 @@ class PortfolioAppBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PortfolioAppBarState createState() => _PortfolioAppBarState();
+  _PortfolioAppBarDataState createState() => _PortfolioAppBarDataState();
 }
 
-class _PortfolioAppBarState extends State<PortfolioAppBar> {
+class _PortfolioAppBarDataState extends State<PortfolioAppBarData> {
   double textOpacity = 0;
   @override
   void initState() {
@@ -66,6 +86,33 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
             color: Colors.white,
           ),
           onPressed: widget.onPress,
+        )
+      ],
+    );
+  }
+}
+
+class PortfolioAppBarLoading extends StatelessWidget {
+  const PortfolioAppBarLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      pinned: true,
+      backgroundColor: Colors.black,
+      title: Shimmer.fromColors(
+        baseColor: shimmerBaseColor,
+        highlightColor: shimmerHighlightColor,
+
+        child: BoxShimmer(width: 48, height: 20, radius: 4),
+      ),
+      actions: [
+        CupertinoButton(
+          child: Icon(
+            Icons.add_circle_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {},
         )
       ],
     );

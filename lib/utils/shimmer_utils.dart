@@ -77,5 +77,5 @@ class BoxShimmer extends StatelessWidget {
   }
 }
 
-final Color shimmerHighlightColor = Colors.red.shade300;
-final Color shimmerBaseColor = Colors.black12;
+final Color shimmerHighlightColor = Colors.red;
+final Color shimmerBaseColor = Color(0xFF222222);

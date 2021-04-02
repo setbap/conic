@@ -1,6 +1,8 @@
+import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:shimmer/shimmer.dart';
 
 class BuyCoin extends StatelessWidget {
   final String coinName = "Cardano";
@@ -43,7 +45,7 @@ class BuyCoin extends StatelessWidget {
         backgroundColor: Colors.black,
         body: TabBarView(
           children: [
-            SingleChildScrollView(child: BuyAndSell()),
+            SingleChildScrollView(child: BuyAndSellLoading()),
             // Text("Change"),
           ],
         ),
@@ -279,6 +281,137 @@ class BuyAndSell extends StatelessWidget {
           height: 70,
         ),
       ],
+    );
+  }
+}
+
+class BuyAndSellLoading extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Shimmer.fromColors(
+      baseColor: shimmerBaseColor,
+      highlightColor: shimmerHighlightColor,
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BoxShimmer(height: 20, width: 40, radius: 4),
+                BoxShimmer(height: 20, width: 40, radius: 4),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BoxShimmer(height: 20, width: 48, radius: 4),
+                BoxShimmer(height: 20, width: 64, radius: 4),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BoxShimmer(height: 20, width: 36, radius: 4),
+                BoxShimmer(height: 20, width: 48, radius: 4),
+              ],
+            ),
+          ),
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                BoxShimmer(height: 20, width: 40, radius: 4),
+                BoxShimmer(height: 20, width: 40, radius: 4),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: BoxShimmer(height: 150, width: double.infinity, radius: 16),
+          ),
+          Divider(),
+          Container(
+            padding: EdgeInsets.all(8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Flexible(
+                  flex: 3,
+                  child: Container(),
+                ),
+                Flexible(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(" "),
+                          BoxShimmer(height: 20, width: 40, radius: 4),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Row(
+                        children: [
+                          Icon(Icons.add,size: 16,),
+                          BoxShimmer(height: 20, width: 36, radius: 4),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      ),
+                      Divider(),
+                      Row(
+                        children: [
+                          Text(" "),
+                          BoxShimmer(height: 20, width: 56, radius: 4),
+                        ],
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Expanded(
+                  child: BoxShimmer(
+                    height: 32,
+                    width: double.infinity,
+                    radius: 6,
+                  ),
+                ),
+                SizedBox(
+                  width: 16,
+                ),
+                Expanded(
+                  child: BoxShimmer(
+                    height: 32,
+                    width: double.infinity,
+                    radius: 6,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: 70,
+          ),
+        ],
+      ),
     );
   }
 }

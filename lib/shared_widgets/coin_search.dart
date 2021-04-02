@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
@@ -49,7 +50,7 @@ class _CoinSearchState extends State<CoinSearch> {
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return SearchShimmer();
             } else {
               final data = snapshot.data!
                   .where(
@@ -119,10 +120,12 @@ class _CoinSearchState extends State<CoinSearch> {
                               ),
                             ),
                           ),
-                          trailing:widget.hasArrow? Icon(
-                            Icons.keyboard_arrow_right_sharp,
-                            color: Colors.white,
-                          ):SizedBox(),
+                          trailing: widget.hasArrow
+                              ? Icon(
+                                  Icons.keyboard_arrow_right_sharp,
+                                  color: Colors.white,
+                                )
+                              : SizedBox(),
                           subtitle: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [

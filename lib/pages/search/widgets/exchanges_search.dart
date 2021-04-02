@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:conic/models/models.dart';
+import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
           builder: (context, snapshot) {
             if (snapshot.hasError) print(snapshot.error);
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return SearchShimmer();
             } else {
               final data = snapshot.data!
                   .where(

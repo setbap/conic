@@ -7,3 +7,4 @@ export 'top_coin_list.dart';
 export 'coin_search.dart';
 export 'price_change.dart';
 export 'chart_box.dart';
+export 'search_shimmer.dart';

@@ -28,7 +28,9 @@ class TopCoinList extends StatelessWidget {
                       Navigator.push(
                         context,
                         CupertinoPageRoute(
-                          builder: (context) => CoinDetail(),
+                          builder: (context) => CoinDetail(
+                            id: "we",
+                          ),
                         ),
                       );
                     },

@@ -1,21 +1,26 @@
 import 'dart:convert';
+import 'package:conic/pages/coin_detail/coin_detail.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:yeet/yeet.dart';
 
 List<SimpleCoin> parseCoins(String string) {
   final parsed = jsonDecode(string).cast<Map<String, dynamic>>();
   return parsed.map<SimpleCoin>((json) => SimpleCoin.fromMap(json)).toList();
 }
 
+typedef void onCoinPressed({required String id});
+
 class CoinSearch extends StatefulWidget {
   final bool hasArrow;
-
+  final onCoinPressed onPressed;
   const CoinSearch({
     Key? key,
+    required this.onPressed,
     this.hasArrow = false,
   }) : super(key: key);
 
@@ -96,7 +101,11 @@ class _CoinSearchState extends State<CoinSearch> {
                     child: ListView.builder(
                       itemBuilder: (ctx, index) {
                         return ListTile(
-                          onTap: () {},
+                          onTap: () {
+                            widget.onPressed(
+                              id: data[index].id,
+                            );
+                          },
                           leading: CircleAvatar(
                             backgroundColor: Colors.transparent,
                             child: Image.network(

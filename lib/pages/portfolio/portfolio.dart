@@ -1,7 +1,9 @@
+import 'package:conic/pages/add_transaction/add_transaction.dart';
 import 'package:conic/pages/portfolio/widgets/widgets.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yeet/yeet.dart';
 
 class Portfolio extends StatefulWidget {
   @override
@@ -47,7 +49,9 @@ class _PortfolioState extends State<Portfolio> {
                 style: TextStyle(color: Colors.white),
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              context.yeet(AddTransaction.route());
+            },
           ),
         ),
         SliverPadding(padding: EdgeInsets.only(top: 100))

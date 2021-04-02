@@ -5,6 +5,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CoinDetail extends StatefulWidget {
+  const CoinDetail({Key? key,required this.id}) : super(key: key);
+
+  static String route({required String id}) => "/coin/$id";
+  static String get routeRegEx => "/coin/:id";
+  final String id;
+
   @override
   _CoinDetailState createState() => _CoinDetailState();
 }

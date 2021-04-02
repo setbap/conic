@@ -1,7 +1,9 @@
 import 'package:conic/pages/index/widgets/widgets.dart';
+import 'package:conic/pages/search/search.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:yeet/yeet.dart';
 
 class Index extends StatelessWidget {
   final CupertinoTabController controller;
@@ -16,7 +18,9 @@ class Index extends StatelessWidget {
           pinned: true,
           actions: [
             CupertinoButton(
-              onPressed: () {},
+              onPressed: () {
+                context.yeet(Search.route());
+              },
               child: Icon(Icons.search_outlined),
             )
           ],

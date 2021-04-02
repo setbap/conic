@@ -1,5 +1,5 @@
-
 import 'package:conic/utils/colors.dart';
+import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 
 class KeyValueData extends StatelessWidget {
@@ -40,22 +40,42 @@ class KeyValueDataGeneric extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Padding(
-          padding: const EdgeInsets.only(right: 8),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                dataKey,
-                style: TextStyle(
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                  color: DarkTextForeground,
-                ),
-              ),
-              dataValueWidget,
-            ],
+      padding: const EdgeInsets.only(right: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            dataKey,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+              color: DarkTextForeground,
+            ),
           ),
-        ));
+          dataValueWidget,
+        ],
+      ),
+    ));
+  }
+}
+
+class KeyValueDataLoading extends StatelessWidget {
+  const KeyValueDataLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+        child: Padding(
+      padding: const EdgeInsets.only(right: 8),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BoxShimmer(height: 16, width: 40, radius: 4),
+          BoxShimmer(height: 16, width: 40, radius: 4),
+        ],
+      ),
+    ));
   }
 }

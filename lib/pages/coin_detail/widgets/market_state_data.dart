@@ -4,6 +4,25 @@ import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class MarketState extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return LoadingShimmer(
+      loadingWidget: PriceDataLoading(),
+      dataWidget: MarketStateData(
+        mktCap: 4,
+        circSupply: 4,
+        totSupply: 4,
+        rank: 4,
+        volIn24h: 4,
+        maxSupply: 4,
+        roi: 4,
+      ),
+      loading: true,
+    );
+  }
+}
+
+class MarketStateData extends StatelessWidget {
   final double mktCap;
   final double circSupply;
   final double totSupply;
@@ -12,7 +31,7 @@ class MarketState extends StatelessWidget {
   final double maxSupply;
   final double roi;
   final double rank;
-  const MarketState({
+  const MarketStateData({
     Key? key,
     required this.mktCap,
     required this.circSupply,
@@ -70,7 +89,7 @@ class MarketState extends StatelessWidget {
                   ),
                   KeyValueData(
                     dataKey: "Max Supply",
-                    dataValue:maxSupply,
+                    dataValue: maxSupply,
                   ),
                   KeyValueDataGeneric(
                     dataKey: "ROi",

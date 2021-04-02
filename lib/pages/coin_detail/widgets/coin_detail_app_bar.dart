@@ -1,18 +1,38 @@
-
+import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:shimmer/shimmer.dart';
 
-class CoinDetailAppBar extends StatefulWidget {
+class CoinDetailAppBar extends StatelessWidget {
   final ScrollController controller;
+
   const CoinDetailAppBar({
+    Key? key,
+    required this.controller,
+  }) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return LoadingShimmer(
+      loadingWidget: CoinDetailAppBarLoading(),
+      dataWidget: CoinDetailAppBarData(
+        controller: controller,
+      ),
+      loading: true,
+    );
+  }
+}
+
+class CoinDetailAppBarData extends StatefulWidget {
+  final ScrollController controller;
+  const CoinDetailAppBarData({
     Key? key,
     required this.controller,
   }) : super(key: key);
 
   @override
-  _CoinDetailAppBarState createState() => _CoinDetailAppBarState();
+  _CoinDetailAppBarDataState createState() => _CoinDetailAppBarDataState();
 }
 
-class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
+class _CoinDetailAppBarDataState extends State<CoinDetailAppBarData> {
   double textOpacity = 0;
 
   @override
@@ -59,7 +79,6 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
             opacity: textOpacity,
             child: Row(
               children: [
-
                 FittedBox(
                   child: Text(
                     "BTC",
@@ -90,11 +109,43 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-
               ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CoinDetailAppBarLoading extends StatelessWidget {
+  const CoinDetailAppBarLoading({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SliverAppBar(
+      leading: BackButton(),
+      pinned: true,
+      centerTitle: true,
+      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.star_outline))],
+      title: Shimmer.fromColors(
+        highlightColor: shimmerHighlightColor,
+        baseColor: shimmerBaseColor,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            BoxShimmer(height: 20, width: 40, radius: 4),
+            SizedBox(
+              width: 8,
+            ),
+            CircleShimmer(radius: 32),
+            SizedBox(
+              width: 8,
+            ),
+            BoxShimmer(height: 20, width: 40, radius: 4),
+          ],
+        ),
       ),
     );
   }

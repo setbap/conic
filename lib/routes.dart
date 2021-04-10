@@ -1,5 +1,6 @@
 import 'package:conic/main.dart';
 import 'package:conic/pages/add_transaction/add_transaction.dart';
+import 'package:conic/pages/buy_coin/buy_coin.dart';
 import 'package:conic/pages/coin_detail/coin_detail.dart';
 import 'package:conic/pages/search/search.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,10 @@ final yeet = Yeet(
     Yeet(
       path: Search.routeRegEx,
       builder: (_, __) => Search(),
+    ),
+    Yeet(
+      path: BuyCoin.routeRegEx,
+      builder: (params, __) => BuyCoin(coinId: params["id"]!),
     ),
     Yeet(
       path: CoinDetail.routeRegEx,

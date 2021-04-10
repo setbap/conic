@@ -1,3 +1,4 @@
+import 'package:conic/pages/buy_coin/buy_coin.dart';
 import 'package:conic/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +18,8 @@ class AddTransaction extends StatelessWidget {
       body: CoinSearch(
         hasArrow: true,
           onPressed: ({required id}) {
-
             context.yeet(
-              AddTransaction.route(
-
-              ),
+              BuyCoin.route(id: id),
             );
           }
       ),

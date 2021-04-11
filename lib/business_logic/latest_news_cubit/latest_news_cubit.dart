@@ -15,16 +15,24 @@ class LatestNewsCubit extends Cubit<LatestNewsState> {
           LatestNewsState(
             data: [],
             error: "",
-            loading: true,
+            isLoading: true,
           ),
         );
 
   getNews() async {
-    emit(state.copyWith(loading: true, error: ''));
-    _newsDataRepo
-        .getLatestNews(count: 6)
-        .then((value) => {state.copyWith(data: value)})
-        .catchError((err) => {state.copyWith(error: 'an error occured')})
-        .whenComplete(() => emit(state.copyWith(loading: false)));
+    emit(
+      state.copyWith(
+        isLoading: true,
+        isError: false,
+        error: '',
+      ),
+    );
+    _newsDataRepo.getLatestNews(count: 6).then((value) {
+      emit(state.copyWith(data: value));
+    }).catchError((err) {
+      emit(state.copyWith(isError: true, error: "new error"));
+    }).whenComplete(() {
+      emit(state.copyWith(isLoading: false));
+    });
   }
 }

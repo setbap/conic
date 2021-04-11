@@ -18,6 +18,8 @@ class MarketState extends StatelessWidget {
         roi: 4,
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

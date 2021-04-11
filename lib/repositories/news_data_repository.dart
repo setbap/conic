@@ -13,7 +13,7 @@ class NewsDataRepo {
       newsItems.add(NewsItem(
           title: element.title,
           link: element.url,
-          subTitle: "${element.source.domain} - "));
+          subTitle: "${element.source.title} - ${element.source.domain} "));
     });
     return newsItems;
   }

@@ -1,8 +1,10 @@
+import 'package:conic/business_logic/latest_news_cubit/latest_news_cubit.dart';
 import 'package:conic/ui/pages/index/widgets/widgets.dart';
 import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:yeet/yeet.dart';
 
 class Index extends StatelessWidget {
@@ -46,7 +48,15 @@ class Index extends StatelessWidget {
             controller.index = 3;
           },
         ),
-        IndexNewsList(),
+        BlocBuilder<LatestNewsCubit, LatestNewsState>(
+          builder: (context, state) {
+            return IndexNewsList(
+              data: state.data,
+              error: state.error,
+              isLoading: state.isLoading,
+            );
+          },
+        ),
         SeeAllNews(onPress: () {
           controller.index = 3;
         }),

@@ -17,6 +17,8 @@ class PortfolioAppBar extends StatelessWidget {
         onPress: () {},
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }
@@ -103,7 +105,6 @@ class PortfolioAppBarLoading extends StatelessWidget {
       title: Shimmer.fromColors(
         baseColor: shimmerBaseColor,
         highlightColor: shimmerHighlightColor,
-
         child: BoxShimmer(width: 48, height: 20, radius: 4),
       ),
       actions: [

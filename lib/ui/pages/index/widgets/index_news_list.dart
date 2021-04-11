@@ -1,29 +1,48 @@
+import 'package:conic/models/models.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class IndexNewsList extends StatelessWidget {
+  final bool isLoading;
+  final String error;
+  final List<NewsItem> data;
   const IndexNewsList({
     Key? key,
+    required this.isLoading,
+    required this.error,
+    required this.data,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (ctx, index) => LoadingShimmer(
-          loadingWidget: NewsItemLoading(),
-          loading: true,
-          dataWidget:  NewsItemData(
-            title:
-                'New crypto  could New crypto regulations could ld New crypto regulations could ',
-            categoryName: "bitcoin",
-            imgSrc:
-                'https://u.today/sites/default/files/2019-12/Cryptocurrency%20News.jpg',
-          ),
+    return LoadingShimmer(
+      loading: isLoading,
+      error: false,
+      errorWidget: Container(),
+      loadingWidget: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (ctx, index) => NewsItemLoading(),
+          childCount: 6,
         ),
-        childCount: 6,
+      ),
+      dataWidget: SliverList(
+        delegate: SliverChildBuilderDelegate(
+          (ctx, index) => LoadingShimmer(
+            loadingWidget: NewsItemLoading(),
+            error: false,
+            errorWidget: Container(),
+            loading: isLoading,
+            dataWidget: NewsItemData(
+              title: data[index].title,
+              categoryName: data[index].subTitle,
+              imgSrc:
+                  'https://u.today/sites/default/files/2019-12/Cryptocurrency%20News.jpg',
+            ),
+          ),
+          childCount: data.length,
+        ),
       ),
     );
   }
@@ -95,9 +114,7 @@ class NewsItemData extends StatelessWidget {
   }
 }
 
-
 class NewsItemLoading extends StatelessWidget {
-
   const NewsItemLoading({
     Key? key,
   }) : super(key: key);
@@ -120,7 +137,8 @@ class NewsItemLoading extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      BoxShimmer(height: 20, width: double.infinity-4, radius: 4),
+                      BoxShimmer(
+                          height: 20, width: double.infinity - 4, radius: 4),
                       SizedBox(height: 4),
                       BoxShimmer(height: 16, width: 40, radius: 4),
                     ],

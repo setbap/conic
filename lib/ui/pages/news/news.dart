@@ -15,21 +15,33 @@ class News extends StatelessWidget {
           subTitle: "Last News About Cardano",
           onPressSeeAll: () {},
         ),
-        IndexNewsList(),
+        IndexNewsList(
+          data: [],
+          error: "",
+          isLoading: true,
+        ),
         SeeAllNews(onPress: () {}),
         BoxTextTitle(
           title: "News Cake",
           subTitle: "Last News About Cake",
           onPressSeeAll: () {},
         ),
-        IndexNewsList(),
+        IndexNewsList(
+          data: [],
+          error: "",
+          isLoading: true,
+        ),
         SeeAllNews(onPress: () {}),
         BoxTextTitle(
           title: "News Cardano",
           subTitle: "Last News About BitCoin",
           onPressSeeAll: () {},
         ),
-        IndexNewsList(),
+        IndexNewsList(
+          data: [],
+          error: "",
+          isLoading: true,
+        ),
         SeeAllNews(onPress: () {}),
         SliverPadding(
           padding: EdgeInsets.symmetric(vertical: 50),

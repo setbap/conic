@@ -18,6 +18,8 @@ class PriceData extends StatelessWidget {
         change: 1,
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

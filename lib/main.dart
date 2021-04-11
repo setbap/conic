@@ -2,6 +2,7 @@ import 'package:conic/home.dart';
 import 'package:conic/repositories/news_data_repository.dart';
 import 'package:conic/routes.dart';
 import 'package:cryptopanic/cryptopanic.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -17,22 +18,28 @@ Future<void> main() async {
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );
-  runApp(MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider<NewsDataRepo>(
-          create: (context) => NewsDataRepo(newApi: CryptoPanicClient()),
-        ),
-      ],
-      child: MultiBlocProvider(
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => MultiRepositoryProvider(
         providers: [
-          BlocProvider<LatestNewsCubit>(
-            create: (BuildContext context) => LatestNewsCubit(
-              newsDataRepo: context.read<NewsDataRepo>(),
-            )..getNews(),
+          RepositoryProvider<NewsDataRepo>(
+            create: (context) => NewsDataRepo(newApi: CryptoPanicClient()),
           ),
         ],
-        child: MyApp(),
-      )));
+        child: MultiBlocProvider(
+          providers: [
+            BlocProvider<LatestNewsCubit>(
+              create: (BuildContext context) => LatestNewsCubit(
+                newsDataRepo: context.read<NewsDataRepo>(),
+              )..getNews(),
+            ),
+          ],
+          child: MyApp(),
+        ),
+      ), // Wrap your app
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -40,6 +47,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      locale: DevicePreview.locale(context), // Add the locale here
+      builder: DevicePreview.appBuilder,
       routeInformationParser: YeetInformationParser(),
       routerDelegate: YeeterDelegate(yeet: yeet),
       title: 'Conic',

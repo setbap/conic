@@ -22,6 +22,8 @@ class TopCoinList extends StatelessWidget {
               .map(
                 (item) => LoadingShimmer(
                   loading: true,
+                  error: false,
+                  errorWidget: Container(),
                   loadingWidget: CoinSquareLoading(),
                   dataWidget: CoinSquare(
                     onPress: () {

@@ -11,6 +11,8 @@ class CoinAbout extends StatelessWidget {
       loadingWidget: CoinAboutLoading(),
       dataWidget: CoinAboutData(),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

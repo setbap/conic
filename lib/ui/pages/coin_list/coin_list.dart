@@ -45,6 +45,8 @@ class _CoinListState extends State<CoinList>
                     itemBuilder: (context, index) {
                       return LoadingShimmer(
                         loading: true,
+                        error: false,
+                        errorWidget: Container(),
                         loadingWidget: CoinListItemLoading(),
                         dataWidget: CoinListItemData(
                           imageSrc:

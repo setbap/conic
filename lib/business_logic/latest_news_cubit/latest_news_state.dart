@@ -3,23 +3,27 @@ part of 'latest_news_cubit.dart';
 @immutable
 class LatestNewsState {
   final List<NewsItem> data;
-  final bool loading;
+  final bool isLoading;
+  final bool isError;
   final String error;
 
-  LatestNewsState({
+  const LatestNewsState({
     required this.data,
-    required this.loading,
+    required this.isLoading,
     required this.error,
+    this.isError = false,
   });
 
   LatestNewsState copyWith({
     List<NewsItem>? data,
-    bool? loading,
+    bool? isLoading,
+    bool? isError,
     String? error,
   }) {
     return LatestNewsState(
       data: data ?? this.data,
-      loading: loading ?? this.loading,
+      isLoading: isLoading ?? this.isLoading,
+      isError: isError ?? this.isError,
       error: error ?? this.error,
     );
   }
@@ -30,10 +34,10 @@ class LatestNewsState {
 
     return other is LatestNewsState &&
         listEquals(other.data, data) &&
-        other.loading == loading &&
+        other.isLoading == isLoading &&
         other.error == error;
   }
 
   @override
-  int get hashCode => data.hashCode ^ loading.hashCode ^ error.hashCode;
+  int get hashCode => data.hashCode ^ isLoading.hashCode ^ error.hashCode;
 }

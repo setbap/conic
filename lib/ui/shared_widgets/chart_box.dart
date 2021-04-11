@@ -9,6 +9,8 @@ class SliverChartBox extends StatelessWidget {
       loadingWidget: SliverChartBoxLoading(),
       dataWidget: SliverChartBoxData(),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

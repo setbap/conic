@@ -14,6 +14,8 @@ class PriceChange extends StatelessWidget {
         price: 439.21,
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

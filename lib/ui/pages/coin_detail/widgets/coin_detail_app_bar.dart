@@ -17,6 +17,8 @@ class CoinDetailAppBar extends StatelessWidget {
         controller: controller,
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

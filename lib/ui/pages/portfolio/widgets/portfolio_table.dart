@@ -21,6 +21,8 @@ class PortfolioTableDataRow extends StatelessWidget {
         onPress: () {},
       ),
       loading: true,
+      error: false,
+      errorWidget: Container(),
     );
   }
 }

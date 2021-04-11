@@ -1,4 +1,4 @@
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';

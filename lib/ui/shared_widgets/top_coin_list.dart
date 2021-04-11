@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:conic/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

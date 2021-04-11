@@ -1,6 +1,6 @@
-import 'package:conic/pages/add_transaction/add_transaction.dart';
-import 'package:conic/pages/portfolio/widgets/widgets.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/pages/add_transaction/add_transaction.dart';
+import 'package:conic/ui/pages/portfolio/widgets/widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';

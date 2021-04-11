@@ -1,6 +1,6 @@
-import 'package:conic/pages/index/widgets/widgets.dart';
-import 'package:conic/pages/news/widgest/widgets.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/pages/index/widgets/widgets.dart';
+import 'package:conic/ui/pages/news/widgest/widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

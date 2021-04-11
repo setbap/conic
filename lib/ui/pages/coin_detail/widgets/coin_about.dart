@@ -1,4 +1,4 @@
-import 'package:conic/pages/coin_detail/widgets/widgets.dart';
+import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
@@ -107,11 +107,19 @@ class CoinAboutLoading extends StatelessWidget {
                     children: [
                       ListTile(
                         title: BoxShimmer(height: 28, width: 50, radius: 4),
-                        trailing: Icon(Icons.arrow_drop_down,size: 28,),
+                        trailing: Icon(
+                          Icons.arrow_drop_down,
+                          size: 28,
+                        ),
                         leading: CircleShimmer(radius: 36),
                       ),
-                      SizedBox(height: 8,),
-                      Divider(height: 2,color: DarkForeground,)
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Divider(
+                        height: 2,
+                        color: DarkForeground,
+                      )
                     ],
                   ),
                 ))

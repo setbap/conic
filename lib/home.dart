@@ -1,13 +1,12 @@
-import 'package:conic/pages/coin_list/coin_list.dart';
-import 'package:conic/pages/index/index.dart';
-import 'package:conic/pages/more/more.dart';
-import 'package:conic/pages/news/news.dart';
-import 'package:conic/pages/portfolio/portfolio.dart';
+import 'package:conic/ui/pages/coin_list/coin_list.dart';
+import 'package:conic/ui/pages/index/index.dart';
+import 'package:conic/ui/pages/more/more.dart';
+import 'package:conic/ui/pages/news/news.dart';
+import 'package:conic/ui/pages/portfolio/portfolio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomeTabBar extends StatelessWidget {
-
   final CupertinoTabController controller = CupertinoTabController();
 
   @override
@@ -41,9 +40,10 @@ class HomeTabBar extends StatelessWidget {
               // case 0:
               //   return BuyCoin();
               case 0:
-                return Index(controller: controller,);
+                return Index(
+                  controller: controller,
+                );
               case 1:
-
                 return CoinList();
               case 2:
                 return Portfolio();
@@ -52,7 +52,9 @@ class HomeTabBar extends StatelessWidget {
               case 4:
                 return More();
               default:
-                return Index(controller: controller,);
+                return Index(
+                  controller: controller,
+                );
             }
           },
         ),

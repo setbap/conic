@@ -1,8 +1,8 @@
 import 'package:conic/main.dart';
-import 'package:conic/pages/add_transaction/add_transaction.dart';
-import 'package:conic/pages/buy_coin/buy_coin.dart';
-import 'package:conic/pages/coin_detail/coin_detail.dart';
-import 'package:conic/pages/search/search.dart';
+import 'package:conic/ui/pages/add_transaction/add_transaction.dart';
+import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
+import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/pages/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:yeet/yeet.dart';
 

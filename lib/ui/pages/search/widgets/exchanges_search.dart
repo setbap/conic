@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:conic/models/models.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +8,9 @@ import 'package:flutter/services.dart';
 
 List<SimpleExchange> parseExchanges(String string) {
   final parsed = jsonDecode(string).cast<Map<String, dynamic>>();
-  return parsed.map<SimpleExchange>((json) => SimpleExchange.fromMap(json)).toList();
+  return parsed
+      .map<SimpleExchange>((json) => SimpleExchange.fromMap(json))
+      .toList();
 }
 
 class ExchangeSearch extends StatefulWidget {
@@ -20,7 +22,8 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
   String searchText = '';
   final _textController = TextEditingController();
   Future<List<SimpleExchange>> fetchExchanges() async {
-    final String response = await rootBundle.loadString('assets/exchanges.json');
+    final String response =
+        await rootBundle.loadString('assets/exchanges.json');
     return compute(parseExchanges, response);
   }
 
@@ -48,16 +51,16 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
               final data = snapshot.data!
                   .where(
                     (element) =>
-                element.name
-                    .toLowerCase()
-                    .startsWith(searchText.toLowerCase()) ||
-                    element.id
-                        .toLowerCase()
-                        .startsWith(searchText.toLowerCase()) ||
-                    element.marketType.toLowerCase().startsWith(
-                      searchText.toLowerCase(),
-                    ),
-              )
+                        element.name
+                            .toLowerCase()
+                            .startsWith(searchText.toLowerCase()) ||
+                        element.id
+                            .toLowerCase()
+                            .startsWith(searchText.toLowerCase()) ||
+                        element.marketType.toLowerCase().startsWith(
+                              searchText.toLowerCase(),
+                            ),
+                  )
                   .toList();
               return Column(
                 children: [
@@ -96,8 +99,8 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
                               data[index].largeThumb,
                               errorBuilder: (context, error, stackTrace) =>
                                   Container(
-                                    color: Colors.orangeAccent,
-                                  ),
+                                color: Colors.orangeAccent,
+                              ),
                             ),
                             radius: 16,
                           ),

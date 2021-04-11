@@ -1,6 +1,6 @@
 import 'dart:math';
-import 'package:conic/pages/coin_list/widgets/widgets.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/pages/coin_list/widgets/widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +46,7 @@ class _CoinListState extends State<CoinList>
                       return LoadingShimmer(
                         loading: true,
                         loadingWidget: CoinListItemLoading(),
-                        dataWidget:  CoinListItemData(
+                        dataWidget: CoinListItemData(
                           imageSrc:
                               'https://s2.coinmarketcap.com/static/img/coins/64x64/$index.png',
                           name: 'bitcoin',

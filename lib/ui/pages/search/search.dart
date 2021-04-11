@@ -1,8 +1,8 @@
-import 'package:conic/pages/coin_detail/coin_detail.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:conic/pages/search/widgets/widgets.dart';
+import 'package:conic/ui/pages/search/widgets/widgets.dart';
 import 'package:yeet/yeet.dart';
 
 class Search extends StatefulWidget {

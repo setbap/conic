@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +12,7 @@ class PortfolioTableDataRow extends StatelessWidget {
     return LoadingShimmer(
       loadingWidget: PortfolioTableDataRowLoading(),
       dataWidget: PortfolioTableDataRowData(
-        imageSrc:
-        'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
+        imageSrc: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
         price: 100,
         id: 'btc',
         name: 'bitcoin',

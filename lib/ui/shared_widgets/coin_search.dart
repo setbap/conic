@@ -1,12 +1,10 @@
 import 'dart:convert';
-import 'package:conic/pages/coin_detail/coin_detail.dart';
-import 'package:conic/shared_widgets/shared_widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:yeet/yeet.dart';
 
 List<SimpleCoin> parseCoins(String string) {
   final parsed = jsonDecode(string).cast<Map<String, dynamic>>();

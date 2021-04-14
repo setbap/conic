@@ -6,21 +6,38 @@ import 'package:shimmer/shimmer.dart';
 
 class IndexNewsList extends StatelessWidget {
   final bool isLoading;
+  final bool isError;
   final String error;
+  final VoidCallback onRetry;
   final List<NewsItem> data;
   const IndexNewsList({
     Key? key,
     required this.isLoading,
+    required this.isError,
     required this.error,
     required this.data,
+    required this.onRetry,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LoadingShimmer(
       loading: isLoading,
-      error: false,
-      errorWidget: Container(),
+      error: isError,
+      errorWidget: SliverToBoxAdapter(
+        child: Container(
+          width: double.infinity,
+          height: 200,
+          child: Center(
+            child: CupertinoButton.filled(
+              child: Text("$error | tap to ReTry"),
+              minSize: 20,
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              onPressed: onRetry,
+            ),
+          ),
+        ),
+      ),
       loadingWidget: SliverList(
         delegate: SliverChildBuilderDelegate(
           (ctx, index) => NewsItemLoading(),

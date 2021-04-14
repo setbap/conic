@@ -52,6 +52,8 @@ class Index extends StatelessWidget {
           builder: (context, state) {
             return IndexNewsList(
               data: state.data,
+              isError: state.isError,
+              onRetry: () => context.read<LatestNewsCubit>().getNews(),
               error: state.error,
               isLoading: state.isLoading,
             );

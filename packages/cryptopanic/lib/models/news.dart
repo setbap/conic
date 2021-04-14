@@ -131,7 +131,7 @@ class NewsModel {
       source: Source.fromJson(asT<Map<String, dynamic>>(jsonRes['source'])!),
       title: asT<String>(jsonRes['title'])!,
       publishedAt: asT<String>(jsonRes['published_at'])!,
-      currencies: currencies!,
+      currencies: currencies ?? [],
       id: asT<int>(jsonRes['id'])!,
       url: asT<String>(jsonRes['url'])!,
     );

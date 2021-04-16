@@ -1,5 +1,6 @@
+import 'package:coingecko/coingecko.dart';
 import 'package:conic/home.dart';
-import 'package:conic/repositories/news_data_repository.dart';
+import 'package:conic/repositories/index_page_repository.dart';
 import 'package:conic/routes.dart';
 import 'package:cryptopanic/cryptopanic.dart';
 import 'package:device_preview/device_preview.dart';
@@ -11,7 +12,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:yeet/yeet.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'business_logic/latest_news_cubit/latest_news_cubit.dart';
+import 'business_logic/latest_news_cubit/index_page_data_cubit.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,15 +24,18 @@ Future<void> main() async {
       enabled: !kReleaseMode,
       builder: (context) => MultiRepositoryProvider(
         providers: [
-          RepositoryProvider<NewsDataRepo>(
-            create: (context) => NewsDataRepo(newApi: CryptoPanicClient()),
+          RepositoryProvider<IndexDataRepository>(
+            create: (context) => IndexDataRepository(
+              newApi: CryptoPanicClient(),
+              coinApi: CoinGeckoClient(),
+            ),
           ),
         ],
         child: MultiBlocProvider(
           providers: [
-            BlocProvider<LatestNewsCubit>(
-              create: (BuildContext context) => LatestNewsCubit(
-                newsDataRepo: context.read<NewsDataRepo>(),
+            BlocProvider<IndexPageDataCubit>(
+              create: (BuildContext context) => IndexPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
               )..getNews(),
             ),
           ],

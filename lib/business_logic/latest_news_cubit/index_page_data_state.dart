@@ -1,26 +1,26 @@
-part of 'latest_news_cubit.dart';
+part of 'index_page_data_cubit.dart';
 
 @immutable
-class LatestNewsState {
-  final List<NewsItem> data;
+class IndexPageDataState {
+  final IndexPageDataModel? data;
   final bool isLoading;
   final bool isError;
   final String error;
 
-  const LatestNewsState({
-    required this.data,
+  const IndexPageDataState({
+    this.data,
     required this.isLoading,
     required this.error,
     this.isError = false,
   });
 
-  LatestNewsState copyWith({
-    List<NewsItem>? data,
+  IndexPageDataState copyWith({
+    IndexPageDataModel? data,
     bool? isLoading,
     bool? isError,
     String? error,
   }) {
-    return LatestNewsState(
+    return IndexPageDataState(
       data: data ?? this.data,
       isLoading: isLoading ?? this.isLoading,
       isError: isError ?? this.isError,
@@ -32,12 +32,18 @@ class LatestNewsState {
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is LatestNewsState &&
-        listEquals(other.data, data) &&
+    return other is IndexPageDataState &&
+        other.data == data &&
         other.isLoading == isLoading &&
+        other.isError == isError &&
         other.error == error;
   }
 
   @override
-  int get hashCode => data.hashCode ^ isLoading.hashCode ^ error.hashCode;
+  int get hashCode {
+    return data.hashCode ^
+        isLoading.hashCode ^
+        isError.hashCode ^
+        error.hashCode;
+  }
 }

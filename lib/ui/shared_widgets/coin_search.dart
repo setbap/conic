@@ -11,6 +11,7 @@ List<SimpleCoin> parseCoins(String string) {
   return parsed.map<SimpleCoin>((json) => SimpleCoin.fromMap(json)).toList();
 }
 
+// ignore: camel_case_types
 typedef void onCoinPressed({required String id});
 
 class CoinSearch extends StatefulWidget {

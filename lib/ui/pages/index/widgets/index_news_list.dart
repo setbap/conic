@@ -1,43 +1,24 @@
 import 'package:conic/models/models.dart';
 import 'package:conic/utils/shimmer_utils.dart';
+import 'package:cryptopanic/cryptopanic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class IndexNewsList extends StatelessWidget {
   final bool isLoading;
-  final bool isError;
-  final String error;
-  final VoidCallback onRetry;
-  final List<NewsItem> data;
+  final List<NewsModel> data;
   const IndexNewsList({
     Key? key,
     required this.isLoading,
-    required this.isError,
-    required this.error,
     required this.data,
-    required this.onRetry,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return LoadingShimmer(
       loading: isLoading,
-      error: isError,
-      errorWidget: SliverToBoxAdapter(
-        child: Container(
-          width: double.infinity,
-          height: 200,
-          child: Center(
-            child: CupertinoButton.filled(
-              child: Text("$error | tap to ReTry"),
-              minSize: 20,
-              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
-              onPressed: onRetry,
-            ),
-          ),
-        ),
-      ),
+      error: false,
       loadingWidget: SliverList(
         delegate: SliverChildBuilderDelegate(
           (ctx, index) => NewsItemLoading(),
@@ -49,11 +30,10 @@ class IndexNewsList extends StatelessWidget {
           (ctx, index) => LoadingShimmer(
             loadingWidget: NewsItemLoading(),
             error: false,
-            errorWidget: Container(),
             loading: isLoading,
             dataWidget: NewsItemData(
               title: data[index].title,
-              categoryName: data[index].subTitle,
+              categoryName: data[index].domain,
               imgSrc:
                   'https://u.today/sites/default/files/2019-12/Cryptocurrency%20News.jpg',
             ),

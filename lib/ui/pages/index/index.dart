@@ -1,4 +1,4 @@
-import 'package:conic/business_logic/latest_news_cubit/latest_news_cubit.dart';
+import 'package:conic/business_logic/latest_news_cubit/index_page_data_cubit.dart';
 import 'package:conic/ui/pages/index/widgets/widgets.dart';
 import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
@@ -13,59 +13,57 @@ class Index extends StatelessWidget {
   const Index({Key? key, required this.controller}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          title: Text("Index"),
-          pinned: true,
-          actions: [
-            CupertinoButton(
-              onPressed: () {
-                context.yeet(Search.route());
-              },
-              child: Icon(Icons.search_outlined),
-            )
-          ],
-        ),
-        IndexToolsList(),
-        BoxTextTitle(
-          title: "Top Coins",
-          onPressSeeAll: () {
-            controller.index = 1;
-          },
-        ),
-        TopCoinList(),
-        SliverPadding(padding: EdgeInsets.all(12)),
-        BoxTextTitle(
-          title: "Most Searched Coins",
-          subTitle: "Based on Top search in last 24h",
-        ),
-        TopCoinList(),
-        BoxTextTitle(
-          title: "News",
-          subTitle: "Last trend and breakding news",
-          onPressSeeAll: () {
+    return BlocConsumer<IndexPageDataCubit, IndexPageDataState>(
+        listener: (context, state) {
+      // TODO: implement listener
+    }, builder: (context, state) {
+      return CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            title: Text("Index"),
+            pinned: true,
+            actions: [
+              CupertinoButton(
+                onPressed: () {
+                  context.yeet(Search.route());
+                },
+                child: Icon(Icons.search_outlined),
+              )
+            ],
+          ),
+          IndexToolsList(),
+          BoxTextTitle(
+            title: "Top Coins",
+            onPressSeeAll: () {
+              controller.index = 1;
+            },
+          ),
+          TopCoinList(),
+          SliverPadding(padding: EdgeInsets.all(12)),
+          BoxTextTitle(
+            title: "Most Searched Coins",
+            subTitle: "Based on Top search in last 24h",
+          ),
+          TopCoinList(),
+          BoxTextTitle(
+            title: "News",
+            subTitle: "Last trend and breakding news",
+            onPressSeeAll: () {
+              controller.index = 3;
+            },
+          ),
+          IndexNewsList(
+            data: state.data != null ? state.data!.newsApiResualt.results : [],
+            isLoading: state.isLoading,
+          ),
+          SeeAllNews(onPress: () {
             controller.index = 3;
-          },
-        ),
-        BlocBuilder<LatestNewsCubit, LatestNewsState>(
-          builder: (context, state) {
-            return IndexNewsList(
-              data: state.data,
-              isError: state.isError,
-              onRetry: () => context.read<LatestNewsCubit>().getNews(),
-              error: state.error,
-              isLoading: state.isLoading,
-            );
-          },
-        ),
-        SeeAllNews(onPress: () {
-          controller.index = 3;
-        }),
-        SliverPadding(
-          padding: EdgeInsets.symmetric(vertical: 50),
-        )
-      ],
-    );
+          }),
+          SliverPadding(
+            padding: EdgeInsets.symmetric(vertical: 50),
+          )
+        ],
+      );
+    });
   }
 }

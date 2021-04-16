@@ -17,9 +17,6 @@ class News extends StatelessWidget {
         ),
         IndexNewsList(
           data: [],
-          isError: false,
-          onRetry: () {},
-          error: "",
           isLoading: true,
         ),
         SeeAllNews(onPress: () {}),
@@ -30,9 +27,6 @@ class News extends StatelessWidget {
         ),
         IndexNewsList(
           data: [],
-          isError: false,
-          onRetry: () {},
-          error: "",
           isLoading: true,
         ),
         SeeAllNews(onPress: () {}),
@@ -43,9 +37,6 @@ class News extends StatelessWidget {
         ),
         IndexNewsList(
           data: [],
-          isError: false,
-          onRetry: () {},
-          error: "",
           isLoading: true,
         ),
         SeeAllNews(onPress: () {}),

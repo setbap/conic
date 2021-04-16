@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class LoadingShimmer extends StatelessWidget {
   final Widget loadingWidget;
-  final Widget errorWidget;
+  final Widget? errorWidget;
   final Widget dataWidget;
   final bool loading;
   final bool error;
@@ -10,15 +10,17 @@ class LoadingShimmer extends StatelessWidget {
   const LoadingShimmer({
     Key? key,
     required this.loadingWidget,
-    required this.errorWidget,
+    this.errorWidget,
     required this.dataWidget,
     required this.loading,
     required this.error,
-  }) : super(key: key);
+  })  : assert(!error || errorWidget != null,
+            "when error is true you must fill errorWidget"),
+        super(key: key);
   @override
   Widget build(BuildContext context) {
     if (loading) return loadingWidget;
-    if (error) return errorWidget;
+    if (error) return errorWidget!;
     return dataWidget;
   }
 }

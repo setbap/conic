@@ -18,7 +18,7 @@ class IndexPageDataCubit extends Cubit<IndexPageDataState> {
           ),
         );
 
-  getNews() async {
+  getIndexData() async {
     emit(
       state.copyWith(
         isLoading: true,

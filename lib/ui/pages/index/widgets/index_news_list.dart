@@ -1,5 +1,4 @@
-import 'package:conic/models/models.dart';
-import 'package:conic/utils/shimmer_utils.dart';
+import 'package:conic/utils/utils.dart';
 import 'package:cryptopanic/cryptopanic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

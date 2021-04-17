@@ -36,7 +36,7 @@ Future<void> main() async {
             BlocProvider<IndexPageDataCubit>(
               create: (BuildContext context) => IndexPageDataCubit(
                 indexDataRepo: context.read<IndexDataRepository>(),
-              )..getNews(),
+              )..getIndexData(),
             ),
           ],
           child: MyApp(),

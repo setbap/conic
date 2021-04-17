@@ -1,4 +1,6 @@
+import 'package:coingecko/coingecko.dart';
 import 'package:conic/business_logic/latest_news_cubit/index_page_data_cubit.dart';
+import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/index/widgets/widgets.dart';
 import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
@@ -14,8 +16,37 @@ class Index extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<IndexPageDataCubit, IndexPageDataState>(
-        listener: (context, state) {
-      // TODO: implement listener
+        listenWhen: (previous, current) {
+      return !previous.isError && current.isError;
+    }, listener: (context, state) {
+      showCupertinoDialog(
+        context: context,
+        builder: (context) => CupertinoAlertDialog(
+          title: Text(
+            'Error',
+            style: TextStyle(color: Colors.red),
+          ),
+          content: Text('an Error with you connection'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('dismiss'),
+            ),
+            TextButton(
+              onPressed: () {
+                context.read<IndexPageDataCubit>().getIndexData();
+                Navigator.pop(context);
+              },
+              child: Text(
+                'retry',
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ],
+        ),
+      );
     }, builder: (context, state) {
       return CustomScrollView(
         slivers: [
@@ -33,18 +64,56 @@ class Index extends StatelessWidget {
           ),
           IndexToolsList(),
           BoxTextTitle(
-            title: "Top Coins",
+            title: "Top 10 Coins",
             onPressSeeAll: () {
               controller.index = 1;
             },
           ),
-          TopCoinList(),
+          TopCoinList<TopCoin>(
+            data: state.data?.topCoinList ?? [],
+            isLoading: state.isLoading || state.isError,
+            dataBuilder: (data) => CoinSquare(
+              onPress: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => CoinDetail(
+                      id: data.id,
+                    ),
+                  ),
+                );
+              },
+              change: data.priceChange24h,
+              coinName: data.name,
+              imgSrc: data.image,
+              price: data.currentPrice,
+            ),
+          ),
           SliverPadding(padding: EdgeInsets.all(12)),
           BoxTextTitle(
             title: "Most Searched Coins",
             subTitle: "Based on Top search in last 24h",
           ),
-          TopCoinList(),
+          TopCoinList<Coins>(
+            isLoading: state.isLoading || state.isError,
+            data: state.data?.trendigCoins.coins ?? [],
+            dataBuilder: (data) => CoinSquare(
+              onPress: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => CoinDetail(
+                      id: data.item.id,
+                    ),
+                  ),
+                );
+              },
+              change: data.item.score.toDouble(),
+              coinName: data.item.name,
+              imgSrc: data.item.large,
+              price: data.item.marketCapRank.toDouble(),
+            ),
+          ),
           BoxTextTitle(
             title: "News",
             subTitle: "Last trend and breakding news",
@@ -54,7 +123,7 @@ class Index extends StatelessWidget {
           ),
           IndexNewsList(
             data: state.data != null ? state.data!.newsApiResualt.results : [],
-            isLoading: state.isLoading,
+            isLoading: state.isLoading || state.isError,
           ),
           SeeAllNews(onPress: () {
             controller.index = 3;

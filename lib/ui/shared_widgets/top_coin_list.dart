@@ -1,14 +1,20 @@
-import 'dart:math';
-import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'coin_square.dart';
 
-class TopCoinList extends StatelessWidget {
+typedef DataWidgetBuilder<T> = Widget Function(T data);
+
+class TopCoinList<T> extends StatelessWidget {
+  final bool isLoading;
+  final List<T> data;
+  final DataWidgetBuilder<T> dataBuilder;
   const TopCoinList({
     Key? key,
+    required this.dataBuilder,
+    required this.isLoading,
+    this.data = const [],
   }) : super(key: key);
 
   @override
@@ -16,33 +22,18 @@ class TopCoinList extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Container(
         height: 150,
-        child: ListView(
-          scrollDirection: Axis.horizontal,
-          children: [1, 2, 3, 4, 5, 6, 7]
-              .map(
-                (item) => LoadingShimmer(
-                  loading: true,
-                  error: false,
-                  errorWidget: Container(),
-                  loadingWidget: CoinSquareLoading(),
-                  dataWidget: CoinSquare(
-                    onPress: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => CoinDetail(
-                            id: "we",
-                          ),
-                        ),
-                      );
-                    },
-                    change: Random().nextDouble() * 5 - 2.5,
-                    coinName: "BitCoine",
-                    price: 234.323,
-                  ),
-                ),
-              )
-              .toList(),
+        child: LoadingShimmer(
+          loading: isLoading,
+          error: false,
+          dataWidget: ListView(
+            scrollDirection: Axis.horizontal,
+            children: data.map(dataBuilder).toList(),
+          ),
+          loadingWidget: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (context, index) => CoinSquareLoading(),
+            itemCount: 6,
+          ),
         ),
       ),
     );

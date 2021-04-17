@@ -15,7 +15,7 @@ class IndexDataRepository {
   Future<IndexPageDataModel> getIndexPageInfo() async {
     final indexPageData = await Future.wait([
       _newsApi.getNews(currencies: []),
-      _coinApi.topCoinInfo(perPage: 6),
+      _coinApi.topCoinInfo(perPage: 10),
       _coinApi.trendigCoins()
     ]);
     final news = indexPageData[0] as NewsApiResualt;

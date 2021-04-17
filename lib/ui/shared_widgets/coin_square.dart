@@ -8,11 +8,13 @@ class CoinSquare extends StatelessWidget {
   final String coinName;
   final double price;
   final double change;
+  final String imgSrc;
   final VoidCallback onPress;
   const CoinSquare({
     Key? key,
     required this.coinName,
     required this.change,
+    required this.imgSrc,
     required this.price,
     required this.onPress,
   }) : super(key: key);
@@ -38,9 +40,10 @@ class CoinSquare extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(bottom: 4),
-                child: Icon(
-                  Icons.monetization_on,
-                  color: Colors.yellowAccent,
+                child: Image.network(
+                  imgSrc,
+                  width: 36,
+                  height: 36,
                 ),
               ),
               Expanded(
@@ -101,7 +104,9 @@ class CoinSquareLoading extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 4),
-                  child: CircleShimmer(radius: 24,),
+                  child: CircleShimmer(
+                    radius: 24,
+                  ),
                 ),
                 Expanded(
                   child: Column(
@@ -113,7 +118,9 @@ class CoinSquareLoading extends StatelessWidget {
                         height: 20.0,
                         radius: 4,
                       ),
-                      SizedBox(height: 4,),
+                      SizedBox(
+                        height: 4,
+                      ),
                       BoxShimmer(
                         width: 36.0,
                         height: 20.0,
@@ -122,8 +129,9 @@ class CoinSquareLoading extends StatelessWidget {
                     ],
                   ),
                 ),
-                SizedBox(height: 4,),
-
+                SizedBox(
+                  height: 4,
+                ),
                 BoxShimmer(
                   width: 48.0,
                   height: 24.0,

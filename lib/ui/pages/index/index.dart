@@ -1,5 +1,5 @@
 import 'package:coingecko/coingecko.dart';
-import 'package:conic/business_logic/latest_news_cubit/index_page_data_cubit.dart';
+import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/index/widgets/widgets.dart';
 import 'package:conic/ui/pages/search/search.dart';

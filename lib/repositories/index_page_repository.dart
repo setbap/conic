@@ -28,4 +28,17 @@ class IndexDataRepository {
       trendigCoins: trendingCoin,
     );
   }
+
+  Future<ListPageDataModel> getListPageInfo() async {
+    final listPageRawData = await Future.wait([
+      _coinApi.topCoinInfo(perPage: 100),
+    ]);
+
+    // ignore: unnecessary_cast
+    final topCoin = listPageRawData[0] as List<TopCoin>;
+
+    return ListPageDataModel(
+      topCoinList: topCoin,
+    );
+  }
 }

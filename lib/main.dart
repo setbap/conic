@@ -1,6 +1,6 @@
 import 'package:coingecko/coingecko.dart';
 import 'package:conic/home.dart';
-import 'package:conic/repositories/index_page_repository.dart';
+import 'package:conic/repositories/repositories.dart';
 import 'package:conic/routes.dart';
 import 'package:cryptopanic/cryptopanic.dart';
 import 'package:device_preview/device_preview.dart';
@@ -11,8 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:yeet/yeet.dart';
 import 'package:path_provider/path_provider.dart';
-
-import 'business_logic/latest_news_cubit/index_page_data_cubit.dart';
+import 'business_logic/business_logic.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -37,6 +36,11 @@ Future<void> main() async {
               create: (BuildContext context) => IndexPageDataCubit(
                 indexDataRepo: context.read<IndexDataRepository>(),
               )..getIndexData(),
+            ),
+            BlocProvider<ListPageDataCubit>(
+              create: (BuildContext context) => ListPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
+              )..getListData(),
             ),
           ],
           child: MyApp(),

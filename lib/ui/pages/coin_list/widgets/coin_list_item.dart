@@ -2,6 +2,7 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CoinListItemData extends StatelessWidget {
@@ -28,6 +29,8 @@ class CoinListItemData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final display = createDisplay(length: 8);
+
     return Container(
       height: 70,
       padding: const EdgeInsets.symmetric(
@@ -39,7 +42,7 @@ class CoinListItemData extends StatelessWidget {
           Container(
             margin: const EdgeInsets.only(right: 12),
             child: CircleAvatar(
-              radius: 20,
+              radius: 16,
               child: Image.network(
                 imageSrc,
                 errorBuilder: (context, error, stackTrace) => Placeholder(),
@@ -51,39 +54,49 @@ class CoinListItemData extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Text(
-                    name,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.1,
+                  Expanded(
+                    child: Text(
+                      name,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1,
+                        fontSize: 12,
+                      ),
                     ),
                   ),
-                  Image.network(
-                    chartSrc,
-                    height: 24,
-                    color: Colors.green,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      child: Text(
-                        "error in connection",
-                        style: TextStyle(
-                          color: Colors.red,
+                  Expanded(
+                    child: Image.network(
+                      chartSrc,
+                      height: 24,
+                      color: Colors.green,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        child: Text(
+                          "error in connection",
+                          style: TextStyle(
+                            color: Colors.red,
+                          ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(),
-                  Text(
-                    "$price\$",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w700,
-                      letterSpacing: 1.1,
+                  Container(
+                    width: 60,
+                    child: Text(
+                      "${display(price)}\$",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 1,
+                          fontSize: 10),
                     ),
                   ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
               ),
               SizedBox(
-                height: 4,
+                height: 6,
               ),
               Row(
                 children: [
@@ -92,7 +105,7 @@ class CoinListItemData extends StatelessWidget {
                       Container(
                         child: Text(
                           '$rank',
-                          style: TextStyle(fontSize: 10),
+                          style: TextStyle(fontSize: 9),
                         ),
                         decoration: BoxDecoration(
                           color: DarkPrimaryColor,
@@ -100,7 +113,7 @@ class CoinListItemData extends StatelessWidget {
                         ),
                         padding: EdgeInsets.symmetric(
                           vertical: 2,
-                          horizontal: 10,
+                          horizontal: 9,
                         ),
                         margin: EdgeInsets.only(
                           right: 6,
@@ -109,7 +122,7 @@ class CoinListItemData extends StatelessWidget {
                       Text(
                         id,
                         style:
-                            TextStyle(fontSize: 12, color: DarkTextForeground),
+                            TextStyle(fontSize: 10, color: DarkTextForeground),
                       ),
                       SizedBox(
                         width: 4,
@@ -118,10 +131,10 @@ class CoinListItemData extends StatelessWidget {
                     ],
                   ),
                   Text(
-                    'MCap $marketCap ',
+                    'MCap ${display(marketCap)} ',
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(fontSize: 12, color: DarkTextForeground),
+                    style: TextStyle(fontSize: 8, color: DarkTextForeground),
                   ),
                 ],
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -135,7 +148,7 @@ class CoinListItemData extends StatelessWidget {
               child: Icon(
                 Icons.star_border_outlined,
                 color: Colors.yellow,
-                size: 16,
+                size: 12,
               ),
             ),
           )

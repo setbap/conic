@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:math';
+import 'dart:ui' as ui;
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -120,13 +121,42 @@ class _MyCanvas extends CustomPainter {
         x += xRatio;
       });
     }
+    p.lineTo(box.right, box.bottom);
 
-    p.moveTo(box.left, box.bottom);
+    p.lineTo(box.left, box.bottom);
+    // p.moveTo(x, box.height - (chartData[0] - minData) * yRatio * percentage);
+
+    p.close();
 
     if (chartData[0] - chartData[chartData.length - 1] < 0) {
-      canvas.drawPath(p, paint..color = Colors.green);
+      canvas.drawPath(
+          p,
+          paint
+            ..color = Colors.green
+            ..style = PaintingStyle.fill
+            ..shader = ui.Gradient.linear(
+              box.topCenter,
+              box.bottomCenter,
+              [
+                Colors.green.shade700.withAlpha(80),
+                Colors.green.shade700.withAlpha(10),
+              ],
+            ));
     } else {
-      canvas.drawPath(p, paint..color = Colors.red);
+      canvas.drawPath(
+        p,
+        paint
+          ..style = PaintingStyle.fill
+          ..strokeWidth = 4
+          ..shader = ui.Gradient.linear(
+            box.topCenter,
+            box.bottomCenter,
+            [
+              Colors.red.shade700.withAlpha(90),
+              Colors.red.shade700.withAlpha(20),
+            ],
+          ),
+      );
     }
   }
 }

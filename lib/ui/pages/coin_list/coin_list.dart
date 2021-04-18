@@ -98,8 +98,7 @@ class _CoinListState extends State<CoinList>
                           return CoinListItemData(
                             imageSrc: topCoinItem[index].image,
                             name: topCoinItem[index].name,
-                            chartSrc:
-                                'https://s3.coinmarketcap.com/generated/sparklines/web/7d/usd/1.png',
+                            chartData: topCoinItem[index].sparklineIn7d!.price,
                             change: topCoinItem[index].priceChangePercentage24h,
                             id: topCoinItem[index].symbol,
                             marketCap: topCoinItem[index].marketCap,

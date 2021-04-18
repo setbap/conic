@@ -2,6 +2,7 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CoinSquare extends StatelessWidget {
@@ -21,6 +22,8 @@ class CoinSquare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberDisplay = createDisplay(length: 8);
+
     return Container(
       width: 134,
       height: 134,
@@ -59,7 +62,7 @@ class CoinSquare extends StatelessWidget {
                           .copyWith(color: Colors.white),
                     ),
                     Text(
-                      price.toStringAsFixed(4),
+                      numberDisplay(price),
                       style: Theme.of(context)
                           .textTheme
                           .caption!

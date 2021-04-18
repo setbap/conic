@@ -31,7 +31,7 @@ class IndexDataRepository {
 
   Future<ListPageDataModel> getListPageInfo() async {
     final listPageRawData = await Future.wait([
-      _coinApi.topCoinInfo(perPage: 100),
+      _coinApi.topCoinInfo(perPage: 100, sparkLine: true),
     ]);
 
     // ignore: unnecessary_cast

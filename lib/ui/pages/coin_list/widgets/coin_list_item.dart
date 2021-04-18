@@ -8,7 +8,7 @@ import 'package:shimmer/shimmer.dart';
 class CoinListItemData extends StatelessWidget {
   final String imageSrc;
   final String name;
-  final String chartSrc;
+  final List<double> chartData;
   final double price;
   final int rank;
   final String id;
@@ -19,7 +19,7 @@ class CoinListItemData extends StatelessWidget {
     Key? key,
     required this.imageSrc,
     required this.name,
-    required this.chartSrc,
+    required this.chartData,
     required this.price,
     required this.rank,
     required this.id,
@@ -45,7 +45,9 @@ class CoinListItemData extends StatelessWidget {
               radius: 16,
               child: Image.network(
                 imageSrc,
-                errorBuilder: (context, error, stackTrace) => Placeholder(),
+                errorBuilder: (context, error, stackTrace) {
+                  return Placeholder();
+                },
               ),
             ),
           ),
@@ -67,17 +69,17 @@ class CoinListItemData extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: Image.network(
-                      chartSrc,
-                      height: 24,
-                      color: Colors.green,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        child: Text(
-                          "error in connection",
-                          style: TextStyle(
-                            color: Colors.red,
-                          ),
-                        ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 4,
+                      ),
+                      child: MyLineChart(
+                        chartData: chartData
+                            .sublist((chartData.length * 6 ~/ 7))
+                            .toList(),
+                        height: 24,
+                        width: 36,
                       ),
                     ),
                   ),
@@ -103,9 +105,13 @@ class CoinListItemData extends StatelessWidget {
                   Row(
                     children: [
                       Container(
+                        width: 24,
                         child: Text(
                           '$rank',
-                          style: TextStyle(fontSize: 9),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 9,
+                          ),
                         ),
                         decoration: BoxDecoration(
                           color: DarkPrimaryColor,
@@ -113,16 +119,19 @@ class CoinListItemData extends StatelessWidget {
                         ),
                         padding: EdgeInsets.symmetric(
                           vertical: 2,
-                          horizontal: 9,
                         ),
                         margin: EdgeInsets.only(
                           right: 6,
                         ),
                       ),
-                      Text(
-                        id,
-                        style:
-                            TextStyle(fontSize: 10, color: DarkTextForeground),
+                      Container(
+                        width: 32,
+                        child: Text(
+                          id,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              fontSize: 10, color: DarkTextForeground),
+                        ),
                       ),
                       SizedBox(
                         width: 4,

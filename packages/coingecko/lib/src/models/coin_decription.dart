@@ -41,7 +41,7 @@ class CoinDecription {
       links: Links.fromJson(asT<Map<String, dynamic>>(jsonRes['links'])!),
       image: jsonRes['image'] == null
           ? null
-          : Image.fromJson(asT<Map<String, dynamic>>(jsonRes['image'])!),
+          : CoinImages.fromJson(asT<Map<String, dynamic>>(jsonRes['image'])!),
       sentimentVotesUpPercentage:
           asT<double?>(jsonRes['sentiment_votes_up_percentage']),
       sentimentVotesDownPercentage:
@@ -60,7 +60,7 @@ class CoinDecription {
   final List<String> categories;
   final Description description;
   final Links links;
-  final Image? image;
+  final CoinImages? image;
   final double? sentimentVotesUpPercentage;
   final double? sentimentVotesDownPercentage;
   final int? marketCapRank;
@@ -280,14 +280,14 @@ class ReposUrl {
       asT<Map<String, dynamic>>(jsonDecode(jsonEncode(this)))!);
 }
 
-class Image {
-  Image({
+class CoinImages {
+  CoinImages({
     this.thumb,
     this.small,
     this.large,
   });
 
-  factory Image.fromJson(Map<String, dynamic> jsonRes) => Image(
+  factory CoinImages.fromJson(Map<String, dynamic> jsonRes) => CoinImages(
         thumb: asT<String?>(jsonRes['thumb']),
         small: asT<String?>(jsonRes['small']),
         large: asT<String?>(jsonRes['large']),
@@ -308,6 +308,6 @@ class Image {
         'large': large,
       };
 
-  Image clone() =>
-      Image.fromJson(asT<Map<String, dynamic>>(jsonDecode(jsonEncode(this)))!);
+  CoinImages clone() => CoinImages.fromJson(
+      asT<Map<String, dynamic>>(jsonDecode(jsonEncode(this)))!);
 }

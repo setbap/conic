@@ -32,13 +32,16 @@ class IndexDataRepository {
   Future<ListPageDataModel> getListPageInfo() async {
     final listPageRawData = await Future.wait([
       _coinApi.topCoinInfo(perPage: 100, sparkLine: true),
+      _coinApi.topExchangesInfo(perPage: 100),
     ]);
 
     // ignore: unnecessary_cast
     final topCoin = listPageRawData[0] as List<TopCoin>;
+    final topExchange = listPageRawData[1] as List<ExchangesItem>;
 
     return ListPageDataModel(
       topCoinList: topCoin,
+      topExchangeList: topExchange,
     );
   }
 }

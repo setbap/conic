@@ -1,8 +1,8 @@
 import 'package:conic/business_logic/business_logic.dart';
-import 'package:conic/models/index_page_model.dart';
+import 'package:conic/models/models.dart';
 import 'package:conic/ui/pages/coin_list/widgets/widgets.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/shimmer_utils.dart';
+import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,51 +28,51 @@ class _CoinListState extends State<CoinList>
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: widget._kTabCount,
-      child: CustomScrollView(
-        slivers: [
-          CoinExchangeAppBar(tabController: tabController),
-          SliverFillRemaining(
-            child: TabBarView(
-              controller: tabController,
-              physics: BouncingScrollPhysics(),
-              children: [
-                BlocConsumer<ListPageDataCubit,
-                    GenericPageStete<ListPageDataModel>>(
-                  listenWhen: (previous, current) {
-                    return !previous.isError && current.isError;
+      child:
+          BlocConsumer<ListPageDataCubit, GenericPageStete<ListPageDataModel>>(
+        listenWhen: (previous, current) {
+          return !previous.isError && current.isError;
+        },
+        listener: (context, state) {
+          showCupertinoDialog(
+            context: context,
+            builder: (context) => CupertinoAlertDialog(
+              title: Text(
+                'Error',
+                style: TextStyle(color: Colors.red),
+              ),
+              content: Text('an Error with you connection'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
                   },
-                  listener: (context, state) {
-                    showCupertinoDialog(
-                      context: context,
-                      builder: (context) => CupertinoAlertDialog(
-                        title: Text(
-                          'Error',
-                          style: TextStyle(color: Colors.red),
-                        ),
-                        content: Text('an Error with you connection'),
-                        actions: <Widget>[
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('dismiss'),
-                          ),
-                          TextButton(
-                            onPressed: () {
-                              context.read<ListPageDataCubit>().getListData();
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              'retry',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
+                  child: Text('dismiss'),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.read<ListPageDataCubit>().getListData();
+                    Navigator.pop(context);
                   },
-                  builder: (context, state) {
-                    return LoadingShimmer(
+                  child: Text(
+                    'retry',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        builder: (context, state) {
+          return CustomScrollView(
+            slivers: [
+              CoinExchangeAppBar(tabController: tabController),
+              SliverFillRemaining(
+                child: TabBarView(
+                  controller: tabController,
+                  physics: BouncingScrollPhysics(),
+                  children: [
+                    LoadingShimmer(
                       loadingWidget: ListView.separated(
                         padding: const EdgeInsets.only(
                           left: 8,
@@ -111,14 +111,45 @@ class _CoinListState extends State<CoinList>
                       ),
                       loading: state.isLoading,
                       error: false,
-                    );
-                  },
+                    ),
+                    LoadingShimmer(
+                      loadingWidget: ListView.separated(
+                        padding: const EdgeInsets.only(
+                          left: 8,
+                          right: 8,
+                          bottom: 94,
+                          top: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return CoinListItemLoading();
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: 20,
+                      ),
+                      dataWidget: ListView.separated(
+                        padding: const EdgeInsets.only(
+                          left: 4,
+                          right: 4,
+                          bottom: 94,
+                          top: 16,
+                        ),
+                        itemBuilder: (context, index) {
+                          return ExchnageListItem(
+                            exchangesItem: state.data!.topExchangeList[index],
+                          );
+                        },
+                        separatorBuilder: (context, index) => Divider(),
+                        itemCount: state.data?.topCoinList.length ?? 0,
+                      ),
+                      loading: state.isLoading,
+                      error: false,
+                    ),
+                  ],
                 ),
-                Tab(icon: Icon(Icons.directions_transit)),
-              ],
-            ),
-          )
-        ],
+              )
+            ],
+          );
+        },
       ),
     );
   }

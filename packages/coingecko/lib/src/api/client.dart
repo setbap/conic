@@ -79,7 +79,6 @@ class CoinGeckoClient {
     if (!simplePriceMap.containsKey(tokenId)) {
       throw BadRequestException("$currency doesn't exist  ");
     } else {
-      print(simplePriceMap[tokenId]);
       simplePriceMap[tokenId]['currency'] = currency;
       return SimplePrice.fromMap(simplePriceMap[tokenId]);
     }
@@ -155,6 +154,27 @@ class CoinGeckoClient {
     );
 
     return CoinDecription.fromJson(coinDescRaw);
+  }
+
+  Future<List<ExchangesItem>> topExchangesInfo({
+    int perPage = 6,
+    int page = 1,
+  }) async {
+    final topExchangesRaw = await _genericGet(
+      path: Endpoints.exchanges(),
+      queryParameters: {
+        'per_page': perPage.toString(),
+        'page': page.toString(),
+      },
+    );
+
+    var topExchanges = <ExchangesItem>[];
+
+    for (var element in topExchangesRaw) {
+      topExchanges.add(ExchangesItem.fromJson(element));
+    }
+
+    return topExchanges;
   }
 
   Future<List> supportedVsCurrencies() async {

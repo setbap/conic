@@ -31,14 +31,6 @@ class HomeTabBar extends StatelessWidget {
           ),
           tabBuilder: (context, index) {
             switch (index) {
-              // case 0:
-              //   return Search();
-              // case 0:
-              //   return CoinDetail();
-              // case 0:
-              //   return BuyCoin();
-              // case 0:
-              //   return BuyCoin();
               case 0:
                 return Index(
                   controller: controller,

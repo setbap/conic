@@ -1,11 +1,13 @@
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
+import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/coin_list/widgets/widgets.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:yeet/yeet.dart';
 
 class CoinList extends StatefulWidget {
   @override
@@ -94,16 +96,21 @@ class _CoinListState extends State<CoinList>
                           top: 16,
                         ),
                         itemBuilder: (context, index) {
-                          final topCoinItem = state.data!.topCoinList;
+                          final topCoinItem = state.data!.topCoinList[index];
                           return CoinListItemData(
-                            imageSrc: topCoinItem[index].image,
-                            name: topCoinItem[index].name,
-                            chartData: topCoinItem[index].sparklineIn7d!.price,
-                            change: topCoinItem[index].priceChangePercentage24h,
-                            id: topCoinItem[index].symbol,
-                            marketCap: topCoinItem[index].marketCap,
-                            price: topCoinItem[index].currentPrice,
-                            rank: topCoinItem[index].marketCapRank,
+                            onPressed: () {
+                              context.yeet(
+                                CoinDetail.route(id: topCoinItem.id),
+                              );
+                            },
+                            imageSrc: topCoinItem.image,
+                            name: topCoinItem.name,
+                            chartData: topCoinItem.sparklineIn7d!.price,
+                            change: topCoinItem.priceChangePercentage24h,
+                            id: topCoinItem.symbol,
+                            marketCap: topCoinItem.marketCap,
+                            price: topCoinItem.currentPrice,
+                            rank: topCoinItem.marketCapRank,
                           );
                         },
                         separatorBuilder: (context, index) => Divider(),

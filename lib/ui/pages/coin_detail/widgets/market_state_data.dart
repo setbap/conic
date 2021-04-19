@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
 
 class MarketState extends StatelessWidget {
-  final double mktCap;
+  final double? mktCap;
   final double? sentimentVotesDownPercentage;
 
-  final double coingeckoScore;
+  final double? coingeckoScore;
   final double? sentimentVotesUpPercentage;
 
-  final int rank;
+  final int? rank;
   const MarketState({
     Key? key,
-    required this.mktCap,
+    this.mktCap,
     this.sentimentVotesDownPercentage,
-    required this.coingeckoScore,
+    this.coingeckoScore,
     this.sentimentVotesUpPercentage,
-    required this.rank,
+    this.rank,
   }) : super(key: key);
 
   @override

@@ -74,14 +74,7 @@ class Index extends StatelessWidget {
             isLoading: state.isLoading || state.isError,
             dataBuilder: (data) => CoinSquare(
               onPress: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => CoinDetail(
-                      id: data.id,
-                    ),
-                  ),
-                );
+                context.yeet(CoinDetail.route(id: data.id));
               },
               change: data.priceChange24h,
               coinName: data.name,
@@ -99,14 +92,7 @@ class Index extends StatelessWidget {
             data: state.data?.trendigCoins.coins ?? [],
             dataBuilder: (data) => CoinSquare(
               onPress: () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => CoinDetail(
-                      id: data.item.id,
-                    ),
-                  ),
-                );
+                context.yeet(CoinDetail.route(id: data.item.id));
               },
               change: data.item.score.toDouble(),
               coinName: data.item.name,

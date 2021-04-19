@@ -10,29 +10,55 @@ final yeet = Yeet(
   children: [
     Yeet(
       path: Search.routeRegEx,
-      builder: (_, __) => Search(),
+      builder: (context) => Search(),
+      children: [
+        Yeet(
+          path: CoinDetail.routeRegEx,
+          builder: (context) => Scaffold(
+            backgroundColor: Colors.black,
+            body: CoinDetail(id: context.params['id']!),
+          ),
+        )
+      ],
     ),
     Yeet(
       path: BuyCoin.routeRegEx,
-      builder: (params, __) => BuyCoin(coinId: params["id"]!),
+      builder: (context) => BuyCoin(coinId: context.params["id"]!),
     ),
-    Yeet(
-      path: CoinDetail.routeRegEx,
-      builder: (params, __) => Scaffold(
-        backgroundColor: Colors.black,
-        body: CoinDetail(id: params['id']!),
-      ),
-    ),
+    // Yeet(
+    //     path: CoinDetail.routeRegEx,
+    //     builder: (context) => Scaffold(
+    //           backgroundColor: Colors.black,
+    //           body: CoinDetail(id: context.params['id']!),
+    //         ),
+    //     children: [
+    //       Yeet(
+    //         path: CoinDetail.routeRegEx,
+    //         builder: (context) => Scaffold(
+    //           backgroundColor: Colors.black,
+    //           body: CoinDetail(id: context.params['id']!),
+    //         ),
+    //       )
+    //     ]),
     Yeet(
       path: AddTransaction.routeRegEx,
-      builder: (params, __) => Scaffold(
+      builder: (context) => Scaffold(
         backgroundColor: Colors.black,
         body: AddTransaction(),
       ),
     ),
     Yeet(
       path: MyHomePage.routeRegEx,
-      builder: (_, __) => MyHomePage(),
+      builder: (context) => MyHomePage(),
+      children: [
+        Yeet(
+          path: CoinDetail.routeRegEx,
+          builder: (context) => Scaffold(
+            backgroundColor: Colors.black,
+            body: CoinDetail(id: context.params['id']!),
+          ),
+        )
+      ],
     ),
 
     // Yeet.custom(
@@ -52,7 +78,7 @@ final yeet = Yeet(
     // ),
     Yeet(
       path: ':_(.*)',
-      builder: (_, __) => MyHomePage(),
+      builder: (context) => MyHomePage(),
     ),
   ],
 );

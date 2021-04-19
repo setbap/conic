@@ -32,7 +32,9 @@ class ExchnageListItem extends StatelessWidget {
             child: Icon(
               Icons.shield_rounded,
               size: 18,
-              color: exchangesItem.trustScore! > 5 ? Colors.green : Colors.red,
+              color: (exchangesItem.trustScore ?? 0) > 5
+                  ? Colors.green
+                  : Colors.red,
             ),
           ),
           Container(
@@ -40,8 +42,9 @@ class ExchnageListItem extends StatelessWidget {
             child: Text(
               exchangesItem.trustScore.toString(),
               style: TextStyle(
-                color:
-                    exchangesItem.trustScore! > 5 ? Colors.green : Colors.red,
+                color: (exchangesItem.trustScore ?? 0) > 5
+                    ? Colors.green
+                    : Colors.red,
               ),
             ),
           ),

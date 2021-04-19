@@ -6,21 +6,21 @@ import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PriceData extends StatelessWidget {
-  final double ath;
-  final double high;
-  final double changePercentage;
-  final double atl;
-  final double low;
-  final double change;
+  final double? ath;
+  final double? high;
+  final double? changePercentage;
+  final double? atl;
+  final double? low;
+  final double? change;
 
   const PriceData({
     Key? key,
-    required this.ath,
-    required this.high,
-    required this.changePercentage,
-    required this.atl,
-    required this.low,
-    required this.change,
+    this.ath,
+    this.high,
+    this.changePercentage,
+    this.atl,
+    this.low,
+    this.change,
   }) : super(key: key);
 
   @override

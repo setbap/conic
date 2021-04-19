@@ -6,10 +6,10 @@ class ChangeShow extends StatelessWidget {
   const ChangeShow({
     Key? key,
     this.mainAxisAlignment = MainAxisAlignment.start,
-    required this.change,
+    this.change,
   }) : super(key: key);
 
-  final double change;
+  final double? change;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,11 @@ class ChangeShow extends StatelessWidget {
           Text(
             display(change),
             style: TextStyle(
-              color: change > 0 ? Colors.green : Colors.red,
+              color: (change ?? 0) > 0 ? Colors.green : Colors.red,
               fontSize: 10,
             ),
           ),
-          change > 0
+          (change ?? 0) > 0
               ? Icon(
                   Icons.arrow_drop_up,
                   color: Colors.green,

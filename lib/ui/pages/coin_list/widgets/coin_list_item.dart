@@ -14,6 +14,7 @@ class CoinListItemData extends StatelessWidget {
   final String id;
   final double change;
   final double marketCap;
+  final VoidCallback onPressed;
 
   const CoinListItemData({
     Key? key,
@@ -25,143 +26,147 @@ class CoinListItemData extends StatelessWidget {
     required this.id,
     required this.change,
     required this.marketCap,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final display = createDisplay(length: 8);
 
-    return Container(
-      height: 70,
-      padding: const EdgeInsets.symmetric(
-        vertical: 4,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(right: 12),
-            child: CircleAvatar(
-              radius: 16,
-              child: Image.network(
-                imageSrc,
-                errorBuilder: (context, error, stackTrace) {
-                  return Placeholder();
-                },
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        height: 70,
+        padding: const EdgeInsets.symmetric(
+          vertical: 4,
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(right: 12),
+              child: CircleAvatar(
+                radius: 16,
+                child: Image.network(
+                  imageSrc,
+                  errorBuilder: (context, error, stackTrace) {
+                    return Placeholder();
+                  },
+                ),
               ),
             ),
-          ),
-          Expanded(
-              child: Column(
-            children: [
-              Row(
-                children: [
-                  Expanded(
-                    child: Text(
-                      name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 1,
-                        fontSize: 12,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 4,
-                      ),
-                      child: MyLineChart(
-                        chartData: chartData
-                            .sublist((chartData.length * 6 ~/ 7))
-                            .toList(),
-                        height: 24,
-                        width: 36,
-                      ),
-                    ),
-                  ),
-                  SizedBox(),
-                  Container(
-                    width: 60,
-                    child: Text(
-                      "${display(price)}\$",
-                      style: TextStyle(
+            Expanded(
+                child: Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        name,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1,
-                          fontSize: 10),
+                          fontSize: 12,
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              ),
-              SizedBox(
-                height: 6,
-              ),
-              Row(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 24,
-                        child: Text(
-                          '$rank',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 9,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 4,
+                        ),
+                        child: MyLineChart(
+                          chartData: chartData
+                              .sublist((chartData.length * 6 ~/ 7))
+                              .toList(),
+                          height: 24,
+                          width: 36,
+                        ),
+                      ),
+                    ),
+                    SizedBox(),
+                    Container(
+                      width: 60,
+                      child: Text(
+                        "${display(price)}\$",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 1,
+                            fontSize: 10),
+                      ),
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+                SizedBox(
+                  height: 6,
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          width: 24,
+                          child: Text(
+                            '$rank',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 9,
+                            ),
+                          ),
+                          decoration: BoxDecoration(
+                            color: DarkPrimaryColor,
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 2,
+                          ),
+                          margin: EdgeInsets.only(
+                            right: 6,
                           ),
                         ),
-                        decoration: BoxDecoration(
-                          color: DarkPrimaryColor,
-                          borderRadius: BorderRadius.circular(6),
+                        Container(
+                          width: 32,
+                          child: Text(
+                            id,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 10, color: DarkTextForeground),
+                          ),
                         ),
-                        padding: EdgeInsets.symmetric(
-                          vertical: 2,
+                        SizedBox(
+                          width: 4,
                         ),
-                        margin: EdgeInsets.only(
-                          right: 6,
-                        ),
-                      ),
-                      Container(
-                        width: 32,
-                        child: Text(
-                          id,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                              fontSize: 10, color: DarkTextForeground),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 4,
-                      ),
-                      ChangeShow(change: change)
-                    ],
-                  ),
-                  Text(
-                    'MCap ${display(marketCap)} ',
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                    style: TextStyle(fontSize: 8, color: DarkTextForeground),
-                  ),
-                ],
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        ChangeShow(change: change)
+                      ],
+                    ),
+                    Text(
+                      'MCap ${display(marketCap)} ',
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                      style: TextStyle(fontSize: 8, color: DarkTextForeground),
+                    ),
+                  ],
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                ),
+              ],
+            )),
+            Container(
+              child: CupertinoButton(
+                padding: const EdgeInsets.all(2),
+                onPressed: () {},
+                child: Icon(
+                  Icons.star_border_outlined,
+                  color: Colors.yellow,
+                  size: 12,
+                ),
               ),
-            ],
-          )),
-          Container(
-            child: CupertinoButton(
-              padding: const EdgeInsets.all(2),
-              onPressed: () {},
-              child: Icon(
-                Icons.star_border_outlined,
-                color: Colors.yellow,
-                size: 12,
-              ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     );
   }

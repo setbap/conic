@@ -5,19 +5,6 @@ import 'package:shimmer/shimmer.dart';
 class SliverChartBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: SliverChartBoxLoading(),
-      dataWidget: SliverChartBoxData(),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class SliverChartBoxData extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class KeyValueData extends StatelessWidget {
   final String dataKey;
-  final double dataValue;
+  final String dataValue;
   const KeyValueData({
     Key? key,
     required this.dataKey,
@@ -16,7 +16,7 @@ class KeyValueData extends StatelessWidget {
     return KeyValueDataGeneric(
       dataKey: dataKey,
       dataValueWidget: Text(
-        "\$ $dataValue",
+        " $dataValue \$",
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,

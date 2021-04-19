@@ -1,42 +1,28 @@
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
-class CoinDetailAppBar extends StatelessWidget {
+class CoinDetailAppBar extends StatefulWidget {
   final ScrollController controller;
-
+  final String symbol;
+  final double price;
+  final String imageSrc;
   const CoinDetailAppBar({
     Key? key,
-    required this.controller,
-  }) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: CoinDetailAppBarLoading(),
-      dataWidget: CoinDetailAppBarData(
-        controller: controller,
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class CoinDetailAppBarData extends StatefulWidget {
-  final ScrollController controller;
-  const CoinDetailAppBarData({
-    Key? key,
+    required this.price,
+    required this.symbol,
+    required this.imageSrc,
     required this.controller,
   }) : super(key: key);
 
   @override
-  _CoinDetailAppBarDataState createState() => _CoinDetailAppBarDataState();
+  _CoinDetailAppBarState createState() => _CoinDetailAppBarState();
 }
 
-class _CoinDetailAppBarDataState extends State<CoinDetailAppBarData> {
+class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
   double textOpacity = 0;
-
+  var numberDisply = createDisplay(length: 8);
   @override
   void dispose() {
     widget.controller.removeListener(() {});
@@ -83,7 +69,7 @@ class _CoinDetailAppBarDataState extends State<CoinDetailAppBarData> {
               children: [
                 FittedBox(
                   child: Text(
-                    "BTC",
+                    widget.symbol,
                     style: TextStyle(
                         color: Colors.white, fontWeight: FontWeight.w500),
                   ),
@@ -96,6 +82,10 @@ class _CoinDetailAppBarDataState extends State<CoinDetailAppBarData> {
           ),
           CircleAvatar(
             backgroundColor: Colors.orange,
+            child: Image.network(
+              widget.imageSrc,
+            ),
+            radius: 16,
           ),
           Opacity(
             opacity: textOpacity,
@@ -105,7 +95,7 @@ class _CoinDetailAppBarDataState extends State<CoinDetailAppBarData> {
                   width: 12,
                 ),
                 Text(
-                  "\$${0.0023}",
+                  "\$${numberDisply(widget.price)}",
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w500,

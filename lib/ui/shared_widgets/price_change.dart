@@ -2,29 +2,14 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PriceChange extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: PriceChangeLoading(),
-      dataWidget: PriceChangeData(
-        change: 2,
-        price: 439.21,
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class PriceChangeData extends StatelessWidget {
   final double price;
   final double change;
 
-  const PriceChangeData({
+  const PriceChange({
     required this.price,
     required this.change,
     Key? key,
@@ -32,6 +17,7 @@ class PriceChangeData extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final numberDisplay = createDisplay(length: 8);
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -50,7 +36,7 @@ class PriceChangeData extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "$price \$",
+                  "${numberDisplay(price)} \$",
                   style: TextStyle(
                     fontSize: 28,
                   ),

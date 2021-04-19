@@ -1,3 +1,4 @@
+import 'package:coingecko/coingecko.dart';
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
@@ -5,22 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CoinAbout extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: CoinAboutLoading(),
-      dataWidget: CoinAboutData(),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class CoinAboutData extends StatelessWidget {
-  const CoinAboutData({
-    Key? key,
-  }) : super(key: key);
+  final CoinDecription coinDecription;
+  const CoinAbout({Key? key, required this.coinDecription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,14 +18,14 @@ class CoinAboutData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "About Coin",
+              "About ${coinDecription.name}",
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
               height: 12,
             ),
             ExpansionTile(
-              title: Text("What is asdas"),
+              title: Text("What is ${coinDecription.name}"),
               leading: Icon(Icons.add_circle_outlined),
               childrenPadding: EdgeInsets.symmetric(
                 vertical: 16,
@@ -47,16 +34,15 @@ class CoinAboutData extends StatelessWidget {
               expandedAlignment: Alignment.centerLeft,
               children: [
                 Text(
-                    "lorem adha siud aa oasd pASYD asdpYASPD  ya sdpAYS DPUCL HCIU DH"),
+                  "${coinDecription.description.en}",
+                ),
                 SizedBox(height: 16),
                 Wrap(
                   spacing: 8,
                   crossAxisAlignment: WrapCrossAlignment.start,
-                  children: [
-                    CustomChip(text: "test"),
-                    CustomChip(text: "asda"),
-                    CustomChip(text: "test"),
-                  ],
+                  children: coinDecription.categories
+                      .map((e) => CustomChip(text: e))
+                      .toList(),
                 ),
               ],
             ),

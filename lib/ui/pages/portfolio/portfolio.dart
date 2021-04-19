@@ -27,7 +27,10 @@ class _PortfolioState extends State<Portfolio> {
         PortfolioAppBar(
           controller: controller,
         ),
-        PriceChange(),
+        PriceChange(
+          change: 2,
+          price: 1,
+        ),
         SliverChartBox(),
         PortfollioTableHeader(),
         SliverToBoxAdapter(

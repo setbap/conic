@@ -1,53 +1,31 @@
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
-import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 
 class MarketState extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: PriceDataLoading(),
-      dataWidget: MarketStateData(
-        mktCap: 4,
-        circSupply: 4,
-        totSupply: 4,
-        rank: 4,
-        volIn24h: 4,
-        maxSupply: 4,
-        roi: 4,
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class MarketStateData extends StatelessWidget {
   final double mktCap;
-  final double circSupply;
-  final double totSupply;
+  final double? sentimentVotesDownPercentage;
 
-  final double volIn24h;
-  final double maxSupply;
-  final double roi;
-  final double rank;
-  const MarketStateData({
+  final double coingeckoScore;
+  final double? sentimentVotesUpPercentage;
+
+  final int rank;
+  const MarketState({
     Key? key,
     required this.mktCap,
-    required this.circSupply,
-    required this.totSupply,
-    required this.volIn24h,
-    required this.maxSupply,
-    required this.roi,
+    this.sentimentVotesDownPercentage,
+    required this.coingeckoScore,
+    this.sentimentVotesUpPercentage,
     required this.rank,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final numberDisplay = createDisplay(length: 6);
+
     return Container(
-      height: 200,
+      height: 150,
       padding: const EdgeInsets.all(8.0),
       child: Container(
         child: Row(
@@ -59,19 +37,28 @@ class MarketStateData extends StatelessWidget {
                 children: [
                   KeyValueData(
                     dataKey: "Mkt Cap",
-                    dataValue: mktCap,
+                    dataValue: numberDisplay(mktCap),
                   ),
-                  KeyValueData(
-                    dataKey: "Circ Supply",
-                    dataValue: circSupply,
-                  ),
-                  KeyValueData(
-                    dataKey: "TOT Supply",
-                    dataValue: totSupply,
-                  ),
-                  KeyValueData(
+                  KeyValueDataGeneric(
+                      dataKey: "Up vote %",
+                      dataValueWidget: Text(
+                        " ${numberDisplay(sentimentVotesUpPercentage)} \%",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.green,
+                        ),
+                      )),
+                  KeyValueDataGeneric(
                     dataKey: "Rank",
-                    dataValue: rank,
+                    dataValueWidget: Text(
+                      " ${numberDisplay(rank)} ",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -86,22 +73,23 @@ class MarketStateData extends StatelessWidget {
               child: Column(
                 children: [
                   KeyValueData(
-                    dataKey: "2dh Vol",
-                    dataValue: volIn24h,
-                  ),
-                  KeyValueData(
-                    dataKey: "Max Supply",
-                    dataValue: maxSupply,
+                    dataKey: "CG Score",
+                    dataValue: numberDisplay(coingeckoScore),
                   ),
                   KeyValueDataGeneric(
-                    dataKey: "ROi",
-                    dataValueWidget: ChangeShow(
-                      change: roi,
-                    ),
+                      dataKey: "Down vote",
+                      dataValueWidget: Text(
+                        " ${numberDisplay(sentimentVotesDownPercentage)} \%",
+                        style: TextStyle(
+                          fontSize: 15,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.red,
+                        ),
+                      )),
+                  KeyValueDataGeneric(
+                    dataKey: "",
+                    dataValueWidget: Text(""),
                   ),
-                  Container(
-                    height: 48,
-                  )
                 ],
               ),
             ),

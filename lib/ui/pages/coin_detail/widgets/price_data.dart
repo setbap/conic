@@ -2,48 +2,30 @@ import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PriceData extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: PriceDataLoading(),
-      dataWidget: PriceDataData(
-        open: 1,
-        high: 1,
-        average: 1,
-        close: 1,
-        low: 1,
-        change: 1,
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class PriceDataData extends StatelessWidget {
-  final double open;
+  final double ath;
   final double high;
-  final double average;
-  final double close;
+  final double changePercentage;
+  final double atl;
   final double low;
   final double change;
 
-  const PriceDataData({
+  const PriceData({
     Key? key,
-    required this.open,
+    required this.ath,
     required this.high,
-    required this.average,
-    required this.close,
+    required this.changePercentage,
+    required this.atl,
     required this.low,
     required this.change,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final numberDisplay = createDisplay(length: 7);
     return Container(
       height: 150,
       padding: const EdgeInsets.all(8.0),
@@ -56,16 +38,23 @@ class PriceDataData extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   KeyValueData(
-                    dataKey: "Open",
-                    dataValue: open,
+                    dataKey: "ATH",
+                    dataValue: numberDisplay(ath),
                   ),
                   KeyValueData(
                     dataKey: "High",
-                    dataValue: high,
+                    dataValue: numberDisplay(high),
                   ),
-                  KeyValueData(
-                    dataKey: "Average",
-                    dataValue: average,
+                  KeyValueDataGeneric(
+                    dataKey: "Chnage%",
+                    dataValueWidget: Text(
+                      " ${numberDisplay(changePercentage)} \%",
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -80,12 +69,12 @@ class PriceDataData extends StatelessWidget {
               child: Column(
                 children: [
                   KeyValueData(
-                    dataKey: "Close",
-                    dataValue: close,
+                    dataKey: "ATL",
+                    dataValue: numberDisplay(atl),
                   ),
                   KeyValueData(
                     dataKey: "Low",
-                    dataValue: low,
+                    dataValue: numberDisplay(low),
                   ),
                   KeyValueDataGeneric(
                     dataKey: "Change",

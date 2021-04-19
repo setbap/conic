@@ -42,6 +42,11 @@ Future<void> main() async {
                 indexDataRepo: context.read<IndexDataRepository>(),
               )..getListData(),
             ),
+            BlocProvider<CoinDetailPageDataCubit>(
+              create: (BuildContext context) => CoinDetailPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),

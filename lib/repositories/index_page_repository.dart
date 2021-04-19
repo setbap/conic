@@ -44,4 +44,20 @@ class IndexDataRepository {
       topExchangeList: topExchange,
     );
   }
+
+  Future<CoinDetailPageDataModel> getCoinDetaiPageInfo(String coinName) async {
+    final listPageRawData = await Future.wait([
+      _coinApi.topCoinInfo(coins: [coinName], sparkLine: true),
+      _coinApi.coinDesc(coinId: coinName),
+    ]);
+
+    // ignore: unnecessary_cast
+    final topCoin = listPageRawData[0] as List<TopCoin>;
+    final coinDecription = listPageRawData[1] as CoinDecription;
+
+    return CoinDetailPageDataModel(
+      coinPrice: topCoin[0],
+      coinDecription: coinDecription,
+    );
+  }
 }

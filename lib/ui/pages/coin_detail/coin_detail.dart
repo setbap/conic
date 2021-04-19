@@ -160,7 +160,12 @@ class _CoinDetailState extends State<CoinDetail> {
                     change: coinPrice.priceChange24h,
                     price: coinPrice.currentPrice!,
                   ),
-                  SliverChartBox(),
+                  SliverChartBox(chartDataArray: [
+                    state.data!.oneDayChartData,
+                    state.data!.sevenDayChartData,
+                    state.data!.thirtyDayChartData,
+                    state.data!.allTimeChartData,
+                  ]),
                   SliverToBoxAdapter(
                     child: Container(
                       padding: EdgeInsets.all(8),

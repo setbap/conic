@@ -9,3 +9,4 @@ export 'price_change.dart';
 export 'chart_box.dart';
 export 'search_shimmer.dart';
 export 'my_line_chart.dart';
+export 'fl_chart_box.dart';

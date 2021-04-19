@@ -160,7 +160,6 @@ class CoinGeckoClient {
     required String coinName,
     required int days,
   }) async {
-    print("raw");
     final coinChartRaw = await _genericGet(
       path: Endpoints.coinsIdMarketChart(id: coinName),
       queryParameters: {
@@ -168,7 +167,6 @@ class CoinGeckoClient {
         'vs_currency': 'usd',
       },
     );
-    print(coinChartRaw);
 
     return CoinChart.fromJson(coinChartRaw);
   }

@@ -15,12 +15,10 @@ class CoinChart {
   });
 
   factory CoinChart.fromJson(Map<String, dynamic> jsonRes) {
-    print("ffffuckk");
     final List<CoinChartTimeData>? prices =
         jsonRes['prices'] is List ? <CoinChartTimeData>[] : null;
     if (prices != null) {
       for (final dynamic item0 in asT<List<dynamic>>(jsonRes['prices'])!) {
-        print(item0);
         if (item0 != null) {
           final item0nn = asT<List<dynamic>>(item0)!;
           prices.add(

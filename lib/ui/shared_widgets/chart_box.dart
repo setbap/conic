@@ -1,8 +1,21 @@
+import 'package:coingecko/coingecko.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class SliverChartBox extends StatelessWidget {
+class SliverChartBox extends StatefulWidget {
+  final List<CoinChart>? chartDataArray;
+
+  const SliverChartBox({Key? key, this.chartDataArray}) : super(key: key);
+
+  @override
+  _SliverChartBoxState createState() => _SliverChartBoxState();
+}
+
+class _SliverChartBoxState extends State<SliverChartBox> {
+  int activeIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -11,32 +24,46 @@ class SliverChartBox extends StatelessWidget {
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: Placeholder(
-              fallbackHeight: 250,
-            ),
+            child: FLChartBox(chartData: widget.chartDataArray![activeIndex]),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               timeButton(
                 text: '24h',
-                currentTime: '7d',
-                onPress: () {},
+                currentTime: activeIndex == 0 ? '24h' : '',
+                onPress: () {
+                  setState(() {
+                    activeIndex = 0;
+                  });
+                },
               ),
               timeButton(
                 text: '7d',
-                currentTime: '7d',
-                onPress: () {},
+                currentTime: activeIndex == 1 ? '7d' : '',
+                onPress: () {
+                  setState(() {
+                    activeIndex = 1;
+                  });
+                },
               ),
               timeButton(
                 text: '30d',
-                currentTime: '7d',
-                onPress: () {},
+                currentTime: activeIndex == 2 ? '30d' : '',
+                onPress: () {
+                  setState(() {
+                    activeIndex = 2;
+                  });
+                },
               ),
               timeButton(
                 text: 'all',
-                currentTime: '7d',
-                onPress: () {},
+                currentTime: activeIndex == 3 ? 'all' : '',
+                onPress: () {
+                  setState(() {
+                    activeIndex = 3;
+                  });
+                },
               ),
             ],
           )

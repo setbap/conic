@@ -76,10 +76,10 @@ class Index extends StatelessWidget {
               onPress: () {
                 context.yeet(CoinDetail.route(id: data.id));
               },
-              change: data.priceChange24h,
+              change: data.priceChange24h ?? 0,
               coinName: data.name,
-              imgSrc: data.image,
-              price: data.currentPrice,
+              imgSrc: data.image ?? "",
+              price: data.currentPrice ?? 0,
             ),
           ),
           SliverPadding(padding: EdgeInsets.all(12)),

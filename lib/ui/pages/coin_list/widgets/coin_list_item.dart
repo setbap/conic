@@ -10,10 +10,10 @@ class CoinListItemData extends StatelessWidget {
   final String name;
   final List<double> chartData;
   final double price;
-  final int rank;
+  final int? rank;
   final String id;
-  final double change;
-  final double marketCap;
+  final double? change;
+  final double? marketCap;
   final VoidCallback onPressed;
 
   const CoinListItemData({
@@ -24,8 +24,8 @@ class CoinListItemData extends StatelessWidget {
     required this.price,
     required this.rank,
     required this.id,
-    required this.change,
-    required this.marketCap,
+    this.change,
+    this.marketCap,
     required this.onPressed,
   }) : super(key: key);
 

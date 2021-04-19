@@ -6,17 +6,17 @@ class CoinDecription {
     required this.id,
     required this.symbol,
     required this.name,
-    required this.assetPlatformId,
-    required this.categories,
-    required this.description,
-    required this.links,
+    this.assetPlatformId,
+    this.categories,
+    this.description,
+    this.links,
     this.image,
     this.sentimentVotesUpPercentage,
     this.sentimentVotesDownPercentage,
-    required this.marketCapRank,
-    required this.coingeckoRank,
-    required this.coingeckoScore,
-    required this.lastUpdated,
+    this.marketCapRank,
+    this.coingeckoRank,
+    this.coingeckoScore,
+    this.lastUpdated,
   });
 
   factory CoinDecription.fromJson(Map<String, dynamic> jsonRes) {
@@ -35,7 +35,7 @@ class CoinDecription {
       symbol: asT<String>(jsonRes['symbol'])!,
       name: asT<String>(jsonRes['name'])!,
       assetPlatformId: asT<Object>(jsonRes['asset_platform_id']),
-      categories: categories!,
+      categories: categories,
       description: Description.fromJson(
           asT<Map<String, dynamic>>(jsonRes['description'])!),
       links: Links.fromJson(asT<Map<String, dynamic>>(jsonRes['links'])!),
@@ -47,9 +47,9 @@ class CoinDecription {
       sentimentVotesDownPercentage:
           asT<double?>(jsonRes['sentiment_votes_down_percentage']),
       marketCapRank: asT<int>(jsonRes['market_cap_rank']),
-      coingeckoRank: asT<int>(jsonRes['coingecko_rank'])!,
-      coingeckoScore: asT<double>(jsonRes['coingecko_score'])!,
-      lastUpdated: asT<String>(jsonRes['last_updated'])!,
+      coingeckoRank: asT<int>(jsonRes['coingecko_rank']),
+      coingeckoScore: asT<double>(jsonRes['coingecko_score']),
+      lastUpdated: asT<String>(jsonRes['last_updated']),
     );
   }
 
@@ -57,16 +57,16 @@ class CoinDecription {
   final String symbol;
   final String name;
   final Object? assetPlatformId;
-  final List<String> categories;
-  final Description description;
-  final Links links;
+  final List<String>? categories;
+  final Description? description;
+  final Links? links;
   final CoinImages? image;
   final double? sentimentVotesUpPercentage;
   final double? sentimentVotesDownPercentage;
   final int? marketCapRank;
-  final int coingeckoRank;
-  final double coingeckoScore;
-  final String lastUpdated;
+  final int? coingeckoRank;
+  final double? coingeckoScore;
+  final String? lastUpdated;
 
   @override
   String toString() {

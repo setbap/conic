@@ -46,4 +46,9 @@ class GenericPageStete<T> {
         isError.hashCode ^
         error.hashCode;
   }
+
+  @override
+  String toString() {
+    return 'GenericPageStete(data: $data, isLoading: $isLoading, isError: $isError, error: $error)';
+  }
 }

@@ -7,11 +7,11 @@ import 'package:shimmer/shimmer.dart';
 
 class PriceChange extends StatelessWidget {
   final double price;
-  final double change;
+  final double? change;
 
   const PriceChange({
     required this.price,
-    required this.change,
+    this.change,
     Key? key,
   }) : super(key: key);
 

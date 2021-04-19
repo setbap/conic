@@ -56,13 +56,7 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
-      leading: IconButton(
-        icon: Icon(Icons.backpack_rounded),
-        onPressed: () {
-          context.yeet();
-          // Navigator.of(context).pop();
-        },
-      ),
+      leading: BackButton(),
       pinned: true,
       centerTitle: true,
       actions: [IconButton(onPressed: () {}, icon: Icon(Icons.star_outline))],

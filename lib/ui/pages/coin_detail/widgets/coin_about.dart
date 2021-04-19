@@ -6,11 +6,16 @@ import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CoinAbout extends StatelessWidget {
-  final CoinDecription coinDecription;
-  const CoinAbout({Key? key, required this.coinDecription}) : super(key: key);
+  final CoinDecription? coinDecription;
+  const CoinAbout({Key? key, this.coinDecription}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    if (coinDecription == null) {
+      return SliverPadding(
+        padding: EdgeInsets.all(8),
+      );
+    }
     return SliverPadding(
       padding: EdgeInsets.all(8),
       sliver: SliverToBoxAdapter(
@@ -18,14 +23,14 @@ class CoinAbout extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "About ${coinDecription.name}",
+              "About ${coinDecription!.name}",
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
               height: 12,
             ),
             ExpansionTile(
-              title: Text("What is ${coinDecription.name}"),
+              title: Text("What is ${coinDecription!.name}"),
               leading: Icon(Icons.add_circle_outlined),
               childrenPadding: EdgeInsets.symmetric(
                 vertical: 16,
@@ -34,13 +39,13 @@ class CoinAbout extends StatelessWidget {
               expandedAlignment: Alignment.centerLeft,
               children: [
                 Text(
-                  "${coinDecription.description.en}",
+                  "${coinDecription!.description?.en}",
                 ),
                 SizedBox(height: 16),
                 Wrap(
                   spacing: 8,
                   crossAxisAlignment: WrapCrossAlignment.start,
-                  children: coinDecription.categories
+                  children: (coinDecription?.categories ?? [])
                       .map((e) => CustomChip(text: e))
                       .toList(),
                 ),

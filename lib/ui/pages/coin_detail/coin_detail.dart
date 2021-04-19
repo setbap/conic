@@ -147,21 +147,26 @@ class _CoinDetailState extends State<CoinDetail> {
           ),
           dataWidget: Builder(
             builder: (context) {
+              print("state.data!");
+              print(state.data);
+              print(state);
+              print("state.data!");
+
               final coinPrice = state.data!.coinPrice;
-              final coinDecription = state.data!.coinDecription;
+              final coinDecription = state.data?.coinDecription;
               return CustomScrollView(
                 controller: _controller,
                 physics: BouncingScrollPhysics(),
                 slivers: [
                   CoinDetailAppBar(
                     symbol: coinPrice.symbol.toUpperCase(),
-                    price: coinPrice.currentPrice,
-                    imageSrc: coinPrice.image,
+                    price: coinPrice.currentPrice!,
+                    imageSrc: coinPrice.image ?? "",
                     controller: _controller,
                   ),
                   PriceChange(
                     change: coinPrice.priceChange24h,
-                    price: coinPrice.currentPrice,
+                    price: coinPrice.currentPrice!,
                   ),
                   SliverChartBox(),
                   SliverToBoxAdapter(
@@ -216,11 +221,11 @@ class _CoinDetailState extends State<CoinDetail> {
                     child: MarketState(
                       mktCap: coinPrice.marketCap,
                       sentimentVotesUpPercentage:
-                          coinDecription.sentimentVotesUpPercentage,
+                          coinDecription?.sentimentVotesUpPercentage,
                       rank: coinPrice.marketCapRank,
-                      coingeckoScore: coinDecription.coingeckoScore,
+                      coingeckoScore: coinDecription?.coingeckoScore,
                       sentimentVotesDownPercentage:
-                          coinDecription.sentimentVotesDownPercentage,
+                          coinDecription?.sentimentVotesDownPercentage,
                     ),
                   ),
                   SliverToBoxAdapter(

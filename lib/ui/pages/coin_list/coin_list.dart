@@ -103,13 +103,13 @@ class _CoinListState extends State<CoinList>
                                 CoinDetail.route(id: topCoinItem.id),
                               );
                             },
-                            imageSrc: topCoinItem.image,
+                            imageSrc: topCoinItem.image ?? "",
                             name: topCoinItem.name,
                             chartData: topCoinItem.sparklineIn7d!.price,
                             change: topCoinItem.priceChangePercentage24h,
                             id: topCoinItem.symbol,
                             marketCap: topCoinItem.marketCap,
-                            price: topCoinItem.currentPrice,
+                            price: topCoinItem.currentPrice!,
                             rank: topCoinItem.marketCapRank,
                           );
                         },

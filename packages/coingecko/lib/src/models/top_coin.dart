@@ -56,16 +56,16 @@ class TopCoin {
     required this.id,
     required this.symbol,
     required this.name,
-    required this.image,
+    this.image,
     required this.currentPrice,
-    required this.marketCap,
-    required this.marketCapRank,
-    required this.high24h,
-    required this.low24h,
-    required this.priceChange24h,
-    required this.priceChangePercentage24h,
-    required this.ath,
-    required this.atl,
+    this.marketCap,
+    this.marketCapRank,
+    this.high24h,
+    this.low24h,
+    this.priceChange24h,
+    this.priceChangePercentage24h,
+    this.ath,
+    this.atl,
     this.sparklineIn7d,
   });
 
@@ -73,17 +73,17 @@ class TopCoin {
         id: asT<String>(jsonRes['id'])!,
         symbol: asT<String>(jsonRes['symbol'])!,
         name: asT<String>(jsonRes['name'])!,
-        image: asT<String>(jsonRes['image'])!,
+        image: asT<String>(jsonRes['image']),
         currentPrice: asT<double>(jsonRes['current_price'])!,
-        marketCap: asT<double>(jsonRes['market_cap'])!,
-        marketCapRank: asT<int>(jsonRes['market_cap_rank'])!,
-        high24h: asT<double>(jsonRes['high_24h'])!,
-        low24h: asT<double>(jsonRes['low_24h'])!,
-        priceChange24h: asT<double>(jsonRes['price_change_24h'])!,
+        marketCap: asT<double>(jsonRes['market_cap']),
+        marketCapRank: asT<int>(jsonRes['market_cap_rank']),
+        high24h: asT<double>(jsonRes['high_24h']),
+        low24h: asT<double>(jsonRes['low_24h']),
+        priceChange24h: asT<double>(jsonRes['price_change_24h']),
         priceChangePercentage24h:
-            asT<double>(jsonRes['price_change_percentage_24h'])!,
-        ath: asT<double>(jsonRes['ath'])!,
-        atl: asT<double>(jsonRes['atl'])!,
+            asT<double>(jsonRes['price_change_percentage_24h']),
+        ath: asT<double>(jsonRes['ath']),
+        atl: asT<double>(jsonRes['atl']),
         sparklineIn7d: jsonRes['sparkline_in_7d'] == null
             ? null
             : SparklineIn7d.fromJson(
@@ -93,16 +93,16 @@ class TopCoin {
   final String id;
   final String symbol;
   final String name;
-  final String image;
-  final double currentPrice;
-  final double marketCap;
-  final int marketCapRank;
-  final double high24h;
-  final double low24h;
-  final double priceChange24h;
-  final double priceChangePercentage24h;
-  final double ath;
-  final double atl;
+  final String? image;
+  final double? currentPrice;
+  final double? marketCap;
+  final int? marketCapRank;
+  final double? high24h;
+  final double? low24h;
+  final double? priceChange24h;
+  final double? priceChangePercentage24h;
+  final double? ath;
+  final double? atl;
   final SparklineIn7d? sparklineIn7d;
 
   @override

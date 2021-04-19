@@ -27,6 +27,7 @@ class CoinDetailPageDataCubit
     _indexDataRepo.getCoinDetaiPageInfo(coinName).then((value) {
       emit(state.copyWith(data: value));
     }).catchError((err) {
+      print(err);
       emit(state.copyWith(isError: true, error: "new error"));
     }).whenComplete(() {
       emit(state.copyWith(isLoading: false));

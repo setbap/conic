@@ -57,7 +57,6 @@ class CryptoPanicClient {
     final newsApiResMap = await _genericGet(
       queryParameters: qs,
     );
-    print(newsApiResMap);
     return NewsApiResualt.fromJson(newsApiResMap);
   }
 }

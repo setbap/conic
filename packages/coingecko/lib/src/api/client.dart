@@ -156,6 +156,23 @@ class CoinGeckoClient {
     return CoinDecription.fromJson(coinDescRaw);
   }
 
+  Future<CoinChart> coinChart({
+    required String coinName,
+    required int days,
+  }) async {
+    print("raw");
+    final coinChartRaw = await _genericGet(
+      path: Endpoints.coinsIdMarketChart(id: coinName),
+      queryParameters: {
+        'days': days.toString(),
+        'vs_currency': 'usd',
+      },
+    );
+    print(coinChartRaw);
+
+    return CoinChart.fromJson(coinChartRaw);
+  }
+
   Future<List<ExchangesItem>> topExchangesInfo({
     int perPage = 6,
     int page = 1,

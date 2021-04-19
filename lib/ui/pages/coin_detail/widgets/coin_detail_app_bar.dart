@@ -2,7 +2,6 @@ import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:yeet/yeet.dart';
 
 class CoinDetailAppBar extends StatefulWidget {
   final ScrollController controller;

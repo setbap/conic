@@ -49,15 +49,27 @@ class IndexDataRepository {
     final listPageRawData = await Future.wait([
       _coinApi.topCoinInfo(coins: [coinName], sparkLine: true),
       _coinApi.coinDesc(coinId: coinName),
+      _coinApi.coinChart(coinName: coinName, days: 1),
+      _coinApi.coinChart(coinName: coinName, days: 7),
+      _coinApi.coinChart(coinName: coinName, days: 30),
+      _coinApi.coinChart(coinName: coinName, days: 365),
     ]);
 
     // ignore: unnecessary_cast
     final topCoin = listPageRawData[0] as List<TopCoin>;
     final coinDecription = listPageRawData[1] as CoinDecription;
+    final coinChart1day = listPageRawData[2] as CoinChart;
+    final coinChart7day = listPageRawData[3] as CoinChart;
+    final coinChart30day = listPageRawData[4] as CoinChart;
+    final coinChart356day = listPageRawData[5] as CoinChart;
 
     return CoinDetailPageDataModel(
       coinPrice: topCoin[0],
       coinDecription: coinDecription,
+      oneDayChartData: coinChart1day,
+      sevenDayChartData: coinChart7day,
+      thirtyDayChartData: coinChart30day,
+      allTimeChartData: coinChart356day,
     );
   }
 }

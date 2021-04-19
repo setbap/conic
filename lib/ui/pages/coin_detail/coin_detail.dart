@@ -75,9 +75,6 @@ class _CoinDetailState extends State<CoinDetail> {
         );
       },
       builder: (context, state) {
-        print("state");
-        print(state.isLoading);
-
         return LoadingShimmer(
           loadingWidget: CustomScrollView(
             controller: _controller,
@@ -147,11 +144,6 @@ class _CoinDetailState extends State<CoinDetail> {
           ),
           dataWidget: Builder(
             builder: (context) {
-              print("state.data!");
-              print(state.data);
-              print(state);
-              print("state.data!");
-
               final coinPrice = state.data!.coinPrice;
               final coinDecription = state.data?.coinDecription;
               return CustomScrollView(

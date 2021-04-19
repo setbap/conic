@@ -3,10 +3,18 @@ import 'package:coingecko/coingecko.dart';
 class CoinDetailPageDataModel {
   final TopCoin coinPrice;
   final CoinDecription coinDecription;
+  final CoinChart oneDayChartData;
+  final CoinChart sevenDayChartData;
+  final CoinChart thirtyDayChartData;
+  final CoinChart allTimeChartData;
 
   const CoinDetailPageDataModel({
     required this.coinDecription,
     required this.coinPrice,
+    required this.oneDayChartData,
+    required this.sevenDayChartData,
+    required this.thirtyDayChartData,
+    required this.allTimeChartData,
   });
 
   @override

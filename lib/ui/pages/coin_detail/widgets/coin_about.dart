@@ -1,9 +1,12 @@
+import 'dart:ui';
+
 import 'package:coingecko/coingecko.dart';
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/link.dart';
 
 class CoinAbout extends StatelessWidget {
   final CoinDecription? coinDecription;
@@ -17,7 +20,7 @@ class CoinAbout extends StatelessWidget {
       );
     }
     return SliverPadding(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(1),
       sliver: SliverToBoxAdapter(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,8 +41,11 @@ class CoinAbout extends StatelessWidget {
               ),
               expandedAlignment: Alignment.centerLeft,
               children: [
-                Text(
-                  "${coinDecription!.description?.en}",
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    "${coinDecription!.description?.en}",
+                  ),
                 ),
                 SizedBox(height: 16),
                 Wrap(
@@ -51,32 +57,83 @@ class CoinAbout extends StatelessWidget {
                 ),
               ],
             ),
-            Divider(),
-            ListTile(
-              title: Text("What is VECHAIN"),
-              leading: Icon(Icons.add_circle_outlined),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("Reddit"),
-              leading: Icon(Icons.add_circle_outlined),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("Source"),
-              leading: Icon(Icons.add_circle_outlined),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("Twitter"),
-              leading: Icon(Icons.add_circle_outlined),
-            ),
-            Divider(),
-            ListTile(
-              title: Text("Chat"),
-              leading: Icon(Icons.add_circle_outlined),
-            ),
+            if (coinDecription?.links?.homepage != null)
+              ExpansionTile(
+                title: Text("Home Page"),
+                leading: Icon(Icons.add_circle_outlined),
+                childrenPadding: EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 1,
+                ),
+                expandedAlignment: Alignment.centerLeft,
+                children: coinDecription!.links!.homepage!.map((e) {
+                  if (e == "") return Container();
+                  return Container(
+                    padding: EdgeInsets.all(8),
+                    width: double.infinity,
+                    child: MyLink(
+                      path: e,
+                    ),
+                  );
+                }).toList(),
+              ),
+            if (coinDecription?.links?.blockchainSite != null)
+              ExpansionTile(
+                title: Text("Blockchain Sites"),
+                leading: Icon(Icons.add_circle_outlined),
+                childrenPadding: EdgeInsets.symmetric(
+                  vertical: 16,
+                  horizontal: 8,
+                ),
+                expandedAlignment: Alignment.centerLeft,
+                children: coinDecription!.links!.blockchainSite!.map((e) {
+                  if (e == "") return Container();
+                  return Container(
+                    padding: EdgeInsets.all(8),
+                    width: double.infinity,
+                    child: MyLink(path: e),
+                  );
+                }).toList(),
+              ),
+            if (coinDecription?.links?.twitterScreenName != null)
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Expanded(child: Text("Twitter")),
+                    MyLink(
+                      path:
+                          'https://twitter.com/${coinDecription!.links!.twitterScreenName}',
+                    ),
+                  ],
+                ),
+              ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class MyLink extends StatelessWidget {
+  final String path;
+
+  const MyLink({Key? key, required this.path}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Link(
+      uri: Uri.parse(path),
+      target: LinkTarget.self,
+      builder: (context, followLink) => TextButton(
+        onPressed: followLink,
+        child: Text(
+          path,
+          style: TextStyle(
+            decoration: TextDecoration.underline,
+            fontSize: 14,
+            color: Colors.blue.shade300,
+          ),
+          textAlign: TextAlign.start,
         ),
       ),
     );

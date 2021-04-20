@@ -50,7 +50,7 @@ class PriceData extends StatelessWidget {
                     dataValueWidget: Text(
                       " ${numberDisplay(changePercentage)} \%",
                       style: TextStyle(
-                        fontSize: 15,
+                        fontSize: 10,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),

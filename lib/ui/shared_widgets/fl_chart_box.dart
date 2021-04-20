@@ -99,8 +99,8 @@ class _FLChartBoxState extends State<FLChartBox> {
                   );
                 },
               ),
-              minY: minPrice - (priceRange * 0.1),
-              maxY: maxPrice + (priceRange * 0.1),
+              // minY: minPrice - (priceRange * 0.1),
+              // maxY: maxPrice + (priceRange * 0.1),
               titlesData: FlTitlesData(
                 show: true,
                 bottomTitles: SideTitles(
@@ -124,7 +124,7 @@ class _FLChartBoxState extends State<FLChartBox> {
                     fontWeight: FontWeight.bold,
                     fontSize: 12,
                   ),
-                  interval: (priceRange / 2.75),
+                  interval: (priceRange / 3.1),
                   getTitles: (value) {
                     return display(minPrice);
                   },

@@ -100,7 +100,7 @@ class _CoinDetailState extends State<CoinDetail> {
                 child: Container(
                   padding: EdgeInsets.all(8),
                   child: Text(
-                    "Price (1H)",
+                    "Price (24H)",
                     style: Theme.of(context)
                         .textTheme
                         .headline5!

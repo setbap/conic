@@ -33,7 +33,8 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
       child: Scaffold(
           backgroundColor: Colors.black,
           appBar: AppBar(
-            centerTitle: false,
+            leading: BackButton(),
+            centerTitle: true,
             title: Container(
               width: 200,
               child: TabBar(

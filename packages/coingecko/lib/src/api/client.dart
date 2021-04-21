@@ -46,6 +46,7 @@ class CoinGeckoClient {
         throw ServerException();
       }
     } catch (e) {
+      print(e);
       throw InternetConnetionException();
     }
   }

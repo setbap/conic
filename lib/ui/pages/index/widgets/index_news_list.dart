@@ -3,6 +3,7 @@ import 'package:cryptopanic/cryptopanic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class IndexNewsList extends StatelessWidget {
   final bool isLoading;
@@ -10,7 +11,7 @@ class IndexNewsList extends StatelessWidget {
   const IndexNewsList({
     Key? key,
     required this.isLoading,
-    required this.data,
+    this.data = const <NewsModel>[],
   }) : super(key: key);
 
   @override
@@ -31,6 +32,12 @@ class IndexNewsList extends StatelessWidget {
             error: false,
             loading: isLoading,
             dataWidget: NewsItemData(
+              onPressed: () async {
+                final _url = data[index].url;
+                await canLaunch(_url)
+                    ? await launch(_url)
+                    : throw 'Could not launch $_url';
+              },
               title: data[index].title,
               categoryName: data[index].domain,
               imgSrc:
@@ -48,17 +55,19 @@ class NewsItemData extends StatelessWidget {
   final String title;
   final String imgSrc;
   final String categoryName;
-  const NewsItemData({
-    Key? key,
-    required this.title,
-    required this.imgSrc,
-    required this.categoryName,
-  }) : super(key: key);
+  final VoidCallback? onPressed;
+  const NewsItemData(
+      {Key? key,
+      required this.title,
+      required this.imgSrc,
+      required this.categoryName,
+      this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
-      onPressed: () {},
+      onPressed: onPressed,
       padding: EdgeInsets.zero,
       child: Padding(
         padding: EdgeInsets.all(8),

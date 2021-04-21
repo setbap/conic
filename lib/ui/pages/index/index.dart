@@ -108,14 +108,16 @@ class Index extends StatelessWidget {
             },
           ),
           IndexNewsList(
-            data: state.data != null ? state.data!.newsApiResualt.results : [],
+            data: state.data != null
+                ? state.data!.newsApiResualt.results.take(6).toList()
+                : [],
             isLoading: state.isLoading || state.isError,
           ),
           SeeAllNews(onPress: () {
             controller.index = 3;
           }),
           SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 50),
+            padding: EdgeInsets.symmetric(vertical: 54),
           )
         ],
       );

@@ -3,31 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class PortfolioAppBar extends StatelessWidget {
-  final ScrollController controller;
-
-  const PortfolioAppBar({Key? key, required this.controller}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: PortfolioAppBarLoading(),
-      dataWidget: PortfolioAppBarData(
-        price: 432,
-        controller: controller,
-        onPress: () {},
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class PortfolioAppBarData extends StatefulWidget {
+class PortfolioAppBar extends StatefulWidget {
   final ScrollController controller;
   final double price;
   final VoidCallback onPress;
-  const PortfolioAppBarData({
+  const PortfolioAppBar({
     Key? key,
     required this.controller,
     required this.price,
@@ -35,10 +15,10 @@ class PortfolioAppBarData extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PortfolioAppBarDataState createState() => _PortfolioAppBarDataState();
+  _PortfolioAppBarState createState() => _PortfolioAppBarState();
 }
 
-class _PortfolioAppBarDataState extends State<PortfolioAppBarData> {
+class _PortfolioAppBarState extends State<PortfolioAppBar> {
   double textOpacity = 0;
   @override
   void initState() {

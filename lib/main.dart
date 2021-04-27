@@ -8,13 +8,21 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:yeet/yeet.dart';
 import 'package:path_provider/path_provider.dart';
 import 'business_logic/business_logic.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:conic/models/models.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter<PortfolioStorage>(PortfolioStorageAdapter());
+  await Hive.openBox<PortfolioStorage>(PortfolioStorage.PortfolioKey);
+
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
   );

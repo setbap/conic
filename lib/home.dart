@@ -31,13 +31,13 @@ class HomeTabBar extends StatelessWidget {
           ),
           tabBuilder: (context, index) {
             switch (index) {
-              case 0:
+              case 2:
                 return Index(
                   controller: controller,
                 );
               case 1:
                 return CoinList();
-              case 2:
+              case 0:
                 return Portfolio();
               case 3:
                 return News();

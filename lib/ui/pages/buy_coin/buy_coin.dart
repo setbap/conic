@@ -5,8 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BuyCoin extends StatelessWidget {
-
-
   static String route({required String id}) => "/buy/$id";
   static String get routeRegEx => "/buy/:id";
 
@@ -14,7 +12,7 @@ class BuyCoin extends StatelessWidget {
   final String coinSymbol = "ADA";
   final double price = 1.23;
 
-  const BuyCoin({Key? key,required this.coinId}) : super(key: key);
+  const BuyCoin({Key? key, required this.coinId}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -23,6 +21,7 @@ class BuyCoin extends StatelessWidget {
       // length: 2,
       child: Scaffold(
         appBar: AppBar(
+          leading: BackButton(),
           title: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -258,7 +257,7 @@ class BuyAndSell extends StatelessWidget {
               Expanded(
                 child: OutlinedButton(
                   style:
-                  OutlinedButton.styleFrom(backgroundColor: Colors.green),
+                      OutlinedButton.styleFrom(backgroundColor: Colors.green),
                   onPressed: () {},
                   child: Text(
                     "Buy",
@@ -370,7 +369,10 @@ class BuyAndSellLoading extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Icon(Icons.add,size: 16,),
+                          Icon(
+                            Icons.add,
+                            size: 16,
+                          ),
                           BoxShimmer(height: 20, width: 36, radius: 4),
                         ],
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

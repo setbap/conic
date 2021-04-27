@@ -21,10 +21,7 @@ final yeet = Yeet(
         )
       ],
     ),
-    Yeet(
-      path: BuyCoin.routeRegEx,
-      builder: (context) => BuyCoin(coinId: context.params["id"]!),
-    ),
+
     // Yeet(
     //     path: CoinDetail.routeRegEx,
     //     builder: (context) => Scaffold(
@@ -40,13 +37,7 @@ final yeet = Yeet(
     //         ),
     //       )
     //     ]),
-    Yeet(
-      path: AddTransaction.routeRegEx,
-      builder: (context) => Scaffold(
-        backgroundColor: Colors.black,
-        body: AddTransaction(),
-      ),
-    ),
+
     Yeet(
       path: MyHomePage.routeRegEx,
       builder: (context) => MyHomePage(),
@@ -57,7 +48,18 @@ final yeet = Yeet(
             backgroundColor: Colors.black,
             body: CoinDetail(id: context.params['id']!),
           ),
-        )
+        ),
+        Yeet(
+          path: AddTransaction.routeRegEx,
+          builder: (context) => Scaffold(
+            backgroundColor: Colors.black,
+            body: AddTransaction(),
+          ),
+        ),
+        Yeet(
+          path: BuyCoin.routeRegEx,
+          builder: (context) => BuyCoin(coinId: context.params["id"]!),
+        ),
       ],
     ),
 

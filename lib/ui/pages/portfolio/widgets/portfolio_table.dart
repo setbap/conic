@@ -4,50 +4,36 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PortfolioTableDataRow extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return LoadingShimmer(
-      loadingWidget: PortfolioTableDataRowLoading(),
-      dataWidget: PortfolioTableDataRowData(
-        imageSrc: 'https://s2.coinmarketcap.com/static/img/coins/64x64/1.png',
-        price: 100,
-        id: 'btc',
-        name: 'bitcoin',
-        change: Random().nextDouble() - 0.5,
-        coinCount: 12,
-        onPress: () {},
-      ),
-      loading: true,
-      error: false,
-      errorWidget: Container(),
-    );
-  }
-}
-
-class PortfolioTableDataRowData extends StatelessWidget {
+  final bool isLoading;
   final String imageSrc;
   final String name;
+  final String symbol;
   final String id;
-  final double price;
+  final double? price;
   final double coinCount;
-  final double change;
+  final double? change;
   final VoidCallback onPress;
-  const PortfolioTableDataRowData({
+
+  const PortfolioTableDataRow({
     Key? key,
     required this.name,
     required this.imageSrc,
     required this.id,
-    required this.price,
+    required this.symbol,
+    this.price,
     required this.coinCount,
-    required this.change,
+    this.change,
     required this.onPress,
+    required this.isLoading,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final numberDisplay = createDisplay(length: 7);
     return CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: onPress,
@@ -91,7 +77,9 @@ class PortfolioTableDataRowData extends StatelessWidget {
                         Text(
                           id,
                           style: TextStyle(
-                              fontSize: 12, color: DarkTextForeground),
+                            fontSize: 12,
+                            color: DarkTextForeground,
+                          ),
                           textAlign: TextAlign.start,
                         )
                       ],
@@ -100,128 +88,79 @@ class PortfolioTableDataRowData extends StatelessWidget {
                 ),
                 flex: 2,
               ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(
-                      price.toStringAsFixed(4),
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                    ChangeShow(
-                      change: change,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    )
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(right: 8),
+              LoadingShimmer(
+                loadingWidget: Shimmer.fromColors(
+                  baseColor: shimmerBaseColor,
+                  highlightColor: shimmerHighlightColor,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(
-                        (price * coinCount).toStringAsFixed(2),
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                        ),
-                        textAlign: TextAlign.end,
-                      ),
-                      Text(
-                        '$coinCount $id',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: DarkTextForeground,
-                        ),
-                        textAlign: TextAlign.end,
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Divider(
-            thickness: 1,
-          )
-        ],
-      ),
-    );
-  }
-}
-
-class PortfolioTableDataRowLoading extends StatelessWidget {
-  const PortfolioTableDataRowLoading({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      baseColor: shimmerBaseColor,
-      highlightColor: shimmerHighlightColor,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 6,
-                    ),
-                    CircleShimmer(radius: 32),
-                    SizedBox(
-                      width: 12,
-                    ),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        BoxShimmer(height: 16, width: 44, radius: 4),
-                        SizedBox(
-                          height: 4,
-                        ),
-                        BoxShimmer(height: 16, width: 44, radius: 4),
-                      ],
-                    )
-                  ],
-                ),
-                flex: 2,
-              ),
-              Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    BoxShimmer(height: 16, width: 44, radius: 4),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    BoxShimmer(height: 16, width: 44, radius: 4),
-                  ],
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  margin: EdgeInsets.only(right: 8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.end,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       BoxShimmer(height: 16, width: 44, radius: 4),
                       SizedBox(
                         height: 4,
                       ),
                       BoxShimmer(height: 16, width: 44, radius: 4),
+                    ],
+                  ),
+                ),
+                loading: isLoading,
+                error: false,
+                dataWidget: Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text(
+                        numberDisplay(price),
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      ChangeShow(
+                        change: change,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Container(
+                  margin: EdgeInsets.only(right: 8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      LoadingShimmer(
+                        error: false,
+                        loading: isLoading,
+                        loadingWidget: Shimmer.fromColors(
+                          baseColor: shimmerBaseColor,
+                          highlightColor: shimmerHighlightColor,
+                          child: BoxShimmer(height: 16, width: 44, radius: 4),
+                        ),
+                        dataWidget: Text(
+                          numberDisplay(price! * coinCount),
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
+                          textAlign: TextAlign.end,
+                        ),
+                      ),
+                      Text(
+                        '${numberDisplay(coinCount)} $symbol',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: DarkTextForeground,
+                        ),
+                        textAlign: TextAlign.end,
+                      )
                     ],
                   ),
                 ),

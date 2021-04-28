@@ -33,7 +33,7 @@ List<double> sumList(List<CoinCountWithSparkLineList>? sparks) {
 
 class PortfolioPageDataModel {
   final List<TopCoin> coinsList;
-  final List<PortfolioStorage> portfolio;
+  final Map<String, PortfolioStorage> portfolio;
   List<double> sparkLine;
 
   PortfolioPageDataModel({
@@ -43,7 +43,7 @@ class PortfolioPageDataModel {
           [
             for (var i = 0; i < coinsList.length; i++)
               CoinCountWithSparkLineList(
-                coinCount: portfolio[i].count,
+                coinCount: portfolio[coinsList[i].id]?.count ?? 1,
                 sparkLineList: coinsList[i].sparklineIn7d?.price ?? [],
               )
           ],

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -144,7 +142,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                           child: BoxShimmer(height: 16, width: 44, radius: 4),
                         ),
                         dataWidget: Text(
-                          numberDisplay(price! * coinCount),
+                          numberDisplay(isLoading ? 0 : price! * coinCount),
                           style: TextStyle(
                             fontSize: 12,
                             color: Colors.white,

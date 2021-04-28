@@ -102,4 +102,17 @@ class IndexDataRepository {
     // );
     return newsData;
   }
+
+  Future<PortfolioPageDataModel> getPortfolioPageInfo(
+      {required Map<String, PortfolioStorage> portfolioItems}) async {
+    final portfolioData = await _coinApi.topCoinInfo(
+      sparkLine: true,
+      coins: portfolioItems.values.map((e) => e.id).toList(),
+    );
+
+    return PortfolioPageDataModel(
+      coinsList: portfolioData,
+      portfolio: portfolioItems,
+    );
+  }
 }

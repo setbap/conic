@@ -60,6 +60,11 @@ Future<void> main() async {
                 indexDataRepo: context.read<IndexDataRepository>(),
               ),
             ),
+            BlocProvider<PortfolioPageDataCubit>(
+              create: (BuildContext context) => PortfolioPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),

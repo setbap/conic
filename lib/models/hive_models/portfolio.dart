@@ -6,7 +6,7 @@ part 'portfolio.g.dart';
 class PortfolioStorage {
   static const PortfolioKey = "hive.portfolio";
 
-  const PortfolioStorage({
+  PortfolioStorage({
     required this.id,
     required this.name,
     required this.image,
@@ -15,7 +15,8 @@ class PortfolioStorage {
     required this.fee,
     required this.desc,
     required this.count,
-  });
+    DateTime? time,
+  }) : this.time = time ?? DateTime.now();
 
   @HiveField(0)
   final String id;
@@ -40,4 +41,7 @@ class PortfolioStorage {
 
   @HiveField(7)
   final String image;
+
+  @HiveField(8)
+  final DateTime time;
 }

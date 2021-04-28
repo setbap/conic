@@ -115,4 +115,24 @@ class IndexDataRepository {
       portfolio: portfolioItems,
     );
   }
+
+  Future<BuyPageDataModel> getBuyPageInfo(String id) async {
+    final coinInfo = await _coinApi.topCoinInfo(
+      coins: [id],
+      sparkLine: false,
+    );
+
+    return BuyPageDataModel(
+      count: 1,
+      desc: "",
+      fee: 0,
+      id: id,
+      image: coinInfo[0].image!,
+      name: coinInfo[0].name,
+      price: coinInfo[0].currentPrice!,
+      symbol: coinInfo[0].symbol,
+      time: DateTime.now(),
+      type: 0,
+    );
+  }
 }

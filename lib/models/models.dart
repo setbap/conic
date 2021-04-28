@@ -7,3 +7,4 @@ export 'news_page_model.dart';
 export 'new_filter_enum.dart';
 export 'hive_models/hive_modals.dart';
 export 'portfolio_page_model.dart';
+export 'buy_page_model.dart';

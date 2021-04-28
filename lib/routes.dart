@@ -50,16 +50,17 @@ final yeet = Yeet(
           ),
         ),
         Yeet(
-          path: AddTransaction.routeRegEx,
-          builder: (context) => Scaffold(
-            backgroundColor: Colors.black,
-            body: AddTransaction(),
-          ),
-        ),
-        Yeet(
-          path: BuyCoin.routeRegEx,
-          builder: (context) => BuyCoin(coinId: context.params["id"]!),
-        ),
+            path: AddTransaction.routeRegEx,
+            builder: (context) => Scaffold(
+                  backgroundColor: Colors.black,
+                  body: AddTransaction(),
+                ),
+            children: [
+              Yeet(
+                path: BuyCoin.routeRegEx,
+                builder: (context) => BuyCoin(coinId: context.params["id"]!),
+              ),
+            ]),
       ],
     ),
 

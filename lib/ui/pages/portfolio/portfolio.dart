@@ -1,3 +1,4 @@
+import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,6 @@ class _PortfolioState extends State<Portfolio> {
 
   @override
   void dispose() {
-    controller.dispose();
     super.dispose();
   }
 
@@ -77,14 +77,26 @@ class _PortfolioState extends State<Portfolio> {
                 child: CustomScrollView(
                   controller: controller,
                   slivers: [
-                    PortfolioAppBar(
-                      controller: controller,
-                      onPress: () {},
-                      price: 21,
+                    LoadingShimmer(
+                      error: false,
+                      loading: state.isLoading,
+                      loadingWidget: PortfolioAppBarLoading(),
+                      dataWidget: PortfolioAppBar(
+                        controller: controller,
+                        onPress: () {
+                          context.yeet(AddTransaction.route());
+                        },
+                        price: state.data?.currentPrice ?? 0,
+                      ),
                     ),
-                    PriceChange(
-                      change: 2,
-                      price: 1,
+                    LoadingShimmer(
+                      error: false,
+                      loading: state.isLoading,
+                      loadingWidget: PriceChangeLoading(),
+                      dataWidget: PriceChange(
+                        change: state.data?.priceChange ?? 0,
+                        price: state.data?.currentPrice ?? 0,
+                      ),
                     ),
                     SliverChartBoxLoading(),
                     PortfollioTableHeader(),
@@ -101,19 +113,46 @@ class _PortfolioState extends State<Portfolio> {
                               : state.isLoading
                                   ? null
                                   : box.get(coinPriceInfo?.id);
-                          return PortfolioTableDataRow(
-                            change: state.isLoading
-                                ? 0
-                                : coinPriceInfo!.currentPrice! -
-                                    coinPortfolioInfo!.price,
-                            isLoading: state.isLoading,
-                            coinCount: coinPortfolioInfo!.count,
-                            id: coinPortfolioInfo.id,
-                            imageSrc: coinPortfolioInfo.image,
-                            symbol: coinPortfolioInfo.symbol,
-                            name: coinPortfolioInfo.name,
-                            onPress: () {},
-                            price: coinPriceInfo?.currentPrice,
+                          return Dismissible(
+                            direction: DismissDirection.startToEnd,
+                            background: Container(
+                              padding: EdgeInsets.all(8),
+                              alignment: AlignmentDirectional.centerStart,
+                              color: Colors.red.shade700,
+                              child: Text(
+                                "DELETE ${coinPortfolioInfo!.id}",
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700),
+                              ),
+                            ),
+                            onDismissed: (direction) async {
+                              if (direction == DismissDirection.startToEnd) {
+                                await box.delete(coinPortfolioInfo.id);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content:
+                                        Text("${coinPortfolioInfo.id} deleted"),
+                                  ),
+                                );
+                              }
+                            },
+                            key: Key(coinPortfolioInfo.id),
+                            child: PortfolioTableDataRow(
+                              change: state.isLoading
+                                  ? 0
+                                  : coinPriceInfo!.currentPrice! -
+                                      coinPortfolioInfo.price,
+                              isLoading: state.isLoading,
+                              coinCount: coinPortfolioInfo.count,
+                              id: coinPortfolioInfo.id,
+                              imageSrc: coinPortfolioInfo.image,
+                              symbol: coinPortfolioInfo.symbol,
+                              name: coinPortfolioInfo.name,
+                              onPress: () {},
+                              price: coinPriceInfo?.currentPrice,
+                            ),
                           );
                         },
                         childCount: portfolioItems.length,

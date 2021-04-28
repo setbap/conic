@@ -110,7 +110,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
-                        numberDisplay(price),
+                        numberDisplay(price) + " \$",
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.white,

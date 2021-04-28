@@ -34,20 +34,29 @@ List<double> sumList(List<CoinCountWithSparkLineList>? sparks) {
 class PortfolioPageDataModel {
   final List<TopCoin> coinsList;
   final Map<String, PortfolioStorage> portfolio;
-  List<double> sparkLine;
+  List<double> sparkLine = [];
+  double currentPrice = 0;
+  double oldPrice = 0;
+  double priceChange = 0;
 
   PortfolioPageDataModel({
     required this.coinsList,
     required this.portfolio,
-  }) : sparkLine = sumList(
-          [
-            for (var i = 0; i < coinsList.length; i++)
-              CoinCountWithSparkLineList(
-                coinCount: portfolio[coinsList[i].id]?.count ?? 1,
-                sparkLineList: coinsList[i].sparklineIn7d?.price ?? [],
-              )
-          ],
-        );
+  }) {
+    List<CoinCountWithSparkLineList> sparks = [];
+    for (var i = 0; i < coinsList.length; i++) {
+      sparks.add(CoinCountWithSparkLineList(
+        coinCount: portfolio[coinsList[i].id]?.count ?? 1,
+        sparkLineList: coinsList[i].sparklineIn7d?.price ?? [],
+      ));
+      this.currentPrice +=
+          coinsList[i].currentPrice! * portfolio[coinsList[i].id]!.count;
+      this.oldPrice +=
+          portfolio[coinsList[i].id]!.price * portfolio[coinsList[i].id]!.count;
+    }
+    this.priceChange = currentPrice - oldPrice;
+    this.sparkLine = sumList(sparks);
+  }
 
   @override
   bool operator ==(Object other) {

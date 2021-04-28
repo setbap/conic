@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:shimmer/shimmer.dart';
 
 class BuyCoin extends StatelessWidget {
-  static String route({required String id}) => "/buy/$id";
-  static String get routeRegEx => "/buy/:id";
+  static String route({required String id}) => "/add_transaction/$id";
+  static String get routeRegEx => "/add_transaction/:id";
 
   final String coinId;
   final String coinSymbol = "ADA";

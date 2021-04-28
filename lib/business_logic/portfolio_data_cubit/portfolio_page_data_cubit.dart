@@ -18,6 +18,16 @@ class PortfolioPageDataCubit
 
   getPortfolioData(
       {required Map<String, PortfolioStorage> portfolioItems}) async {
+    if (portfolioItems.values.length == 0) {
+      emit(
+        state.copyWith(
+          isLoading: false,
+          isError: false,
+          error: '',
+        ),
+      );
+      return null;
+    }
     emit(
       state.copyWith(
         isLoading: true,

@@ -1,6 +1,7 @@
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:number_display/number_display.dart';
 import 'package:shimmer/shimmer.dart';
 
 class PortfolioAppBar extends StatefulWidget {
@@ -20,9 +21,11 @@ class PortfolioAppBar extends StatefulWidget {
 
 class _PortfolioAppBarState extends State<PortfolioAppBar> {
   double textOpacity = 0;
+  dynamic numberDisplay;
   @override
   void initState() {
     super.initState();
+    numberDisplay = createDisplay(length: 8);
     widget.controller.addListener(() {
       final offset = widget.controller.offset;
       if (offset > 0 && offset < 70) {
@@ -45,7 +48,6 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
 
   @override
   void dispose() {
-    widget.controller.removeListener(() {});
     super.dispose();
   }
 
@@ -57,7 +59,7 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
       title: Opacity(
         opacity: textOpacity,
         child: Text(
-          "\$ ${widget.price}",
+          "\$ ${numberDisplay(widget.price)}",
           style: TextStyle(fontWeight: FontWeight.w700, fontSize: 14),
         ),
       ),

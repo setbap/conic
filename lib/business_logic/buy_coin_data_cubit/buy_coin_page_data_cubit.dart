@@ -15,7 +15,16 @@ class BuyPagePageDataCubit extends Cubit<GenericPageStete<BuyPageDataModel>> {
           ),
         );
 
-  getPortfolioData({required String coinId}) async {
+  void updateBuyCoinData(BuyPageDataModel data) {
+    emit(
+      state.copyWith(
+        data: data,
+        error: '',
+      ),
+    );
+  }
+
+  void getBuyCoinData({required String coinId}) async {
     emit(
       state.copyWith(
         isLoading: true,

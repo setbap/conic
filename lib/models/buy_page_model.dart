@@ -1,6 +1,12 @@
 import 'package:conic/models/hive_models/hive_modals.dart';
 
-class BuyPageDataModel extends PortfolioStorage {
+enum CoinTransactionStatus {
+  Buy,
+  Sell,
+  Transfer,
+}
+
+class BuyPageDataModel {
   final String id;
   final String name;
   final String desc;
@@ -11,29 +17,19 @@ class BuyPageDataModel extends PortfolioStorage {
   final double fee;
   final double count;
   final DateTime time;
-  final double type;
+  final TransferStatus transferType;
   BuyPageDataModel({
     required this.id,
     required this.name,
-    required this.desc,
+    this.desc = "",
     required this.symbol,
     required this.image,
     required this.price,
     required this.fee,
     required this.count,
     required this.time,
-    required this.type,
-  }) : super(
-          id: id,
-          name: name,
-          desc: desc,
-          symbol: symbol,
-          image: image,
-          price: price,
-          fee: fee,
-          count: count,
-          time: time,
-        );
+    required this.transferType,
+  });
 
   BuyPageDataModel copyWith({
     String? id,
@@ -45,7 +41,7 @@ class BuyPageDataModel extends PortfolioStorage {
     double? fee,
     double? count,
     DateTime? time,
-    double? type,
+    TransferStatus? transferType,
   }) {
     return BuyPageDataModel(
       id: id ?? this.id,
@@ -57,7 +53,7 @@ class BuyPageDataModel extends PortfolioStorage {
       fee: fee ?? this.fee,
       count: count ?? this.count,
       time: time ?? this.time,
-      type: type ?? this.type,
+      transferType: transferType ?? this.transferType,
     );
   }
 
@@ -75,7 +71,7 @@ class BuyPageDataModel extends PortfolioStorage {
         other.fee == fee &&
         other.count == count &&
         other.time == time &&
-        other.type == type;
+        other.transferType == transferType;
   }
 
   @override
@@ -89,6 +85,6 @@ class BuyPageDataModel extends PortfolioStorage {
         fee.hashCode ^
         count.hashCode ^
         time.hashCode ^
-        type.hashCode;
+        transferType.hashCode;
   }
 }

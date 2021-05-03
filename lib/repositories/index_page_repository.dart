@@ -132,7 +132,7 @@ class IndexDataRepository {
       price: coinInfo[0].currentPrice!,
       symbol: coinInfo[0].symbol,
       time: DateTime.now(),
-      type: 0,
+      transferType: TransferStatus.TransferIn,
     );
   }
 }

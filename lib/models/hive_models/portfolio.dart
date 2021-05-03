@@ -45,3 +45,12 @@ class PortfolioStorage {
   @HiveField(8)
   final DateTime time;
 }
+
+@HiveType(typeId: 2)
+enum TransferStatus {
+  @HiveField(0)
+  TransferIn,
+
+  @HiveField(1)
+  TransferOut,
+}

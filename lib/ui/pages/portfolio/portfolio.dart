@@ -107,12 +107,15 @@ class _PortfolioState extends State<Portfolio> {
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (ctx, index) {
+                          if (state.isLoading ||
+                              (state.data?.coinsList.length ?? 0) <= index) {
+                            return Container(
+                              height: 30,
+                            );
+                          }
                           final coinPriceInfo = state.data?.coinsList[index];
-                          final coinPortfolioInfo = state.isLoading
-                              ? portfolioItems.values.elementAt(index)
-                              : state.isLoading
-                                  ? null
-                                  : box.get(coinPriceInfo?.id);
+                          final coinPortfolioInfo = box.get(coinPriceInfo?.id)!;
+
                           return Dismissible(
                             direction: DismissDirection.startToEnd,
                             background: Container(
@@ -120,7 +123,7 @@ class _PortfolioState extends State<Portfolio> {
                               alignment: AlignmentDirectional.centerStart,
                               color: Colors.red.shade700,
                               child: Text(
-                                "DELETE ${coinPortfolioInfo!.id}",
+                                "DELETE ${coinPortfolioInfo.id}",
                                 style: TextStyle(
                                     fontSize: 16,
                                     color: Colors.black,

@@ -6,6 +6,45 @@ part of 'portfolio.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
+class TransferStatusAdapter extends TypeAdapter<TransferStatus> {
+  @override
+  final int typeId = 2;
+
+  @override
+  TransferStatus read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return TransferStatus.TransferIn;
+      case 1:
+        return TransferStatus.TransferOut;
+      default:
+        return TransferStatus.TransferIn;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, TransferStatus obj) {
+    switch (obj) {
+      case TransferStatus.TransferIn:
+        writer.writeByte(0);
+        break;
+      case TransferStatus.TransferOut:
+        writer.writeByte(1);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TransferStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class PortfolioStorageAdapter extends TypeAdapter<PortfolioStorage> {
   @override
   final int typeId = 1;

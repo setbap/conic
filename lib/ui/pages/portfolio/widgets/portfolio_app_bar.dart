@@ -21,33 +21,38 @@ class PortfolioAppBar extends StatefulWidget {
 
 class _PortfolioAppBarState extends State<PortfolioAppBar> {
   double textOpacity = 0;
+  bool isDisposed = false;
   dynamic numberDisplay;
   @override
   void initState() {
     super.initState();
+
     numberDisplay = createDisplay(length: 8);
     widget.controller.addListener(() {
-      final offset = widget.controller.offset;
-      if (offset > 0 && offset < 70) {
-        setState(() {
-          textOpacity = (offset.clamp(30, 70) - 30) / 40;
-        });
-      } else if (offset < 0 && textOpacity < 0.01) {
-        //when scroll so fast
-        setState(() {
-          textOpacity = 0;
-        });
-      } else if (offset > 70 && textOpacity < 0.98) {
-        //when scroll so fast
-        setState(() {
-          textOpacity = 1;
-        });
+      if (!isDisposed) {
+        final offset = widget.controller.offset;
+        if (offset > 0 && offset < 70) {
+          setState(() {
+            textOpacity = (offset.clamp(30, 70) - 30) / 40;
+          });
+        } else if (offset < 0 && textOpacity < 0.01) {
+          //when scroll so fast
+          setState(() {
+            textOpacity = 0;
+          });
+        } else if (offset > 70 && textOpacity < 0.98) {
+          //when scroll so fast
+          setState(() {
+            textOpacity = 1;
+          });
+        }
       }
     });
   }
 
   @override
   void dispose() {
+    isDisposed = true;
     super.dispose();
   }
 

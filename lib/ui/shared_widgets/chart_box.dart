@@ -24,7 +24,12 @@ class _SliverChartBoxState extends State<SliverChartBox> {
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.only(bottom: 12),
-            child: FLChartBox(chartData: widget.chartDataArray![activeIndex]),
+            child: (widget.chartDataArray?.first.prices?.length ?? 0) > 0
+                ? FLChartBox(
+                    chartData: widget.chartDataArray,
+                    activeIndex: activeIndex,
+                  )
+                : Container(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,

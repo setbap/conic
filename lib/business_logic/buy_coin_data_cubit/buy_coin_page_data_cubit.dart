@@ -1,14 +1,18 @@
 import 'package:bloc/bloc.dart';
 import 'package:conic/business_logic/business_logic.dart';
+import 'package:conic/manager/manager.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/repositories/repositories.dart';
 import 'package:hive/hive.dart';
 
 class BuyPagePageDataCubit extends Cubit<GenericPageStete<BuyPageDataModel>> {
   final IndexDataRepository _indexDataRepo;
+  final TransactionManager _transactionManager;
   BuyPagePageDataCubit({
     required IndexDataRepository indexDataRepo,
+    required TransactionManager transactionManager,
   })  : _indexDataRepo = indexDataRepo,
+        _transactionManager = transactionManager,
         super(
           GenericPageStete<BuyPageDataModel>(
             error: "",
@@ -17,23 +21,15 @@ class BuyPagePageDataCubit extends Cubit<GenericPageStete<BuyPageDataModel>> {
         );
 
   void addTransaction({required CoinTransactionStatus transactionStatus}) {
-    final box = Hive.box<PortfolioStorage>(PortfolioStorage.PortfolioKey);
     final data = state.data!;
-    final isNegetive = transactionStatus == CoinTransactionStatus.Buy ||
-        (transactionStatus == CoinTransactionStatus.Transfer ||
-            state.data?.transferType == TransferStatus.TransferOut);
-    box.put(
-        data.id,
-        PortfolioStorage(
-          id: data.id,
-          name: data.name,
-          image: data.image,
-          symbol: data.symbol,
-          price: isNegetive ? -1 * data.price : data.price,
-          fee: data.fee,
-          desc: data.desc,
-          count: data.count,
-        ));
+    _transactionManager.addTransaction(
+      transactionStorage: data.toTransactionStorage(),
+      transactionStatus: transactionStatus,
+    );
+  }
+
+  void sellAll({required String coinId}) {
+    _transactionManager.sellAll(coinId: coinId);
   }
 
   void updateBuyCoinData(BuyPageDataModel data) {

@@ -31,6 +31,20 @@ class BuyPageDataModel {
     required this.transferType,
   });
 
+  TransactionStorage toTransactionStorage() {
+    return TransactionStorage(
+      id: id,
+      name: name,
+      image: image,
+      symbol: symbol,
+      price: price,
+      fee: fee,
+      desc: desc,
+      count: count,
+      transferStatus: transferType,
+    );
+  }
+
   BuyPageDataModel copyWith({
     String? id,
     String? name,

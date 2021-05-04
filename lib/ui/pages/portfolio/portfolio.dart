@@ -1,3 +1,4 @@
+import 'package:conic/manager/transaction_storage.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -98,12 +99,28 @@ class _PortfolioState extends State<Portfolio> {
                         price: state.data?.currentPrice ?? 0,
                       ),
                     ),
-                    SliverChartBoxLoading(),
+                    LoadingShimmer(
+                      error: false,
+                      loading: state.isLoading,
+                      loadingWidget: SliverChartBoxLoading(),
+                      dataWidget: SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12.0, vertical: 25),
+                          child: MyLineChart(
+                            width: MediaQuery.of(context).size.width - 80,
+                            height: 240,
+                            chartData: state.data?.sparkLine ?? [],
+                          ),
+                        ),
+                      ),
+                    ),
                     PortfollioTableHeader(),
                     SliverToBoxAdapter(
-                        child: Divider(
-                      thickness: 3,
-                    )),
+                      child: Divider(
+                        thickness: 3,
+                      ),
+                    ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
                         (ctx, index) {
@@ -114,8 +131,12 @@ class _PortfolioState extends State<Portfolio> {
                             );
                           }
                           final coinPriceInfo = state.data?.coinsList[index];
-                          final coinPortfolioInfo = box.get(coinPriceInfo?.id)!;
-
+                          final coinPortfolioInfo = box.get(coinPriceInfo?.id);
+                          if (coinPortfolioInfo == null) {
+                            return Container(
+                              height: 30,
+                            );
+                          }
                           return Dismissible(
                             direction: DismissDirection.startToEnd,
                             background: Container(
@@ -132,7 +153,10 @@ class _PortfolioState extends State<Portfolio> {
                             ),
                             onDismissed: (direction) async {
                               if (direction == DismissDirection.startToEnd) {
-                                await box.delete(coinPortfolioInfo.id);
+                                // TODO: imporve This part
+                                TransactionManager().sellAll(
+                                  coinId: coinPortfolioInfo.id,
+                                );
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content:

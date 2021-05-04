@@ -1,5 +1,6 @@
 import 'package:coingecko/coingecko.dart';
 import 'package:conic/home.dart';
+import 'package:conic/manager/transaction_storage.dart';
 import 'package:conic/repositories/repositories.dart';
 import 'package:conic/routes.dart';
 import 'package:cryptopanic/cryptopanic.dart';
@@ -18,10 +19,13 @@ import 'package:conic/models/models.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  WidgetsFlutterBinding.ensureInitialized();
+
   await Hive.initFlutter();
   Hive.registerAdapter<PortfolioStorage>(PortfolioStorageAdapter());
+  Hive.registerAdapter<TransactionStorage>(TransactionStorageAdapter());
+  Hive.registerAdapter<TransferStatus>(TransferStatusAdapter());
   await Hive.openBox<PortfolioStorage>(PortfolioStorage.PortfolioKey);
+  await Hive.openBox<TransactionStorage>(TransactionStorage.TransactionKey);
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
@@ -67,6 +71,7 @@ Future<void> main() async {
             ),
             BlocProvider<BuyPagePageDataCubit>(
               create: (BuildContext context) => BuyPagePageDataCubit(
+                transactionManager: TransactionManager(),
                 indexDataRepo: context.read<IndexDataRepository>(),
               ),
             ),

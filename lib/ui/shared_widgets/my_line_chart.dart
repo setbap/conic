@@ -1,7 +1,5 @@
 import 'dart:async';
 import 'dart:math';
-import 'dart:ui' as ui;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -48,12 +46,21 @@ class _MyLineChartState extends State<MyLineChart> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.chartData.length < 5) {
+      Container(
+        height: widget.height,
+        width: widget.width,
+      );
+    }
+    // TODO : Bad state: No element In CustomPainer
     return Container(
       height: widget.height,
       width: widget.width,
       child: CustomPaint(
         painter: _MyCanvas(
-            chartData: widget.chartData, percentage: animationPercentage),
+          chartData: widget.chartData,
+          percentage: animationPercentage,
+        ),
       ),
     );
   }
@@ -121,41 +128,26 @@ class _MyCanvas extends CustomPainter {
         x += xRatio;
       });
     }
-    p.lineTo(box.right, box.bottom);
+    // p.lineTo(box.right, box.bottom);
 
-    p.lineTo(box.left, box.bottom);
+    // p.lineTo(box.left, box.bottom);
     // p.moveTo(x, box.height - (chartData[0] - minData) * yRatio * percentage);
 
-    p.close();
+    // p.close();
 
     if (chartData[0] - chartData[chartData.length - 1] < 0) {
       canvas.drawPath(
           p,
           paint
             ..color = Colors.green
-            ..style = PaintingStyle.fill
-            ..shader = ui.Gradient.linear(
-              box.topCenter,
-              box.bottomCenter,
-              [
-                Colors.green.shade700.withAlpha(80),
-                Colors.green.shade700.withAlpha(10),
-              ],
-            ));
+            ..style = PaintingStyle.stroke);
     } else {
       canvas.drawPath(
         p,
         paint
-          ..style = PaintingStyle.fill
-          ..strokeWidth = 4
-          ..shader = ui.Gradient.linear(
-            box.topCenter,
-            box.bottomCenter,
-            [
-              Colors.red.shade700.withAlpha(90),
-              Colors.red.shade700.withAlpha(20),
-            ],
-          ),
+          ..color = Colors.red
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
       );
     }
   }

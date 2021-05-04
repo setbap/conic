@@ -505,7 +505,8 @@ class _BuyAndSellState extends State<BuyAndSell> {
                         onPressed: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             context.read<BuyPagePageDataCubit>().addTransaction(
-                                transactionStatus: widget.status);
+                                  transactionStatus: widget.status,
+                                );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

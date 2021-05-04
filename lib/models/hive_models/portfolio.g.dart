@@ -8,7 +8,7 @@ part of 'portfolio.dart';
 
 class TransferStatusAdapter extends TypeAdapter<TransferStatus> {
   @override
-  final int typeId = 2;
+  final int typeId = 3;
 
   @override
   TransferStatus read(BinaryReader reader) {
@@ -45,17 +45,17 @@ class TransferStatusAdapter extends TypeAdapter<TransferStatus> {
           typeId == other.typeId;
 }
 
-class PortfolioStorageAdapter extends TypeAdapter<PortfolioStorage> {
+class TransactionStorageAdapter extends TypeAdapter<TransactionStorage> {
   @override
   final int typeId = 1;
 
   @override
-  PortfolioStorage read(BinaryReader reader) {
+  TransactionStorage read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return PortfolioStorage(
+    return TransactionStorage(
       id: fields[0] as String,
       name: fields[1] as String,
       image: fields[7] as String,
@@ -64,14 +64,15 @@ class PortfolioStorageAdapter extends TypeAdapter<PortfolioStorage> {
       fee: fields[3] as double,
       desc: fields[4] as String,
       count: fields[5] as double,
+      transferStatus: fields[9] as TransferStatus,
       time: fields[8] as DateTime?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, PortfolioStorage obj) {
+  void write(BinaryWriter writer, TransactionStorage obj) {
     writer
-      ..writeByte(9)
+      ..writeByte(10)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -89,6 +90,60 @@ class PortfolioStorageAdapter extends TypeAdapter<PortfolioStorage> {
       ..writeByte(7)
       ..write(obj.image)
       ..writeByte(8)
+      ..write(obj.time)
+      ..writeByte(9)
+      ..write(obj.transferStatus);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TransactionStorageAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class PortfolioStorageAdapter extends TypeAdapter<PortfolioStorage> {
+  @override
+  final int typeId = 2;
+
+  @override
+  PortfolioStorage read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return PortfolioStorage(
+      id: fields[0] as String,
+      name: fields[1] as String,
+      image: fields[5] as String,
+      symbol: fields[4] as String,
+      price: fields[2] as double,
+      count: fields[3] as double,
+      time: fields[6] as DateTime?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, PortfolioStorage obj) {
+    writer
+      ..writeByte(7)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name)
+      ..writeByte(2)
+      ..write(obj.price)
+      ..writeByte(3)
+      ..write(obj.count)
+      ..writeByte(4)
+      ..write(obj.symbol)
+      ..writeByte(5)
+      ..write(obj.image)
+      ..writeByte(6)
       ..write(obj.time);
   }
 

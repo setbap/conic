@@ -3,10 +3,14 @@ import 'package:number_display/number_display.dart';
 
 class ChangeShow extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
+  final String ending;
+  final double fontSize;
   const ChangeShow({
     Key? key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.change,
+    this.ending = "\$",
+    this.fontSize = 10,
   }) : super(key: key);
 
   final double? change;
@@ -21,10 +25,10 @@ class ChangeShow extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment,
         children: [
           Text(
-            display(change),
+            "${display(change)} \$",
             style: TextStyle(
               color: (change ?? 0) > 0 ? Colors.green : Colors.red,
-              fontSize: 10,
+              fontSize: fontSize,
             ),
           ),
           (change ?? 0) > 0

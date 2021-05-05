@@ -5,6 +5,7 @@ import 'package:conic/repositories/repositories.dart';
 import 'package:conic/ui/pages/add_transaction/add_transaction.dart';
 import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/pages/landing/landing.dart';
 import 'package:conic/ui/pages/search/search.dart';
 
 import 'package:cryptopanic/cryptopanic.dart';
@@ -45,6 +46,9 @@ Future<void> main() async {
               coinApi: CoinGeckoClient(),
             ),
           ),
+          RepositoryProvider<ParsDataRepo>(
+            create: (context) => ParsDataRepo(),
+          ),
         ],
         child: MultiBlocProvider(
           providers: [
@@ -52,6 +56,11 @@ Future<void> main() async {
               create: (BuildContext context) => IndexPageDataCubit(
                 indexDataRepo: context.read<IndexDataRepository>(),
               )..getIndexData(),
+            ),
+            BlocProvider<SearchPageDataCubit>(
+              create: (BuildContext context) => SearchPageDataCubit(
+                parsDataRepo: context.read<ParsDataRepo>(),
+              )..getListData(),
             ),
             BlocProvider<ListPageDataCubit>(
               create: (BuildContext context) => ListPageDataCubit(
@@ -96,9 +105,11 @@ class MyApp extends StatelessWidget {
       builder: DevicePreview.appBuilder,
       title: 'Conic',
       debugShowCheckedModeBanner: false,
-      initialRoute: MyHomePage.route,
+      initialRoute: Landing.route,
       onGenerateRoute: (settings) {
         switch (settings.name) {
+          case Landing.route:
+            return MaterialPageRoute(builder: (context) => Landing());
           case MyHomePage.route:
             return MaterialPageRoute(builder: (context) => MyHomePage());
           case AddTransaction.route:

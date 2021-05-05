@@ -3,7 +3,6 @@ import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/manager/manager.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/repositories/repositories.dart';
-import 'package:hive/hive.dart';
 
 class BuyPagePageDataCubit extends Cubit<GenericPageStete<BuyPageDataModel>> {
   final IndexDataRepository _indexDataRepo;

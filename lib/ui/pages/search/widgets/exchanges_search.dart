@@ -1,17 +1,12 @@
 import 'dart:convert';
+import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
-List<SimpleExchange> parseExchanges(String string) {
-  final parsed = jsonDecode(string).cast<Map<String, dynamic>>();
-  return parsed
-      .map<SimpleExchange>((json) => SimpleExchange.fromMap(json))
-      .toList();
-}
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExchangeSearch extends StatefulWidget {
   @override
@@ -21,11 +16,6 @@ class ExchangeSearch extends StatefulWidget {
 class _ExchangeSearchState extends State<ExchangeSearch> {
   String searchText = '';
   final _textController = TextEditingController();
-  Future<List<SimpleExchange>> fetchExchanges() async {
-    final String response =
-        await rootBundle.loadString('assets/exchanges.json');
-    return compute(parseExchanges, response);
-  }
 
   @override
   void initState() {
@@ -41,14 +31,15 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Colors.black,
-        body: FutureBuilder<List<SimpleExchange>>(
-          future: fetchExchanges(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) print(snapshot.error);
-            if (!snapshot.hasData) {
+        body: BlocConsumer<SearchPageDataCubit, GenericPageStete<SearchData>>(
+          listener: (context, state) {
+            // TODO: implement listener
+          },
+          builder: (context, state) {
+            if (state.isLoading || state.isError) {
               return SearchShimmer();
             } else {
-              final data = snapshot.data!
+              final data = state.data!.simpleExchanges!
                   .where(
                     (element) =>
                         element.name

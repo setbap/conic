@@ -2,10 +2,9 @@ import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:yeet/yeet.dart';
 
 class AddTransaction extends StatelessWidget {
-  static String route() => "/add_transaction";
+  static const String route = "/add_transaction";
   static String get routeRegEx => "/add_transaction";
 
   @override
@@ -18,9 +17,7 @@ class AddTransaction extends StatelessWidget {
       body: CoinSearch(
           hasArrow: true,
           onPressed: ({required id}) {
-            context.yeet(
-              BuyCoin.route(id: id),
-            );
+            Navigator.pushNamed(context, BuyCoin.route, arguments: id);
           }),
     );
   }

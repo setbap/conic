@@ -9,8 +9,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class BuyCoin extends StatefulWidget {
-  static String route({required String id}) => "/add_transaction/$id";
-  static String get routeRegEx => "/add_transaction/:id";
+  static const String route = "/buy_coin";
+  static String get routeRegEx => "/buy_coin/:id";
 
   final String coinId;
 

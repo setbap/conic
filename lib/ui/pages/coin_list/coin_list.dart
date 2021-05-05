@@ -7,7 +7,6 @@ import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yeet/yeet.dart';
 
 class CoinList extends StatefulWidget {
   @override
@@ -99,9 +98,8 @@ class _CoinListState extends State<CoinList>
                           final topCoinItem = state.data!.topCoinList[index];
                           return CoinListItemData(
                             onPressed: () {
-                              context.yeet(
-                                CoinDetail.route(id: topCoinItem.id),
-                              );
+                              Navigator.pushNamed(context, CoinDetail.route,
+                                  arguments: topCoinItem.id);
                             },
                             imageSrc: topCoinItem.image ?? "",
                             name: topCoinItem.name,

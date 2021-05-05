@@ -27,15 +27,15 @@ class _MyLineChartState extends State<MyLineChart> {
   @override
   void initState() {
     super.initState();
-    final animationDuration = Duration(milliseconds: duration ~/ fps);
-    timer = Timer.periodic(animationDuration, (time) {
-      setState(() {
-        animationPercentage += fps / duration;
-      });
-      if (animationPercentage >= 1) {
-        timer?.cancel();
-      }
-    });
+    // final animationDuration = Duration(milliseconds: duration ~/ fps);
+    // timer = Timer.periodic(animationDuration, (time) {
+    //   setState(() {
+    //     animationPercentage += fps / duration;
+    //   });
+    //   if (animationPercentage >= 1) {
+    //     timer?.cancel();
+    //   }
+    // });
   }
 
   @override
@@ -47,7 +47,7 @@ class _MyLineChartState extends State<MyLineChart> {
   @override
   Widget build(BuildContext context) {
     if (widget.chartData.length < 5) {
-      Container(
+      return Container(
         height: widget.height,
         width: widget.width,
       );
@@ -59,7 +59,8 @@ class _MyLineChartState extends State<MyLineChart> {
       child: CustomPaint(
         painter: _MyCanvas(
           chartData: widget.chartData,
-          percentage: animationPercentage,
+          // percentage: animationPercentage,
+          percentage: 1,
         ),
       ),
     );

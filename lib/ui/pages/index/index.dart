@@ -7,7 +7,6 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:yeet/yeet.dart';
 
 class Index extends StatelessWidget {
   final CupertinoTabController controller;
@@ -56,7 +55,10 @@ class Index extends StatelessWidget {
             actions: [
               CupertinoButton(
                 onPressed: () {
-                  context.yeet(Search.route());
+                  Navigator.pushNamed(
+                    context,
+                    Search.route,
+                  );
                 },
                 child: Icon(Icons.search_outlined),
               )
@@ -74,7 +76,11 @@ class Index extends StatelessWidget {
             isLoading: state.isLoading || state.isError,
             dataBuilder: (data) => CoinSquare(
               onPress: () {
-                context.yeet(CoinDetail.route(id: data.id));
+                Navigator.pushNamed(
+                  context,
+                  CoinDetail.route,
+                  arguments: data.id,
+                );
               },
               change: data.priceChange24h ?? 0,
               coinName: data.name,
@@ -92,7 +98,11 @@ class Index extends StatelessWidget {
             data: state.data?.trendigCoins.coins ?? [],
             dataBuilder: (data) => CoinSquare(
               onPress: () {
-                context.yeet(CoinDetail.route(id: data.item.id));
+                Navigator.pushNamed(
+                  context,
+                  CoinDetail.route,
+                  arguments: data.item.id,
+                );
               },
               change: data.item.score.toDouble(),
               coinName: data.item.name,

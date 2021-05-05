@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:yeet/yeet.dart';
 
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
@@ -85,7 +84,10 @@ class _PortfolioState extends State<Portfolio> {
                       dataWidget: PortfolioAppBar(
                         controller: controller,
                         onPress: () {
-                          context.yeet(AddTransaction.route());
+                          Navigator.pushNamed(
+                            context,
+                            AddTransaction.route,
+                          );
                         },
                         price: state.data?.currentPrice ?? 0,
                       ),
@@ -201,7 +203,10 @@ class _PortfolioState extends State<Portfolio> {
                           ),
                         ),
                         onPressed: () {
-                          context.yeet(AddTransaction.route());
+                          Navigator.pushNamed(
+                            context,
+                            AddTransaction.route,
+                          );
                           // box.put(
                           //   'bitcoin',
                           //   PortfolioStorage(

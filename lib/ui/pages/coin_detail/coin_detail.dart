@@ -11,7 +11,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CoinDetail extends StatefulWidget {
   const CoinDetail({Key? key, required this.id}) : super(key: key);
 
-  static String route({required String id}) => "coin/$id";
+  static const String route = "coin/detail";
   static String get routeRegEx => "coin/:id";
   final String id;
 
@@ -37,218 +37,220 @@ class _CoinDetailState extends State<CoinDetail> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<CoinDetailPageDataCubit,
-        GenericPageStete<CoinDetailPageDataModel>>(
-      listenWhen: (previous, current) {
-        return !previous.isError && current.isError;
-      },
-      listener: (context, state) {
-        showCupertinoDialog(
-          context: context,
-          builder: (context) => CupertinoAlertDialog(
-            title: Text(
-              'Error',
-              style: TextStyle(color: Colors.red),
-            ),
-            content: Text('an Error with you connection'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: Text('dismiss'),
+    return Scaffold(
+      body: BlocConsumer<CoinDetailPageDataCubit,
+          GenericPageStete<CoinDetailPageDataModel>>(
+        listenWhen: (previous, current) {
+          return !previous.isError && current.isError;
+        },
+        listener: (context, state) {
+          showCupertinoDialog(
+            context: context,
+            builder: (context) => CupertinoAlertDialog(
+              title: Text(
+                'Error',
+                style: TextStyle(color: Colors.red),
               ),
-              TextButton(
-                onPressed: () {
-                  context
-                      .read<CoinDetailPageDataCubit>()
-                      .getCoinDetailData(widget.id);
-                  Navigator.pop(context);
-                },
-                child: Text(
-                  'retry',
-                  style: TextStyle(color: Colors.white),
+              content: Text('an Error with you connection'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: Text('dismiss'),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
-      builder: (context, state) {
-        return LoadingShimmer(
-          loadingWidget: CustomScrollView(
-            controller: _controller,
-            physics: BouncingScrollPhysics(),
-            slivers: [
-              CoinDetailAppBarLoading(),
-              PriceChangeLoading(),
-              SliverChartBoxLoading(),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(" ", style: TextStyle(color: Colors.white)),
+                TextButton(
+                  onPressed: () {
+                    context
+                        .read<CoinDetailPageDataCubit>()
+                        .getCoinDetailData(widget.id);
+                    Navigator.pop(context);
+                  },
+                  child: Text(
+                    'retry',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        builder: (context, state) {
+          return LoadingShimmer(
+            loadingWidget: CustomScrollView(
+              controller: _controller,
+              physics: BouncingScrollPhysics(),
+              slivers: [
+                CoinDetailAppBarLoading(),
+                PriceChangeLoading(),
+                SliverChartBoxLoading(),
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(" ", style: TextStyle(color: Colors.white)),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SliverPadding(padding: EdgeInsets.all(8)),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    "Price (24H)",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: Colors.white),
+                SliverPadding(padding: EdgeInsets.all(8)),
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      "Price (24H)",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: PriceDataLoading(),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  padding: EdgeInsets.all(8),
-                  child: Text(
-                    "Market State",
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline5!
-                        .copyWith(color: Colors.white),
+                SliverToBoxAdapter(
+                  child: PriceDataLoading(),
+                ),
+                SliverToBoxAdapter(
+                  child: Container(
+                    padding: EdgeInsets.all(8),
+                    child: Text(
+                      "Market State",
+                      style: Theme.of(context)
+                          .textTheme
+                          .headline5!
+                          .copyWith(color: Colors.white),
+                    ),
                   ),
                 ),
-              ),
-              SliverToBoxAdapter(
-                child: PriceDataLoading(),
-              ),
-              SliverToBoxAdapter(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
-                  child: Divider(
-                    color: DarkForeground,
+                SliverToBoxAdapter(
+                  child: PriceDataLoading(),
+                ),
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
+                    child: Divider(
+                      color: DarkForeground,
+                    ),
                   ),
                 ),
-              ),
-              CoinAboutLoading(),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 120,
+                CoinAboutLoading(),
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: 120,
+                  ),
                 ),
-              ),
-            ],
-          ),
-          dataWidget: Builder(
-            builder: (context) {
-              final coinPrice = state.data!.coinPrice;
-              final coinDecription = state.data?.coinDecription;
-              return CustomScrollView(
-                controller: _controller,
-                physics: BouncingScrollPhysics(),
-                slivers: [
-                  CoinDetailAppBar(
-                    symbol: coinPrice.symbol.toUpperCase(),
-                    price: coinPrice.currentPrice!,
-                    imageSrc: coinPrice.image ?? "",
-                    controller: _controller,
-                  ),
-                  PriceChange(
-                    change: coinPrice.priceChange24h,
-                    price: coinPrice.currentPrice!,
-                  ),
-                  SliverChartBox(chartDataArray: [
-                    state.data!.oneDayChartData,
-                    state.data!.sevenDayChartData,
-                    state.data!.thirtyDayChartData,
-                    state.data!.allTimeChartData,
-                  ]),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text("Ads",
-                              style: TextStyle(color: Colors.white)),
+              ],
+            ),
+            dataWidget: Builder(
+              builder: (context) {
+                final coinPrice = state.data!.coinPrice;
+                final coinDecription = state.data?.coinDecription;
+                return CustomScrollView(
+                  controller: _controller,
+                  physics: BouncingScrollPhysics(),
+                  slivers: [
+                    CoinDetailAppBar(
+                      symbol: coinPrice.symbol.toUpperCase(),
+                      price: coinPrice.currentPrice!,
+                      imageSrc: coinPrice.image ?? "",
+                      controller: _controller,
+                    ),
+                    PriceChange(
+                      change: coinPrice.priceChange24h,
+                      price: coinPrice.currentPrice!,
+                    ),
+                    SliverChartBox(chartDataArray: [
+                      state.data!.oneDayChartData,
+                      state.data!.sevenDayChartData,
+                      state.data!.thirtyDayChartData,
+                      state.data!.allTimeChartData,
+                    ]),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text("Ads",
+                                style: TextStyle(color: Colors.white)),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  SliverPadding(padding: EdgeInsets.all(8)),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        "Price (24H)",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: Colors.white),
+                    SliverPadding(padding: EdgeInsets.all(8)),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          "Price (24H)",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: PriceData(
-                      ath: coinPrice.ath,
-                      high: coinPrice.high24h,
-                      changePercentage: coinPrice.priceChangePercentage24h,
-                      atl: coinPrice.atl,
-                      low: coinPrice.low24h,
-                      change: coinPrice.priceChange24h,
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      padding: EdgeInsets.all(8),
-                      child: Text(
-                        "Market State",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5!
-                            .copyWith(color: Colors.white),
+                    SliverToBoxAdapter(
+                      child: PriceData(
+                        ath: coinPrice.ath,
+                        high: coinPrice.high24h,
+                        changePercentage: coinPrice.priceChangePercentage24h,
+                        atl: coinPrice.atl,
+                        low: coinPrice.low24h,
+                        change: coinPrice.priceChange24h,
                       ),
                     ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: MarketState(
-                      mktCap: coinPrice.marketCap,
-                      sentimentVotesUpPercentage:
-                          coinDecription?.sentimentVotesUpPercentage,
-                      rank: coinPrice.marketCapRank,
-                      coingeckoScore: coinDecription?.coingeckoScore,
-                      sentimentVotesDownPercentage:
-                          coinDecription?.sentimentVotesDownPercentage,
-                    ),
-                  ),
-                  SliverToBoxAdapter(
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
-                      child: Divider(
-                        color: DarkForeground,
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          "Market State",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
-                  ),
-                  CoinAbout(
-                    coinDecription: coinDecription,
-                  ),
-                  SliverToBoxAdapter(
-                    child: Container(
-                      height: 120,
+                    SliverToBoxAdapter(
+                      child: MarketState(
+                        mktCap: coinPrice.marketCap,
+                        sentimentVotesUpPercentage:
+                            coinDecription?.sentimentVotesUpPercentage,
+                        rank: coinPrice.marketCapRank,
+                        coingeckoScore: coinDecription?.coingeckoScore,
+                        sentimentVotesDownPercentage:
+                            coinDecription?.sentimentVotesDownPercentage,
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-          loading: state.isLoading,
-          error: false,
-        );
-      },
+                    SliverToBoxAdapter(
+                      child: Padding(
+                        padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
+                        child: Divider(
+                          color: DarkForeground,
+                        ),
+                      ),
+                    ),
+                    CoinAbout(
+                      coinDecription: coinDecription,
+                    ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        height: 120,
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
+            loading: state.isLoading,
+            error: false,
+          );
+        },
+      ),
     );
   }
 }

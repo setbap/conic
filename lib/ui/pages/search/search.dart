@@ -3,10 +3,9 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:conic/ui/pages/search/widgets/widgets.dart';
-import 'package:yeet/yeet.dart';
 
 class Search extends StatefulWidget {
-  static String route() => "/search";
+  static const String route = "/search";
   static String get routeRegEx => "/search";
   @override
   _SearchState createState() => _SearchState();
@@ -56,10 +55,10 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
             children: [
               CoinSearch(
                 onPressed: ({required id}) {
-                  context.yeet(
-                    CoinDetail.route(
-                      id: id,
-                    ),
+                  Navigator.pushNamed(
+                    context,
+                    CoinDetail.route,
+                    arguments: id,
                   );
                 },
               ),

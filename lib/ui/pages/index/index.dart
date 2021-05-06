@@ -60,7 +60,10 @@ class Index extends StatelessWidget {
                     Search.route,
                   );
                 },
-                child: Icon(Icons.search_outlined),
+                child: Icon(
+                  Icons.search_outlined,
+                  color: Theme.of(context).iconTheme.color,
+                ),
               )
             ],
           ),

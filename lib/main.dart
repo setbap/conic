@@ -144,6 +144,10 @@ class MyApp extends StatelessWidget {
           labelStyle: TextStyle(),
           secondaryColor: Colors.grey.shade900,
         ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+          primary: Colors.green,
+        )),
         cardColor: Colors.white,
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),

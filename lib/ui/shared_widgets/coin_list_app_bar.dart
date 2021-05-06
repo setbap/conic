@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 
 class CoinExchangeAppBar extends StatelessWidget {
   final bool showSearch;
+  final VoidCallback onPressed;
   const CoinExchangeAppBar({
     Key? key,
+    required this.onPressed,
     this.showSearch = true,
     required this.tabController,
   }) : super(key: key);
@@ -19,7 +21,7 @@ class CoinExchangeAppBar extends StatelessWidget {
         showSearch
             ? IconButton(
                 icon: Icon(Icons.search),
-                onPressed: () {},
+                onPressed: onPressed,
               )
             : SizedBox()
       ],

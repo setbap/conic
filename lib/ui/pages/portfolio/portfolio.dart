@@ -195,6 +195,9 @@ class _PortfolioState extends State<Portfolio> {
                       ),
                     SliverToBoxAdapter(
                       child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.green,
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.all(12),
                           child: Text(

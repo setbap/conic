@@ -60,7 +60,6 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Theme.of(context).backgroundColor,
       title: Opacity(
         opacity: textOpacity,
         child: Text(

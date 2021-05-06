@@ -2,6 +2,7 @@ import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/coin_list/widgets/widgets.dart';
+import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -67,7 +68,15 @@ class _CoinListState extends State<CoinList>
         builder: (context, state) {
           return CustomScrollView(
             slivers: [
-              CoinExchangeAppBar(tabController: tabController),
+              CoinExchangeAppBar(
+                tabController: tabController,
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    Search.route,
+                  );
+                },
+              ),
               SliverFillRemaining(
                 child: TabBarView(
                   controller: tabController,
@@ -84,14 +93,16 @@ class _CoinListState extends State<CoinList>
                         itemBuilder: (context, index) {
                           return CoinListItemLoading();
                         },
-                        separatorBuilder: (context, index) => Divider(),
+                        separatorBuilder: (context, index) => Divider(
+                          color: Colors.amber,
+                        ),
                         itemCount: 20,
                       ),
                       dataWidget: ListView.separated(
                         padding: const EdgeInsets.only(
-                          left: 4,
+                          left: 8,
                           right: 4,
-                          bottom: 94,
+                          bottom: 20,
                           top: 16,
                         ),
                         itemBuilder: (context, index) {
@@ -111,7 +122,9 @@ class _CoinListState extends State<CoinList>
                             rank: topCoinItem.marketCapRank,
                           );
                         },
-                        separatorBuilder: (context, index) => Divider(),
+                        separatorBuilder: (context, index) => Divider(
+                          color: Theme.of(context).disabledColor,
+                        ),
                         itemCount: state.data?.topCoinList.length ?? 0,
                       ),
                       loading: state.isLoading,

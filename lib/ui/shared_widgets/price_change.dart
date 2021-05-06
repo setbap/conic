@@ -1,5 +1,5 @@
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/colors.dart';
+
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
@@ -29,7 +29,7 @@ class PriceChange extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w700,
                 fontSize: 14,
-                color: DarkTextForeground,
+                color: Theme.of(context).canvasColor,
               ),
             ),
             Row(

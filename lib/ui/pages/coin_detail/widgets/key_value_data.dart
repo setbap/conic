@@ -1,4 +1,3 @@
-import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +19,7 @@ class KeyValueData extends StatelessWidget {
         style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600,
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
         ),
       ),
     );
@@ -47,11 +46,7 @@ class KeyValueDataGeneric extends StatelessWidget {
         children: [
           Text(
             dataKey,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.w600,
-              color: DarkTextForeground,
-            ),
+            style: Theme.of(context).textTheme.caption,
           ),
           dataValueWidget,
         ],

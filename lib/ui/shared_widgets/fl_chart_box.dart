@@ -1,6 +1,6 @@
 import 'dart:math';
 import 'package:coingecko/coingecko.dart';
-import 'package:conic/utils/colors.dart';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
@@ -62,7 +62,7 @@ class Chartic extends StatelessWidget {
     return LineChart(LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: DarkForeground,
+            tooltipBgColor: Theme.of(context).canvasColor,
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 final flSpot = barSpot;
@@ -73,15 +73,15 @@ class Chartic extends StatelessWidget {
                 return LineTooltipItem(
                   '${time.year}/${time.month}/${time.day} ${time.hour}:${time.minute}  \n',
                   const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
+                    fontSize: 11,
                   ),
                   children: [
                     TextSpan(
                       text: display(flSpot.y),
-                      style: TextStyle(
-                        color: DarkTextForeground,
+                      style: const TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontSize: 13,
                       ),
                     ),
                     TextSpan(
@@ -102,13 +102,13 @@ class Chartic extends StatelessWidget {
         drawVerticalLine: true,
         getDrawingHorizontalLine: (value) {
           return FlLine(
-            color: DarkForeground,
+            color: Theme.of(context).chipTheme.backgroundColor,
             strokeWidth: 1,
           );
         },
         getDrawingVerticalLine: (value) {
           return FlLine(
-            color: DarkForeground,
+            color: Theme.of(context).chipTheme.backgroundColor,
             strokeWidth: 1,
           );
         },
@@ -121,7 +121,6 @@ class Chartic extends StatelessWidget {
           showTitles: true,
           interval: (chartData.length / 2) - 5,
           getTextStyles: (value) => const TextStyle(
-            color: DarkTextForeground,
             fontWeight: FontWeight.w400,
             fontSize: 10,
           ),
@@ -136,8 +135,8 @@ class Chartic extends StatelessWidget {
         ),
         leftTitles: SideTitles(
           showTitles: true,
-          getTextStyles: (value) => const TextStyle(
-            color: DarkTextForeground,
+          getTextStyles: (value) => TextStyle(
+            color: Theme.of(context).canvasColor,
             fontWeight: FontWeight.bold,
             fontSize: 12,
           ),

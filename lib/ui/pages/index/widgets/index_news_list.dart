@@ -98,7 +98,8 @@ class NewsItemData extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       softWrap: false,
-                      style: TextStyle(color: Colors.white, fontSize: 13),
+                      style: TextStyle(
+                          color: Theme.of(context).cardColor, fontSize: 13),
                     ),
                     SizedBox(height: 4),
                     Text(

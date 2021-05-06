@@ -1,4 +1,3 @@
-import 'package:conic/utils/colors.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -60,20 +59,22 @@ class NewsChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 8.0),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6),
       child: CupertinoButton(
-        padding: EdgeInsets.zero,
+        padding: EdgeInsets.all(0),
         onPressed: onPress,
         child: Chip(
           side: BorderSide(color: Colors.transparent),
           labelStyle: TextStyle(
-              color: isActive ? Colors.red : DarkTextForeground,
+              fontSize: 10,
+              color: isActive
+                  ? Theme.of(context).primaryColor
+                  : Theme.of(context).textTheme.caption!.color,
               fontWeight: FontWeight.w500,
               letterSpacing: 1.2),
           label: Text(text),
           padding: EdgeInsets.symmetric(
-            horizontal: 8,
-            vertical: 2,
+            horizontal: 3,
           ),
         ),
       ),

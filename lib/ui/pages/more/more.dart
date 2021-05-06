@@ -33,7 +33,7 @@ class More extends StatelessWidget {
                           padding: EdgeInsets.all(4),
                           child: Icon(
                             Icons.golf_course,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                           ),
                         ),
                       ),
@@ -44,7 +44,7 @@ class More extends StatelessWidget {
                           padding: EdgeInsets.all(4),
                           child: Icon(
                             Icons.golf_course,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                           ),
                         ),
                       ),
@@ -55,7 +55,7 @@ class More extends StatelessWidget {
                           padding: EdgeInsets.all(4),
                           child: Icon(
                             Icons.golf_course,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                           ),
                         ),
                       ),
@@ -66,7 +66,7 @@ class More extends StatelessWidget {
                           padding: EdgeInsets.all(4),
                           child: Icon(
                             Icons.golf_course,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                           ),
                         ),
                       ),

@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:coingecko/coingecko.dart';
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
-import 'package:conic/utils/colors.dart';
+
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
@@ -168,7 +168,7 @@ class CoinAboutLoading extends StatelessWidget {
                       ),
                       Divider(
                         height: 2,
-                        color: DarkForeground,
+                        color: Theme.of(context).accentColor,
                       )
                     ],
                   ),

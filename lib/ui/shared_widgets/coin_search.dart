@@ -1,7 +1,7 @@
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/models/models.dart';
-import 'package:conic/utils/colors.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,7 +39,7 @@ class _CoinSearchState extends State<CoinSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: BlocConsumer<SearchPageDataCubit, GenericPageStete<SearchData>>(
           listener: (context, state) {
             // TODO: implement listener
@@ -69,7 +69,7 @@ class _CoinSearchState extends State<CoinSearch> {
                     padding: EdgeInsets.all(0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: DarkForeground,
+                      color: Theme.of(context).chipTheme.backgroundColor,
                     ),
                     child: TextField(
                       controller: _textController,
@@ -123,26 +123,28 @@ class _CoinSearchState extends State<CoinSearch> {
                           trailing: widget.hasArrow
                               ? Icon(
                                   Icons.keyboard_arrow_right_sharp,
-                                  color: Colors.white,
+                                  color: Theme.of(context).cardColor,
                                 )
                               : SizedBox(),
                           subtitle: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
-                                width: 40,
-                                height: 15,
+                                width: 44,
+                                height: 16,
                                 decoration: BoxDecoration(
-                                  color: DarkForeground,
+                                  color: Theme.of(context).canvasColor,
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 padding: EdgeInsets.symmetric(
                                   vertical: 1,
                                   horizontal: 10,
                                 ),
-                                child: Text(
-                                  data[index].symbol,
-                                  style: TextStyle(fontSize: 9),
+                                child: Center(
+                                  child: Text(
+                                    data[index].symbol,
+                                    style: TextStyle(fontSize: 8),
+                                  ),
                                 ),
                               ),
                             ],

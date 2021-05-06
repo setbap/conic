@@ -30,7 +30,7 @@ class CoinSquare extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: DarkForeground,
+        color: Theme.of(context).accentColor,
       ),
       child: CupertinoButton(
         onPressed: onPress,
@@ -59,14 +59,12 @@ class CoinSquare extends StatelessWidget {
                       style: Theme.of(context)
                           .textTheme
                           .caption!
-                          .copyWith(color: Colors.white),
+                          .copyWith(color: Theme.of(context).cardColor),
                     ),
                     Text(
                       numberDisplay(price),
-                      style: Theme.of(context)
-                          .textTheme
-                          .caption!
-                          .copyWith(color: DarkTextForeground),
+                      // TODO : text color
+                      style: Theme.of(context).textTheme.caption!.copyWith(),
                     ),
                   ],
                 ),
@@ -91,14 +89,14 @@ class CoinSquareLoading extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: DarkForeground,
+        color: Theme.of(context).accentColor,
       ),
       child: Shimmer.fromColors(
         highlightColor: shimmerHighlightColor,
         baseColor: shimmerBaseColor,
         child: Container(
           padding: EdgeInsets.zero,
-          color: Colors.white10,
+          color: Theme.of(context).cardColor,
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             child: Column(

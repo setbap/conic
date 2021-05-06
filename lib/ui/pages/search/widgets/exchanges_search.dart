@@ -1,11 +1,8 @@
-import 'dart:convert';
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/colors.dart';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ExchangeSearch extends StatefulWidget {
@@ -30,7 +27,7 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Theme.of(context).backgroundColor,
         body: BlocConsumer<SearchPageDataCubit, GenericPageStete<SearchData>>(
           listener: (context, state) {
             // TODO: implement listener
@@ -60,7 +57,7 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
                     padding: EdgeInsets.all(0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
-                      color: DarkForeground,
+                      color: Theme.of(context).chipTheme.backgroundColor,
                     ),
                     child: TextField(
                       controller: _textController,
@@ -113,7 +110,7 @@ class _ExchangeSearchState extends State<ExchangeSearch> {
                           ),
                           trailing: Container(
                             decoration: BoxDecoration(
-                              color: DarkForeground,
+                              color: Theme.of(context).canvasColor,
                               borderRadius: BorderRadius.circular(8),
                             ),
                             padding: EdgeInsets.symmetric(

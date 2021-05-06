@@ -134,11 +134,43 @@ class MyApp extends StatelessWidget {
       },
       theme: ThemeData(
         brightness: Brightness.dark,
+        accentColor: Colors.grey.shade900,
+        primaryColor: Colors.red,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.grey.shade900,
+        ),
+        chipTheme: ChipThemeData.fromDefaults(
+          primaryColor: Color(0xff222431),
+          labelStyle: TextStyle(),
+          secondaryColor: Colors.grey.shade900,
+        ),
+        cardColor: Colors.white,
         backgroundColor: Colors.black,
-        colorScheme: ColorScheme.dark(
-          primary: Colors.red,
-          secondary: Colors.green,
+        iconTheme: IconThemeData(color: Colors.white),
+        cupertinoOverrideTheme: CupertinoThemeData(
+          primaryColor: Colors.red,
           brightness: Brightness.dark,
+        ),
+        buttonColor: Colors.red,
+        inputDecorationTheme: InputDecorationTheme(
+            fillColor: Colors.grey.shade900,
+            filled: true,
+            border: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade700, width: 3),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey.shade700, width: 3),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 12,
+            )),
+        scaffoldBackgroundColor: Colors.black,
+        textTheme: TextTheme(
+          caption: TextStyle(
+            fontSize: 10,
+          ),
         ),
       ),
     );

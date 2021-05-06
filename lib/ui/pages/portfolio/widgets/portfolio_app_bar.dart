@@ -60,7 +60,7 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: Opacity(
         opacity: textOpacity,
         child: Text(
@@ -72,7 +72,7 @@ class _PortfolioAppBarState extends State<PortfolioAppBar> {
         CupertinoButton(
           child: Icon(
             Icons.add_circle_outlined,
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
           ),
           onPressed: widget.onPress,
         )
@@ -88,7 +88,7 @@ class PortfolioAppBarLoading extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       pinned: true,
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).backgroundColor,
       title: Shimmer.fromColors(
         baseColor: shimmerBaseColor,
         highlightColor: shimmerHighlightColor,
@@ -98,7 +98,7 @@ class PortfolioAppBarLoading extends StatelessWidget {
         CupertinoButton(
           child: Icon(
             Icons.add_circle_outlined,
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
           ),
           onPressed: () {},
         )

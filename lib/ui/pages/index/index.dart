@@ -23,7 +23,7 @@ class Index extends StatelessWidget {
         builder: (context) => CupertinoAlertDialog(
           title: Text(
             'Error',
-            style: TextStyle(color: Colors.red),
+            style: TextStyle(color: Theme.of(context).primaryColor),
           ),
           content: Text('an Error with you connection'),
           actions: <Widget>[
@@ -40,7 +40,7 @@ class Index extends StatelessWidget {
               },
               child: Text(
                 'retry',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Theme.of(context).cardColor),
               ),
             ),
           ],

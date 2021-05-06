@@ -1,4 +1,3 @@
-import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,11 +6,11 @@ class IndexToolsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> items = [
       IndexToolsItem(
-        backgroundColor: WatchListColor,
+        backgroundColor: Color(0xff8A3FFC),
         text: 'Watch list',
         icon: Icon(
           Icons.backup_table_outlined,
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
         ),
         onPress: () {
           // Navigator.push(
@@ -23,11 +22,11 @@ class IndexToolsList extends StatelessWidget {
         },
       ),
       IndexToolsItem(
-          backgroundColor: ConvertColor,
+          backgroundColor: Color(0xff3661FB),
           text: 'Convert',
           icon: Icon(
             Icons.info_outline,
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
           ),
           onPress: () {
             // Navigator.push(
@@ -72,7 +71,7 @@ class IndexToolsItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: DarkForeground,
+        color: Theme.of(context).accentColor,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Material(

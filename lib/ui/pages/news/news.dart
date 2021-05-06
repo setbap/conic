@@ -34,7 +34,7 @@ class _NewsState extends State<News> {
           builder: (context) => CupertinoAlertDialog(
             title: Text(
               'Error',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(color: Theme.of(context).primaryColor),
             ),
             content: Text('an Error with you connection'),
             actions: <Widget>[
@@ -53,7 +53,7 @@ class _NewsState extends State<News> {
                 },
                 child: Text(
                   'retry',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Theme.of(context).cardColor),
                 ),
               ),
             ],
@@ -62,7 +62,7 @@ class _NewsState extends State<News> {
       },
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).backgroundColor,
           body: Builder(
             builder: (context) {
               final filterType =

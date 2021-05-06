@@ -230,7 +230,7 @@ class CoinListItemLoading extends StatelessWidget {
                 onPressed: () {},
                 child: Icon(
                   Icons.star_border_outlined,
-                  color: Colors.yellow,
+                  color: Theme.of(context).primaryColor,
                   size: 16,
                 ),
               ),

@@ -2,7 +2,6 @@ import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +67,7 @@ class _CoinDetailState extends State<CoinDetail> {
                   },
                   child: Text(
                     'retry',
-                    style: TextStyle(color: Colors.white),
+                    style: TextStyle(color: Theme.of(context).cardColor),
                   ),
                 ),
               ],
@@ -91,7 +90,9 @@ class _CoinDetailState extends State<CoinDetail> {
                       onPressed: () {},
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Text(" ", style: TextStyle(color: Colors.white)),
+                        child: Text(" ",
+                            style:
+                                TextStyle(color: Theme.of(context).cardColor)),
                       ),
                     ),
                   ),
@@ -105,7 +106,7 @@ class _CoinDetailState extends State<CoinDetail> {
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
-                          .copyWith(color: Colors.white),
+                          .copyWith(color: Theme.of(context).cardColor),
                     ),
                   ),
                 ),
@@ -120,7 +121,7 @@ class _CoinDetailState extends State<CoinDetail> {
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
-                          .copyWith(color: Colors.white),
+                          .copyWith(color: Theme.of(context).cardColor),
                     ),
                   ),
                 ),
@@ -131,7 +132,7 @@ class _CoinDetailState extends State<CoinDetail> {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
                     child: Divider(
-                      color: DarkForeground,
+                      color: Theme.of(context).accentColor,
                     ),
                   ),
                 ),
@@ -175,7 +176,8 @@ class _CoinDetailState extends State<CoinDetail> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Text("Ads",
-                                style: TextStyle(color: Colors.white)),
+                                style: TextStyle(
+                                    color: Theme.of(context).cardColor)),
                           ),
                         ),
                       ),
@@ -189,7 +191,7 @@ class _CoinDetailState extends State<CoinDetail> {
                           style: Theme.of(context)
                               .textTheme
                               .headline5!
-                              .copyWith(color: Colors.white),
+                              .copyWith(color: Theme.of(context).cardColor),
                         ),
                       ),
                     ),
@@ -211,7 +213,7 @@ class _CoinDetailState extends State<CoinDetail> {
                           style: Theme.of(context)
                               .textTheme
                               .headline5!
-                              .copyWith(color: Colors.white),
+                              .copyWith(color: Theme.of(context).cardColor),
                         ),
                       ),
                     ),
@@ -230,7 +232,7 @@ class _CoinDetailState extends State<CoinDetail> {
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
                         child: Divider(
-                          color: DarkForeground,
+                          color: Theme.of(context).accentColor,
                         ),
                       ),
                     ),

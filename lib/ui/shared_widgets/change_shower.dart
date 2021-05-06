@@ -27,7 +27,9 @@ class ChangeShow extends StatelessWidget {
           Text(
             "${display(change)} \$",
             style: TextStyle(
-              color: (change ?? 0) > 0 ? Colors.green : Colors.red,
+              color: (change ?? 0) > 0
+                  ? Colors.green
+                  : Theme.of(context).primaryColor,
               fontSize: fontSize,
             ),
           ),
@@ -38,7 +40,7 @@ class ChangeShow extends StatelessWidget {
                 )
               : Icon(
                   Icons.arrow_drop_down,
-                  color: Colors.red,
+                  color: Theme.of(context).primaryColor,
                 ),
         ],
       ),

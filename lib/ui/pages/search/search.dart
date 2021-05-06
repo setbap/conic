@@ -30,7 +30,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
     return DefaultTabController(
       length: widget._kTabCount,
       child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).backgroundColor,
           appBar: AppBar(
             leading: BackButton(),
             centerTitle: true,
@@ -38,7 +38,7 @@ class _SearchState extends State<Search> with SingleTickerProviderStateMixin {
               width: 200,
               child: TabBar(
                 physics: BouncingScrollPhysics(),
-                indicatorColor: Colors.red,
+                indicatorColor: Theme.of(context).primaryColor,
                 indicatorSize: TabBarIndicatorSize.label,
                 labelPadding: EdgeInsets.only(bottom: 4),
                 controller: tabController,

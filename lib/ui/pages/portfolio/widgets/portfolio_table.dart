@@ -68,16 +68,13 @@ class PortfolioTableDataRow extends StatelessWidget {
                           name,
                           style: TextStyle(
                             fontSize: 14,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
                         Text(
                           id,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: DarkTextForeground,
-                          ),
+                          style: Theme.of(context).textTheme.bodyText2,
                           textAlign: TextAlign.start,
                         )
                       ],
@@ -113,7 +110,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                         numberDisplay(price) + " \$",
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white,
+                          color: Theme.of(context).cardColor,
                           fontWeight: FontWeight.w700,
                         ),
                         textAlign: TextAlign.center,
@@ -145,19 +142,20 @@ class PortfolioTableDataRow extends StatelessWidget {
                           numberDisplay(isLoading ? 0 : price! * coinCount),
                           style: TextStyle(
                             fontSize: 12,
-                            color: Colors.white,
+                            color: Theme.of(context).cardColor,
                             fontWeight: FontWeight.w700,
                           ),
                           textAlign: TextAlign.end,
                         ),
                       ),
-                      Text(
-                        '${numberDisplay(coinCount)} $symbol',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: DarkTextForeground,
+                      Container(
+                        height: 18,
+                        padding: EdgeInsets.only(top: 2),
+                        child: Text(
+                          '${numberDisplay(coinCount)} $symbol',
+                          style: Theme.of(context).textTheme.caption,
+                          textAlign: TextAlign.end,
                         ),
-                        textAlign: TextAlign.end,
                       )
                     ],
                   ),

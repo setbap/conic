@@ -1,5 +1,4 @@
 import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
-import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
 
@@ -65,7 +64,7 @@ class MarketState extends StatelessWidget {
             ),
             Container(
               height: 120,
-              color: DarkForeground,
+              color: Theme.of(context).accentColor,
               width: 2,
               margin: EdgeInsets.only(right: 8),
             ),
@@ -83,7 +82,7 @@ class MarketState extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: Colors.red,
+                          color: Theme.of(context).primaryColor,
                         ),
                       )),
                   KeyValueDataGeneric(

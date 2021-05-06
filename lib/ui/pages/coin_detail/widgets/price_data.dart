@@ -52,7 +52,7 @@ class PriceData extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 10,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: Theme.of(context).cardColor,
                       ),
                     ),
                   ),
@@ -61,7 +61,7 @@ class PriceData extends StatelessWidget {
             ),
             Container(
               height: 120,
-              color: DarkForeground,
+              color: Theme.of(context).accentColor,
               width: 2,
               margin: EdgeInsets.only(right: 8),
             ),
@@ -119,7 +119,7 @@ class PriceDataLoading extends StatelessWidget {
               ),
               Container(
                 height: 120,
-                color: DarkForeground,
+                color: Theme.of(context).accentColor,
                 width: 2,
                 margin: EdgeInsets.only(right: 8),
               ),

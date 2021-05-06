@@ -46,7 +46,7 @@ class _PortfolioState extends State<Portfolio> {
                 builder: (context) => CupertinoAlertDialog(
                   title: Text(
                     'Error',
-                    style: TextStyle(color: Colors.red),
+                    style: TextStyle(color: Theme.of(context).primaryColor),
                   ),
                   content: Text('an Error with you connection'),
                   actions: <Widget>[
@@ -65,7 +65,7 @@ class _PortfolioState extends State<Portfolio> {
                       },
                       child: Text(
                         'retry',
-                        style: TextStyle(color: Colors.white),
+                        style: TextStyle(color: Theme.of(context).cardColor),
                       ),
                     ),
                   ],
@@ -144,12 +144,12 @@ class _PortfolioState extends State<Portfolio> {
                             background: Container(
                               padding: EdgeInsets.all(8),
                               alignment: AlignmentDirectional.centerStart,
-                              color: Colors.red.shade700,
+                              color: Theme.of(context).primaryColor,
                               child: Text(
                                 "DELETE ${coinPortfolioInfo.id}",
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: Colors.black,
+                                    color: Theme.of(context).backgroundColor,
                                     fontWeight: FontWeight.w700),
                               ),
                             ),
@@ -199,7 +199,8 @@ class _PortfolioState extends State<Portfolio> {
                           padding: const EdgeInsets.all(12),
                           child: Text(
                             "Add Transaction",
-                            style: TextStyle(color: Colors.white),
+                            style:
+                                TextStyle(color: Theme.of(context).cardColor),
                           ),
                         ),
                         onPressed: () {

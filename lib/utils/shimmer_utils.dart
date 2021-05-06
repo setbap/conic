@@ -36,7 +36,7 @@ class CircleShimmer extends StatelessWidget {
       height: radius,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: Colors.black,
+        color: Theme.of(context).backgroundColor,
       ),
     );
   }
@@ -55,7 +55,7 @@ class SquareShimmer extends StatelessWidget {
       height: size,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: Colors.black,
+        color: Theme.of(context).backgroundColor,
       ),
     );
   }
@@ -79,7 +79,7 @@ class BoxShimmer extends StatelessWidget {
       height: height,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(radius),
-        color: Colors.black,
+        color: Theme.of(context).backgroundColor,
       ),
     );
   }

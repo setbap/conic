@@ -1,7 +1,6 @@
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/pages/buy_coin/widgets/widgets.dart';
-import 'package:conic/utils/colors.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,9 @@ class _BuyCoinState extends State<BuyCoin> {
           builder: (context) => CupertinoAlertDialog(
             title: Text(
               'Error',
-              style: TextStyle(color: Colors.red),
+              style: TextStyle(
+                color: Theme.of(context).errorColor,
+              ),
             ),
             content: Text('an Error with you connection'),
             actions: <Widget>[
@@ -64,7 +65,6 @@ class _BuyCoinState extends State<BuyCoin> {
                 },
                 child: Text(
                   'retry',
-                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ],
@@ -74,7 +74,6 @@ class _BuyCoinState extends State<BuyCoin> {
       builder: (context, state) {
         return Scaffold(
           resizeToAvoidBottomInset: true,
-          backgroundColor: Colors.black,
           appBar: AppBar(
             elevation: 2,
             centerTitle: true,
@@ -93,8 +92,6 @@ class _BuyCoinState extends State<BuyCoin> {
                             CoinTransactionStatus.Sell: Text('Sell'),
                             CoinTransactionStatus.Transfer: Text('Transfer')
                           },
-                          thumbColor: Colors.black,
-                          backgroundColor: DarkPrimaryColor,
                           groupValue: segmentedControlValue,
                           onValueChanged: (CoinTransactionStatus? value) {
                             if (value != null) {

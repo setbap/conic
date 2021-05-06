@@ -73,7 +73,8 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                   child: Text(
                     widget.symbol,
                     style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.w500),
+                        color: Theme.of(context).cardColor,
+                        fontWeight: FontWeight.w500),
                   ),
                 ),
                 SizedBox(
@@ -99,7 +100,7 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                 Text(
                   "\$${numberDisply(widget.price)}",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).cardColor,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

@@ -1,6 +1,6 @@
 import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
-import 'package:conic/utils/colors.dart';
+
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +23,9 @@ class BuyAndSell extends StatefulWidget {
 class _BuyAndSellState extends State<BuyAndSell> {
   final _formKey = GlobalKey<FormState>();
   final inputOutLinedBorder = OutlineInputBorder(
-    borderSide: BorderSide(color: DarkPrimaryColor, width: 3),
     borderRadius: BorderRadius.circular(8),
   );
+
   BuyPageDataModel? data;
 
   @override
@@ -33,24 +33,6 @@ class _BuyAndSellState extends State<BuyAndSell> {
     super.initState();
     data = widget.data;
   }
-
-  final inlineInputDecoration = InputDecoration(
-    fillColor: DarkForeground,
-    filled: true,
-    hintText: "0.00",
-    border: OutlineInputBorder(
-      borderSide: BorderSide(color: DarkPrimaryColor, width: 3),
-      borderRadius: BorderRadius.circular(8),
-    ),
-    enabledBorder: OutlineInputBorder(
-      borderSide: BorderSide(color: DarkPrimaryColor, width: 3),
-      borderRadius: BorderRadius.circular(8),
-    ),
-    contentPadding: EdgeInsets.symmetric(
-      horizontal: 8,
-      vertical: 0,
-    ),
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +50,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
                 width: double.infinity,
                 margin: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: DarkForeground,
+                  color: Theme.of(context).accentColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -91,8 +73,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
                     ),
                     Text(
                       state.data?.symbol.toString() ?? "",
-                      style: textTheme.bodyText1!
-                          .copyWith(color: DarkTextForeground),
+                      style: textTheme.caption,
                     ),
                   ],
                 ),
@@ -148,7 +129,9 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                     }
                                   },
                                   textAlign: TextAlign.left,
-                                  decoration: inlineInputDecoration,
+                                  decoration: InputDecoration(
+                                    hintText: "0.00",
+                                  ),
                                   maxLines: 1,
                                   textInputAction: TextInputAction.next,
                                 ),
@@ -185,8 +168,10 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                           );
                                     }
                                   },
-                                  dropdownColor: DarkForeground,
-                                  decoration: inlineInputDecoration,
+                                  dropdownColor: Theme.of(context).accentColor,
+                                  decoration: InputDecoration(
+                                    hintText: "0.00",
+                                  ),
                                   items: [
                                     DropdownMenuItem(
                                       child: Text("Transfer In"),
@@ -263,7 +248,9 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                       RegExp(r'[0-9.]')),
                                 ],
                                 textAlign: TextAlign.left,
-                                decoration: inlineInputDecoration,
+                                decoration: InputDecoration(
+                                  hintText: "0.00",
+                                ),
                                 maxLines: 1,
                                 textInputAction: TextInputAction.next,
                               ),
@@ -338,7 +325,9 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                       RegExp(r'[0-9.]')),
                                 ],
                                 textAlign: TextAlign.left,
-                                decoration: inlineInputDecoration,
+                                decoration: InputDecoration(
+                                  hintText: "0.00",
+                                ),
                                 maxLines: 1,
                                 textInputAction: TextInputAction.next,
                               ),
@@ -375,10 +364,9 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     border: Border.all(
-                                      color: DarkPrimaryColor,
                                       width: 2,
                                     ),
-                                    color: DarkForeground,
+                                    color: Theme.of(context).accentColor,
                                   ),
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
@@ -405,16 +393,13 @@ class _BuyAndSellState extends State<BuyAndSell> {
                   showCupertinoModalPopup(
                     context: context,
                     barrierDismissible: true,
-                    barrierColor: DarkForeground.withAlpha(200),
                     builder: (context) {
-                      return CupertinoTheme(
-                        data: CupertinoThemeData(
-                          brightness: Brightness.dark,
-                          scaffoldBackgroundColor: Colors.red,
-                        ),
-                        child: Container(
-                          height: 300,
-                          color: Colors.white10,
+                      return Container(
+                        height: 300,
+                        color: Theme.of(context).backgroundColor,
+                        child: CupertinoTheme(
+                          data: CupertinoThemeData(
+                              brightness: Theme.of(context).brightness),
                           child: CupertinoDatePicker(
                             initialDateTime: state.data?.time,
                             onDateTimeChanged: (value) {
@@ -426,7 +411,6 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                     ),
                                   );
                             },
-                            backgroundColor: Colors.black,
                             maximumDate: DateTime.now().add(
                               Duration(
                                 seconds: 20,
@@ -441,10 +425,9 @@ class _BuyAndSellState extends State<BuyAndSell> {
                 child: Container(
                     height: 48,
                     decoration: BoxDecoration(
-                      color: DarkForeground,
+                      color: Theme.of(context).accentColor,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: DarkPrimaryColor,
                         width: 2,
                       ),
                     ),
@@ -470,7 +453,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Colors.grey.shade900.withAlpha(40),
+                  color: Theme.of(context).accentColor.withAlpha(40),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: TextFormField(
@@ -484,11 +467,11 @@ class _BuyAndSellState extends State<BuyAndSell> {
                         );
                   },
                   decoration: InputDecoration(
-                    fillColor: DarkForeground,
-                    enabledBorder: inputOutLinedBorder,
-                    filled: true,
-                    border: inputOutLinedBorder,
                     hintText: "Note on this transaction",
+                    contentPadding: EdgeInsets.symmetric(
+                      vertical: 16,
+                      horizontal: 12,
+                    ),
                   ),
                 ),
               ),
@@ -512,18 +495,15 @@ class _BuyAndSellState extends State<BuyAndSell> {
                               SnackBar(
                                 content: Text(
                                   " Please fill inputs correctly",
-                                  style: TextStyle(
-                                    color: DarkTextForeground,
-                                  ),
                                 ),
-                                backgroundColor: DarkForeground,
+                                backgroundColor: Theme.of(context).accentColor,
                               ),
                             );
                           }
                         },
                         child: Text(
                           "Add Transaction",
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(color: Theme.of(context).cardColor),
                         ),
                       ),
                     ),

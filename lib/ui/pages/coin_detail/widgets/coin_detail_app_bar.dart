@@ -1,7 +1,6 @@
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
-import 'package:shimmer/shimmer.dart';
 
 class CoinDetailAppBar extends StatefulWidget {
   final ScrollController controller;
@@ -123,9 +122,7 @@ class CoinDetailAppBarLoading extends StatelessWidget {
       pinned: true,
       centerTitle: true,
       actions: [IconButton(onPressed: () {}, icon: Icon(Icons.star_outline))],
-      title: Shimmer.fromColors(
-        highlightColor: shimmerHighlightColor,
-        baseColor: shimmerBaseColor,
+      title: MyShimmer(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

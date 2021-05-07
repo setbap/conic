@@ -3,7 +3,6 @@ import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
-import 'package:shimmer/shimmer.dart';
 
 class PortfolioTableDataRow extends StatelessWidget {
   final bool isLoading;
@@ -84,9 +83,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                 flex: 2,
               ),
               LoadingShimmer(
-                loadingWidget: Shimmer.fromColors(
-                  baseColor: shimmerBaseColor,
-                  highlightColor: shimmerHighlightColor,
+                loadingWidget: MyShimmer(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -133,9 +130,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                       LoadingShimmer(
                         error: false,
                         loading: isLoading,
-                        loadingWidget: Shimmer.fromColors(
-                          baseColor: shimmerBaseColor,
-                          highlightColor: shimmerHighlightColor,
+                        loadingWidget: MyShimmer(
                           child: BoxShimmer(height: 16, width: 44, radius: 4),
                         ),
                         dataWidget: Text(

@@ -1,5 +1,4 @@
 import 'package:coingecko/coingecko.dart';
-import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';

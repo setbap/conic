@@ -2,7 +2,6 @@ import 'package:coingecko/coingecko.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SliverChartBox extends StatefulWidget {
   final List<CoinChart>? chartDataArray;
@@ -114,9 +113,7 @@ class SliverChartBoxLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Shimmer.fromColors(
-        baseColor: shimmerBaseColor,
-        highlightColor: shimmerHighlightColor,
+      child: MyShimmer(
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 8),
           child: Column(children: [

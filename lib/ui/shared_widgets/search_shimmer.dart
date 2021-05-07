@@ -1,6 +1,5 @@
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SearchShimmer extends StatelessWidget {
   const SearchShimmer({
@@ -9,9 +8,7 @@ class SearchShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Shimmer.fromColors(
-      highlightColor: shimmerHighlightColor,
-      baseColor: shimmerBaseColor,
+    return MyShimmer(
       child: Column(
         children: [
           Container(

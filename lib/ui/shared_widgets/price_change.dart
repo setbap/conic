@@ -3,7 +3,6 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
-import 'package:shimmer/shimmer.dart';
 
 class PriceChange extends StatelessWidget {
   final double price;
@@ -59,9 +58,7 @@ class PriceChangeLoading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Shimmer.fromColors(
-        baseColor: shimmerBaseColor,
-        highlightColor: shimmerHighlightColor,
+      child: MyShimmer(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(

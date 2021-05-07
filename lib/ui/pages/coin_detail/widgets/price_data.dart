@@ -3,7 +3,6 @@ import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
-import 'package:shimmer/shimmer.dart';
 
 class PriceData extends StatelessWidget {
   final double? ath;
@@ -100,9 +99,7 @@ class PriceDataLoading extends StatelessWidget {
     return Container(
       height: 150,
       padding: const EdgeInsets.all(8.0),
-      child: Shimmer.fromColors(
-        baseColor: shimmerBaseColor,
-        highlightColor: shimmerHighlightColor,
+      child: MyShimmer(
         child: Container(
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -5,7 +5,7 @@ import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:url_launcher/link.dart';
 
 class CoinAbout extends StatelessWidget {
@@ -150,9 +150,7 @@ class CoinAboutLoading extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Column(
         children: [1, 2, 3, 4, 5, 6]
-            .map((_) => Shimmer.fromColors(
-                  highlightColor: shimmerHighlightColor,
-                  baseColor: shimmerBaseColor,
+            .map((_) => MyShimmer(
                   child: Column(
                     children: [
                       ListTile(

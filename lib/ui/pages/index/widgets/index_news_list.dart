@@ -2,7 +2,7 @@ import 'package:conic/utils/utils.dart';
 import 'package:cryptopanic/cryptopanic.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shimmer/shimmer.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 class IndexNewsList extends StatelessWidget {
@@ -130,9 +130,7 @@ class NewsItemLoading extends StatelessWidget {
     return Container(
       child: Padding(
         padding: EdgeInsets.all(8),
-        child: Shimmer.fromColors(
-          baseColor: shimmerBaseColor,
-          highlightColor: shimmerHighlightColor,
+        child: MyShimmer(
           child: Container(
             child: Row(
               children: [

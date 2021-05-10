@@ -1,11 +1,5 @@
 import 'package:conic/models/hive_models/hive_modals.dart';
 
-enum CoinTransactionStatus {
-  Buy,
-  Sell,
-  Transfer,
-}
-
 class BuyPageDataModel {
   final String id;
   final String name;
@@ -31,7 +25,9 @@ class BuyPageDataModel {
     required this.transferType,
   });
 
-  TransactionStorage toTransactionStorage() {
+  TransactionStorage toTransactionStorage({
+    required CoinTransactionStatus coinTransactionStatus,
+  }) {
     return TransactionStorage(
       id: id,
       name: name,
@@ -42,6 +38,7 @@ class BuyPageDataModel {
       desc: desc,
       count: count,
       transferStatus: transferType,
+      coinTransactionStatus: coinTransactionStatus,
     );
   }
 

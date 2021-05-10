@@ -22,7 +22,9 @@ class BuyPagePageDataCubit extends Cubit<GenericPageStete<BuyPageDataModel>> {
   void addTransaction({required CoinTransactionStatus transactionStatus}) {
     final data = state.data!;
     _transactionManager.addTransaction(
-      transactionStorage: data.toTransactionStorage(),
+      transactionStorage: data.toTransactionStorage(
+        coinTransactionStatus: transactionStatus,
+      ),
       transactionStatus: transactionStatus,
     );
   }

@@ -16,6 +16,7 @@ class TransactionStorage {
     required this.desc,
     required this.count,
     required this.transferStatus,
+    required this.coinTransactionStatus,
     DateTime? time,
   }) : this.time = time ?? DateTime.now();
 
@@ -49,6 +50,9 @@ class TransactionStorage {
   @HiveField(9)
   final TransferStatus transferStatus;
 
+  @HiveField(10)
+  final CoinTransactionStatus coinTransactionStatus;
+
   TransactionStorage copyWith({
     String? id,
     String? name,
@@ -60,6 +64,7 @@ class TransactionStorage {
     String? image,
     DateTime? time,
     TransferStatus? transferStatus,
+    CoinTransactionStatus? coinTransactionStatus,
   }) {
     return TransactionStorage(
       id: id ?? this.id,
@@ -72,6 +77,8 @@ class TransactionStorage {
       image: image ?? this.image,
       time: time ?? this.time,
       transferStatus: transferStatus ?? this.transferStatus,
+      coinTransactionStatus:
+          coinTransactionStatus ?? this.coinTransactionStatus,
     );
   }
 }
@@ -119,4 +126,14 @@ enum TransferStatus {
 
   @HiveField(1)
   TransferOut,
+}
+
+@HiveType(typeId: 4)
+enum CoinTransactionStatus {
+  @HiveField(0)
+  Buy,
+  @HiveField(1)
+  Sell,
+  @HiveField(2)
+  Transfer,
 }

@@ -1,4 +1,5 @@
 import 'package:conic/manager/transaction_storage.dart';
+import 'package:conic/ui/pages/single_coin_history/single_coin_history.dart';
 import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -179,7 +180,13 @@ class _PortfolioState extends State<Portfolio> {
                               imageSrc: coinPortfolioInfo.image,
                               symbol: coinPortfolioInfo.symbol,
                               name: coinPortfolioInfo.name,
-                              onPress: () {},
+                              onPress: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  SingleCoinHistory.route,
+                                  arguments: coinPortfolioInfo.id,
+                                );
+                              },
                               price: coinPriceInfo?.currentPrice,
                             ),
                           );

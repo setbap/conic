@@ -7,6 +7,7 @@ import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/landing/landing.dart';
 import 'package:conic/ui/pages/search/search.dart';
+import 'package:conic/ui/pages/single_coin_history/single_coin_history.dart';
 import 'package:cryptopanic/cryptopanic.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
@@ -27,6 +28,7 @@ Future<void> main() async {
   Hive.registerAdapter<PortfolioStorage>(PortfolioStorageAdapter());
   Hive.registerAdapter<TransactionStorage>(TransactionStorageAdapter());
   Hive.registerAdapter<TransferStatus>(TransferStatusAdapter());
+  Hive.registerAdapter<CoinTransactionStatus>(CoinTransactionStatusAdapter());
   await Hive.openBox<PortfolioStorage>(PortfolioStorage.PortfolioKey);
   await Hive.openBox<TransactionStorage>(TransactionStorage.TransactionKey);
 
@@ -46,6 +48,9 @@ Future<void> main() async {
           ),
           RepositoryProvider<ParsDataRepo>(
             create: (context) => ParsDataRepo(),
+          ),
+          RepositoryProvider<TransactionManager>(
+            create: (context) => TransactionManager(),
           ),
         ],
         child: MultiBlocProvider(
@@ -82,7 +87,7 @@ Future<void> main() async {
             ),
             BlocProvider<BuyPagePageDataCubit>(
               create: (BuildContext context) => BuyPagePageDataCubit(
-                transactionManager: TransactionManager(),
+                transactionManager: context.read<TransactionManager>(),
                 indexDataRepo: context.read<IndexDataRepository>(),
               ),
             ),
@@ -125,6 +130,14 @@ class MyApp extends StatelessWidget {
             final String args = settings.arguments as String;
             return MaterialPageRoute(
               builder: (context) => CoinDetail(
+                id: args,
+              ),
+            );
+
+          case SingleCoinHistory.route:
+            final String args = settings.arguments as String;
+            return MaterialPageRoute(
+              builder: (context) => SingleCoinHistory(
                 id: args,
               ),
             );

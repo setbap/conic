@@ -45,6 +45,50 @@ class TransferStatusAdapter extends TypeAdapter<TransferStatus> {
           typeId == other.typeId;
 }
 
+class CoinTransactionStatusAdapter extends TypeAdapter<CoinTransactionStatus> {
+  @override
+  final int typeId = 4;
+
+  @override
+  CoinTransactionStatus read(BinaryReader reader) {
+    switch (reader.readByte()) {
+      case 0:
+        return CoinTransactionStatus.Buy;
+      case 1:
+        return CoinTransactionStatus.Sell;
+      case 2:
+        return CoinTransactionStatus.Transfer;
+      default:
+        return CoinTransactionStatus.Buy;
+    }
+  }
+
+  @override
+  void write(BinaryWriter writer, CoinTransactionStatus obj) {
+    switch (obj) {
+      case CoinTransactionStatus.Buy:
+        writer.writeByte(0);
+        break;
+      case CoinTransactionStatus.Sell:
+        writer.writeByte(1);
+        break;
+      case CoinTransactionStatus.Transfer:
+        writer.writeByte(2);
+        break;
+    }
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CoinTransactionStatusAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 class TransactionStorageAdapter extends TypeAdapter<TransactionStorage> {
   @override
   final int typeId = 1;
@@ -65,6 +109,7 @@ class TransactionStorageAdapter extends TypeAdapter<TransactionStorage> {
       desc: fields[4] as String,
       count: fields[5] as double,
       transferStatus: fields[9] as TransferStatus,
+      coinTransactionStatus: fields[10] as CoinTransactionStatus,
       time: fields[8] as DateTime?,
     );
   }
@@ -72,7 +117,7 @@ class TransactionStorageAdapter extends TypeAdapter<TransactionStorage> {
   @override
   void write(BinaryWriter writer, TransactionStorage obj) {
     writer
-      ..writeByte(10)
+      ..writeByte(11)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -92,7 +137,9 @@ class TransactionStorageAdapter extends TypeAdapter<TransactionStorage> {
       ..writeByte(8)
       ..write(obj.time)
       ..writeByte(9)
-      ..write(obj.transferStatus);
+      ..write(obj.transferStatus)
+      ..writeByte(10)
+      ..write(obj.coinTransactionStatus);
   }
 
   @override

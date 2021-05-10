@@ -74,18 +74,19 @@ class TransactionManager {
     transactionStorageBox.put(
       coinId + "__" + DateTime.now().toString(),
       TransactionStorage(
-        name: before.name,
-        desc: "Delete This Item",
-        fee: 0,
-        id: before.id,
-        symbol: before.symbol,
-        time: DateTime.now(),
-        image: before.image,
-        transferStatus:
-            count > 0 ? TransferStatus.TransferOut : TransferStatus.TransferIn,
-        count: count,
-        price: price,
-      ),
+          name: before.name,
+          desc: "Delete This Item",
+          fee: 0,
+          id: before.id,
+          symbol: before.symbol,
+          time: DateTime.now(),
+          image: before.image,
+          transferStatus: count > 0
+              ? TransferStatus.TransferOut
+              : TransferStatus.TransferIn,
+          count: count,
+          price: price,
+          coinTransactionStatus: CoinTransactionStatus.Sell),
     );
     portfolioStorageBox.delete(coinId);
   }

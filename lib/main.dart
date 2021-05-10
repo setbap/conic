@@ -166,7 +166,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors.red,
           brightness: Brightness.dark,
         ),
-        buttonColor: Colors.red,
+        hintColor: Colors.lightBlue.shade200,
         inputDecorationTheme: InputDecorationTheme(
             fillColor: Colors.grey.shade900,
             filled: true,

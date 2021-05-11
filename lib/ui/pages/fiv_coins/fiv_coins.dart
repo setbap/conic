@@ -19,7 +19,7 @@ class FivCoins extends StatefulWidget {
 }
 
 class _FivCoinsState extends State<FivCoins> {
-  List<TopCoin> coins = [];
+  List<TopCoin>? coins = [];
 
   @override
   void initState() {
@@ -31,8 +31,7 @@ class _FivCoinsState extends State<FivCoins> {
     return ValueListenableBuilder<Box<String>>(
         valueListenable: context.read<FivManager>().fivStorageBox.listenable(),
         builder: (context, box, _) {
-          if ((coins.length + 1 != box.values.length) &&
-              box.values.isNotEmpty) {
+          if (((coins?.length ?? 0) + 1 != box.values.length)) {
             context.read<FivPageDataCubit>().getFivCoinsData(
                   coinsId: box.values.toList(),
                 );
@@ -75,7 +74,7 @@ class _FivCoinsState extends State<FivCoins> {
             },
             builder: (context, state) {
               if (!state.isLoading || !state.isError) {
-                coins = state.data!;
+                coins = state.data;
               }
               return Scaffold(
                 appBar: AppBar(
@@ -96,45 +95,59 @@ class _FivCoinsState extends State<FivCoins> {
                     separatorBuilder: (context, index) => Divider(),
                     itemCount: 20,
                   ),
-                  dataWidget: ListView.separated(
-                    padding: const EdgeInsets.only(
-                      left: 8,
-                      right: 4,
-                      bottom: 20,
-                      top: 16,
-                    ),
-                    itemBuilder: (context, index) {
-                      final favCoinItem = state.data![index];
-                      return CoinListItemData(
-                        onFavPressed: () {
-                          context.read<FivPageDataCubit>().deleteFivCoinData(
-                                coinId: favCoinItem.id,
-                              );
-                        },
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            CoinDetail.route,
-                            arguments: favCoinItem.id,
-                          );
-                        },
-                        imageSrc: favCoinItem.image ?? "",
-                        name: favCoinItem.name,
-                        chartData: favCoinItem.sparklineIn7d!.price,
-                        change: favCoinItem.priceChangePercentage24h,
-                        id: favCoinItem.id,
-                        symbol: favCoinItem.symbol,
-                        marketCap: favCoinItem.marketCap,
-                        price: favCoinItem.currentPrice!,
-                        rank: favCoinItem.marketCapRank,
-                        key: ValueKey(favCoinItem.id),
-                      );
-                    },
-                    separatorBuilder: (context, index) => Divider(
-                      color: Theme.of(context).disabledColor,
-                    ),
-                    itemCount: state.data?.length ?? 0,
-                  ),
+                  dataWidget: (state.data == null || state.data!.isEmpty)
+                      ? Center(
+                          child: Column(
+                            children: [
+                              Icon(Icons.add_box),
+                              Text(
+                                "Fav List is Empty",
+                                style: Theme.of(context).textTheme.headline4,
+                              ),
+                            ],
+                          ),
+                        )
+                      : ListView.separated(
+                          padding: const EdgeInsets.only(
+                            left: 8,
+                            right: 4,
+                            bottom: 20,
+                            top: 16,
+                          ),
+                          itemBuilder: (context, index) {
+                            final favCoinItem = state.data![index];
+                            return CoinListItemData(
+                              onFavPressed: () {
+                                context
+                                    .read<FivPageDataCubit>()
+                                    .deleteFivCoinData(
+                                      coinId: favCoinItem.id,
+                                    );
+                              },
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  CoinDetail.route,
+                                  arguments: favCoinItem.id,
+                                );
+                              },
+                              imageSrc: favCoinItem.image ?? "",
+                              name: favCoinItem.name,
+                              chartData: favCoinItem.sparklineIn7d!.price,
+                              change: favCoinItem.priceChangePercentage24h,
+                              id: favCoinItem.id,
+                              symbol: favCoinItem.symbol,
+                              marketCap: favCoinItem.marketCap,
+                              price: favCoinItem.currentPrice!,
+                              rank: favCoinItem.marketCapRank,
+                              key: ValueKey(favCoinItem.id),
+                            );
+                          },
+                          separatorBuilder: (context, index) => Divider(
+                            color: Theme.of(context).disabledColor,
+                          ),
+                          itemCount: state.data?.length ?? 0,
+                        ),
                   error: false,
                 ),
               );

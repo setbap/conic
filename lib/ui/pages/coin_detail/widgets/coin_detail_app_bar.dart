@@ -39,20 +39,23 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
     widget.controller.addListener(() {
       final offset = widget.controller.offset;
       if (!isPageClosed) {
-        if (offset > 0 && offset < 70) {
+        if (offset > 0 && offset < 130) {
           setState(() {
-            textOpacity = (offset.clamp(30, 70) - 30) / 40;
+            setState(() {});
+            textOpacity = (offset.clamp(30, 130) - 30) / 100;
           });
-        } else if (offset < 0 && textOpacity < 0.01) {
+        } else if (offset < 0 && textOpacity != 0) {
           //when scroll so fast
           setState(() {
             textOpacity = 0;
           });
-        } else if (offset > 70 && textOpacity < 0.98) {}
+        } else if (offset > 130 && textOpacity != 1) {
+          setState(() {
+            textOpacity = 1;
+          });
+        }
         //when scroll so fast
-        setState(() {
-          textOpacity = 1;
-        });
+
       }
     });
   }
@@ -75,53 +78,56 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                   : Icons.star_outline,
             ))
       ],
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Opacity(
-            opacity: textOpacity,
-            child: Row(
-              children: [
-                FittedBox(
-                  child: Text(
-                    widget.symbol,
+      title: Transform.translate(
+        offset: Offset(0, (50 - (textOpacity * 50)).clamp(0, 50)),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Opacity(
+              opacity: textOpacity,
+              child: Row(
+                children: [
+                  FittedBox(
+                    child: Text(
+                      widget.symbol,
+                      style: TextStyle(
+                          color: Theme.of(context).cardColor,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 12,
+                  ),
+                ],
+              ),
+            ),
+            CircleAvatar(
+              backgroundColor: Colors.transparent,
+              child: Image.network(
+                widget.imageSrc,
+              ),
+              radius: 16,
+            ),
+            Opacity(
+              opacity: textOpacity,
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 12,
+                  ),
+                  Text(
+                    "\$${numberDisply(widget.price)}",
                     style: TextStyle(
-                        color: Theme.of(context).cardColor,
-                        fontWeight: FontWeight.w500),
+                      color: Theme.of(context).cardColor,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: 12,
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          CircleAvatar(
-            backgroundColor: Colors.orange,
-            child: Image.network(
-              widget.imageSrc,
-            ),
-            radius: 16,
-          ),
-          Opacity(
-            opacity: textOpacity,
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 12,
-                ),
-                Text(
-                  "\$${numberDisply(widget.price)}",
-                  style: TextStyle(
-                    color: Theme.of(context).cardColor,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

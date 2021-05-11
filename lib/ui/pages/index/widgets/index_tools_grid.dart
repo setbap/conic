@@ -8,7 +8,7 @@ class IndexToolsList extends StatelessWidget {
     final List<Widget> items = [
       IndexToolsItem(
         backgroundColor: Color(0xff8A3FFC),
-        text: 'Watch list',
+        text: 'Fav list',
         icon: Icon(
           Icons.backup_table_outlined,
           color: Theme.of(context).cardColor,
@@ -36,7 +36,7 @@ class IndexToolsList extends StatelessWidget {
     return SliverGrid(
       delegate: SliverChildBuilderDelegate(
         (context, index) => items[index],
-        childCount: 2,
+        childCount: 1,
       ),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,

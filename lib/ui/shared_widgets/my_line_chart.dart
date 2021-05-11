@@ -46,13 +46,13 @@ class _MyLineChartState extends State<MyLineChart> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.chartData.length < 5) {
+    if (widget.chartData.length < 2) {
       return Container(
         height: widget.height,
         width: widget.width,
       );
     }
-    // TODO : Bad state: No element In CustomPainer
+
     return Container(
       height: widget.height,
       width: widget.width,

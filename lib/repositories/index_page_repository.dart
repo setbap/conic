@@ -75,31 +75,8 @@ class IndexDataRepository {
 
   Future<NewsApiResualt> getNewsPageInfo(NewsFilter newsFilter) async {
     // using filter=(rising|hot|bullish|bearish|important|saved|lol):
-
-    // final indexPageData = await Future.wait([
-    // _newsApi.getNews(currencies: []),
-    // _newsApi.getNews(currencies: [], filter: "hot"),
-    // _newsApi.getNews(currencies: [], filter: "bullish"),
-    // _newsApi.getNews(currencies: [], filter: "bearish"),
-    // _newsApi.getNews(currencies: [], filter: "important"),
-    // ]);
-
     final newsData = await _newsApi
         .getNews(currencies: [], filter: newsFilter.toString().split(".")[1]);
-
-    // final topCoinNews = indexPageData[0];
-    // final hotCoinNews = indexPageData[0];
-    // final bullishCoinNews = indexPageData[0];
-    // final bearishCoinNews = indexPageData[0];
-    // final importantCoinNews = indexPageData[0];
-
-    // return NewsPageDataModel(
-    // topCoinApiResualt: topCoinNews,
-    // hotApiResualt: hotCoinNews,
-    //   bullishApiResualt: bullishCoinNews,
-    //   bearishApiResualt: bearishCoinNews,
-    // importantApiResualt: importantCoinNews,
-    // );
     return newsData;
   }
 
@@ -134,5 +111,10 @@ class IndexDataRepository {
       time: DateTime.now(),
       transferType: TransferStatus.TransferIn,
     );
+  }
+
+  Future<List<TopCoin>> getFivInfo({required List<String> coins}) async {
+    final coinsInfo = await _coinApi.topCoinInfo(coins: coins, sparkLine: true);
+    return coinsInfo;
   }
 }

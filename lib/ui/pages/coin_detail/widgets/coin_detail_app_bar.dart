@@ -1,15 +1,19 @@
+import 'package:conic/manager/manager.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_display/number_display.dart';
 
 class CoinDetailAppBar extends StatefulWidget {
   final ScrollController controller;
   final String symbol;
+  final String id;
   final double price;
   final String imageSrc;
   const CoinDetailAppBar({
     Key? key,
     required this.price,
+    required this.id,
     required this.symbol,
     required this.imageSrc,
     required this.controller,
@@ -59,7 +63,18 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
       leading: BackButton(),
       pinned: true,
       centerTitle: true,
-      actions: [IconButton(onPressed: () {}, icon: Icon(Icons.star_outline))],
+      actions: [
+        IconButton(
+            onPressed: () {
+              context.read<FivManager>().toggleFiv(id: widget.id);
+              setState(() {});
+            },
+            icon: Icon(
+              context.read<FivManager>().isFiv(id: widget.id)
+                  ? Icons.star_outlined
+                  : Icons.star_outline,
+            ))
+      ],
       title: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

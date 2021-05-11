@@ -1,3 +1,4 @@
+import 'package:conic/ui/pages/fiv_coins/fiv_coins.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -13,12 +14,7 @@ class IndexToolsList extends StatelessWidget {
           color: Theme.of(context).cardColor,
         ),
         onPress: () {
-          // Navigator.push(
-          //   context,
-          //   CupertinoPageRoute(
-          //     builder: (context) => WatchList(),
-          //   ),
-          // );
+          Navigator.pushNamed(context, FivCoins.route);
         },
       ),
       IndexToolsItem(

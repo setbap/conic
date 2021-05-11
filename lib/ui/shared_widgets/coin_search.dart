@@ -40,10 +40,7 @@ class _CoinSearchState extends State<CoinSearch> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
-        body: BlocConsumer<SearchPageDataCubit, GenericPageStete<SearchData>>(
-          listener: (context, state) {
-            // TODO: implement listener
-          },
+        body: BlocBuilder<SearchPageDataCubit, GenericPageStete<SearchData>>(
           builder: (context, state) {
             if (state.isLoading || state.isError) {
               return SearchShimmer();

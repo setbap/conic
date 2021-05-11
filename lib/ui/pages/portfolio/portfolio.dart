@@ -39,7 +39,7 @@ class _PortfolioState extends State<Portfolio> {
           return BlocConsumer<PortfolioPageDataCubit,
               GenericPageStete<PortfolioPageDataModel>>(
             listenWhen: (previous, current) {
-              return !previous.isError && current.isError;
+              return !previous.isError == current.isError;
             },
             listener: (context, state) {
               showCupertinoDialog(

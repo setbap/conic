@@ -154,6 +154,7 @@ class _CoinDetailState extends State<CoinDetail> {
                   slivers: [
                     CoinDetailAppBar(
                       symbol: coinPrice.symbol.toUpperCase(),
+                      id: coinPrice.id,
                       price: coinPrice.currentPrice!,
                       imageSrc: coinPrice.image ?? "",
                       controller: _controller,

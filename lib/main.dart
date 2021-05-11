@@ -1,10 +1,11 @@
 import 'package:coingecko/coingecko.dart';
 import 'package:conic/home.dart';
-import 'package:conic/manager/transaction_storage.dart';
+import 'package:conic/manager/manager.dart';
 import 'package:conic/repositories/repositories.dart';
 import 'package:conic/ui/pages/add_transaction/add_transaction.dart';
 import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/pages/fiv_coins/fiv_coins.dart';
 import 'package:conic/ui/pages/landing/landing.dart';
 import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/pages/single_coin_history/single_coin_history.dart';
@@ -31,6 +32,7 @@ Future<void> main() async {
   Hive.registerAdapter<CoinTransactionStatus>(CoinTransactionStatusAdapter());
   await Hive.openBox<PortfolioStorage>(PortfolioStorage.PortfolioKey);
   await Hive.openBox<TransactionStorage>(TransactionStorage.TransactionKey);
+  await Hive.openBox<String>(favKey);
 
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory: await getApplicationDocumentsDirectory(),
@@ -51,6 +53,9 @@ Future<void> main() async {
           ),
           RepositoryProvider<TransactionManager>(
             create: (context) => TransactionManager(),
+          ),
+          RepositoryProvider<FivManager>(
+            create: (context) => FivManager(),
           ),
         ],
         child: MultiBlocProvider(
@@ -91,6 +96,11 @@ Future<void> main() async {
                 indexDataRepo: context.read<IndexDataRepository>(),
               ),
             ),
+            BlocProvider<FivPageDataCubit>(
+              create: (BuildContext context) => FivPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),
@@ -119,6 +129,8 @@ class MyApp extends StatelessWidget {
             return MaterialPageRoute(builder: (context) => AddTransaction());
           case Search.route:
             return MaterialPageRoute(builder: (context) => Search());
+          case FivCoins.route:
+            return MaterialPageRoute(builder: (context) => FivCoins());
           case BuyCoin.route:
             final String args = settings.arguments as String;
             return MaterialPageRoute(

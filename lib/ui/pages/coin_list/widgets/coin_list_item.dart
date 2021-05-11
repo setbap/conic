@@ -1,7 +1,9 @@
+import 'package:conic/manager/manager.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_display/number_display.dart';
 
 class CoinListItemData extends StatelessWidget {
@@ -11,18 +13,22 @@ class CoinListItemData extends StatelessWidget {
   final double price;
   final int? rank;
   final String id;
+  final String symbol;
   final double? change;
   final double? marketCap;
   final VoidCallback onPressed;
+  final VoidCallback? onFavPressed;
 
   const CoinListItemData({
     Key? key,
+    this.onFavPressed,
     required this.imageSrc,
     required this.name,
     required this.chartData,
     required this.price,
     required this.rank,
     required this.id,
+    required this.symbol,
     this.change,
     this.marketCap,
     required this.onPressed,
@@ -128,9 +134,9 @@ class CoinListItemData extends StatelessWidget {
                           ),
                         ),
                         Container(
-                          width: 32,
+                          width: 48,
                           child: Text(
-                            id,
+                            symbol,
                             textAlign: TextAlign.center,
                             style: Theme.of(context).textTheme.caption,
                           ),
@@ -156,16 +162,47 @@ class CoinListItemData extends StatelessWidget {
               child: CupertinoButton(
                 padding: const EdgeInsets.all(2),
                 onPressed: () {},
-                child: Icon(
-                  Icons.star_border_outlined,
-                  size: 12,
-                ),
+                child: CoinStar(id: id, onFavPressed: onFavPressed),
               ),
             )
           ],
         ),
       ),
     );
+  }
+}
+
+class CoinStar extends StatefulWidget {
+  final String id;
+  final VoidCallback? onFavPressed;
+  const CoinStar({
+    Key? key,
+    required this.id,
+    this.onFavPressed,
+  }) : super(key: key);
+
+  @override
+  _CoinStarState createState() => _CoinStarState();
+}
+
+class _CoinStarState extends State<CoinStar> {
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () {
+          if (widget.onFavPressed != null) {
+            widget.onFavPressed!();
+          }
+
+          context.read<FivManager>().toggleFiv(id: widget.id);
+          setState(() {});
+        },
+        iconSize: 16,
+        icon: Icon(
+          context.read<FivManager>().isFiv(id: widget.id)
+              ? Icons.star_outlined
+              : Icons.star_outline,
+        ));
   }
 }
 

@@ -10,7 +10,6 @@ class More extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
       child: ValueListenableBuilder<Box<TransactionStorage>>(
-        // TODO better managment
         valueListenable:
             TransactionManager().transactionStorageBox.listenable(),
         builder: (context, box, child) {

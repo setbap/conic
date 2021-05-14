@@ -84,7 +84,7 @@ class _SliverChartBoxState extends State<SliverChartBox> {
     return Container(
       decoration: BoxDecoration(
           color: text == currentTime
-              ? Theme.of(context).accentColor
+              ? Theme.of(context).colorScheme.secondary
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
           border: Border.all(color: Theme.of(context).dividerColor)),
@@ -145,7 +145,7 @@ class SliverChartBoxLoading extends StatelessWidget {
       builder: (context) => Container(
         decoration: BoxDecoration(
           color: text == currentTime
-              ? Theme.of(context).accentColor
+              ? Theme.of(context).colorScheme.secondary
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8),
         ),

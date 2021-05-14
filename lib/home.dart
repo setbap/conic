@@ -17,7 +17,7 @@ class HomeTabBar extends StatelessWidget {
         controller: controller,
         backgroundColor: Theme.of(context).backgroundColor,
         tabBar: CupertinoTabBar(
-          backgroundColor: Theme.of(context).accentColor,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(icon: Icon(Icons.home_filled)),
             BottomNavigationBarItem(icon: Icon(Icons.bar_chart)),

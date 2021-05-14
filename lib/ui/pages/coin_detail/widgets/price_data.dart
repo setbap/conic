@@ -60,7 +60,7 @@ class PriceData extends StatelessWidget {
             ),
             Container(
               height: 120,
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
               width: 2,
               margin: EdgeInsets.only(right: 8),
             ),
@@ -116,7 +116,7 @@ class PriceDataLoading extends StatelessWidget {
               ),
               Container(
                 height: 120,
-                color: Theme.of(context).accentColor,
+                color: Theme.of(context).colorScheme.secondary,
                 width: 2,
                 margin: EdgeInsets.only(right: 8),
               ),

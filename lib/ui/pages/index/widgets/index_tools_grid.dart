@@ -67,7 +67,7 @@ class IndexToolsItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Material(

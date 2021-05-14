@@ -156,9 +156,21 @@ class MyApp extends StatelessWidget {
         }
       },
       theme: ThemeData(
-        brightness: Brightness.dark,
-        accentColor: Colors.grey.shade900,
-        primaryColor: Colors.red,
+        colorScheme: ColorScheme(
+          brightness: Brightness.dark,
+          primary: Colors.red,
+          onPrimary: Colors.white,
+          primaryVariant: Colors.red.shade200,
+          secondary: Colors.grey.shade900,
+          onSecondary: Colors.white,
+          secondaryVariant: Colors.grey.shade400,
+          surface: Colors.black,
+          onSurface: Colors.white,
+          background: Colors.black,
+          onBackground: Colors.white,
+          error: Colors.red,
+          onError: Colors.black,
+        ),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade900,
         ),

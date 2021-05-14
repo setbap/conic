@@ -166,7 +166,7 @@ class CoinAboutLoading extends StatelessWidget {
                       ),
                       Divider(
                         height: 2,
-                        color: Theme.of(context).accentColor,
+                        color: Theme.of(context).colorScheme.secondary,
                       )
                     ],
                   ),

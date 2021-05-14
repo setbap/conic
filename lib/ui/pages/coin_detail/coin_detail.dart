@@ -132,7 +132,7 @@ class _CoinDetailState extends State<CoinDetail> {
                   child: Padding(
                     padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
                     child: Divider(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                   ),
                 ),
@@ -233,7 +233,7 @@ class _CoinDetailState extends State<CoinDetail> {
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
                         child: Divider(
-                          color: Theme.of(context).accentColor,
+                          color: Theme.of(context).colorScheme.secondary,
                         ),
                       ),
                     ),

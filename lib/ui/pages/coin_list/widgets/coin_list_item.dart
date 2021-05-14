@@ -123,7 +123,7 @@ class CoinListItemData extends StatelessWidget {
                             ),
                           ),
                           decoration: BoxDecoration(
-                            color: Theme.of(context).accentColor,
+                            color: Theme.of(context).colorScheme.secondary,
                             borderRadius: BorderRadius.circular(6),
                           ),
                           padding: EdgeInsets.symmetric(

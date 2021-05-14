@@ -29,7 +29,7 @@ class CoinSquare extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: CupertinoButton(
         onPressed: onPress,
@@ -88,7 +88,7 @@ class CoinSquareLoading extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16),
-        color: Theme.of(context).accentColor,
+        color: Theme.of(context).colorScheme.secondary,
       ),
       child: MyShimmer(
         child: Container(

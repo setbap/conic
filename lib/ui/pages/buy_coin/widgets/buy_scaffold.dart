@@ -49,7 +49,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
                 width: double.infinity,
                 margin: EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor,
+                  color: Theme.of(context).colorScheme.secondary,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Row(
@@ -167,7 +167,8 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                           );
                                     }
                                   },
-                                  dropdownColor: Theme.of(context).accentColor,
+                                  dropdownColor:
+                                      Theme.of(context).colorScheme.secondary,
                                   decoration: InputDecoration(
                                     hintText: "0.00",
                                   ),
@@ -365,7 +366,8 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                     border: Border.all(
                                       width: 2,
                                     ),
-                                    color: Theme.of(context).accentColor,
+                                    color:
+                                        Theme.of(context).colorScheme.secondary,
                                   ),
                                   child: Container(
                                     padding: EdgeInsets.symmetric(
@@ -424,7 +426,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
                 child: Container(
                     height: 48,
                     decoration: BoxDecoration(
-                      color: Theme.of(context).accentColor,
+                      color: Theme.of(context).colorScheme.secondary,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
                         width: 2,
@@ -452,7 +454,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
               Container(
                 padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
-                  color: Theme.of(context).accentColor.withAlpha(40),
+                  color: Theme.of(context).colorScheme.secondary.withAlpha(40),
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: TextFormField(
@@ -495,7 +497,8 @@ class _BuyAndSellState extends State<BuyAndSell> {
                                 content: Text(
                                   " Please fill inputs correctly",
                                 ),
-                                backgroundColor: Theme.of(context).accentColor,
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
                               ),
                             );
                           }

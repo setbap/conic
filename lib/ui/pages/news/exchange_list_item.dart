@@ -59,7 +59,7 @@ class ExchnageListItem extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 2, horizontal: 12),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
-              color: Theme.of(context).accentColor,
+              color: Theme.of(context).colorScheme.secondary,
             ),
           ),
         ],

@@ -18,6 +18,11 @@ class _LandingState extends State<Landing> {
       listener: (context, state) {
         if (!state.isLoading) {
           Navigator.pushReplacementNamed(context, MyHomePage.route);
+          Navigator.pushNamedAndRemoveUntil(
+            context,
+            MyHomePage.route,
+            (route) => false,
+          );
         }
       },
       child: Center(

@@ -35,7 +35,9 @@ class IndexNewsList extends StatelessWidget {
               onPressed: () async {
                 final _url = data[index].url;
                 await canLaunch(_url)
-                    ? await launch(_url)
+                    ? await launch(
+                        _url,
+                      )
                     : throw 'Could not launch $_url';
               },
               title: data[index].title,

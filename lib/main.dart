@@ -39,7 +39,8 @@ Future<void> main() async {
   );
   runApp(
     DevicePreview(
-      enabled: !kReleaseMode,
+      // enabled: !kReleaseMode,
+      enabled: false,
       builder: (context) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider<IndexDataRepository>(
@@ -114,11 +115,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      locale: DevicePreview.locale(context), // Add the locale here
-      builder: DevicePreview.appBuilder,
+      // locale: DevicePreview.locale(context), // Add the locale here
+      // builder: DevicePreview.appBuilder,
       title: 'Conic',
       debugShowCheckedModeBanner: false,
       initialRoute: Landing.route,
+
       onGenerateRoute: (settings) {
         switch (settings.name) {
           case Landing.route:
@@ -227,8 +229,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: HomeTabBar(),
+    return Material(
+      child: HomeTabBar(),
     );
   }
 }

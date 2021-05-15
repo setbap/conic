@@ -9,7 +9,7 @@ class ChangeShow extends StatelessWidget {
     Key? key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.change,
-    this.ending = "\$",
+    this.ending = "\%",
     this.fontSize = 10,
   }) : super(key: key);
 
@@ -25,11 +25,9 @@ class ChangeShow extends StatelessWidget {
         mainAxisAlignment: mainAxisAlignment,
         children: [
           Text(
-            "${display(change)} \$",
+            "${display(change)} $ending",
             style: TextStyle(
-              color: (change ?? 0) > 0
-                  ? Colors.green
-                  : Theme.of(context).primaryColor,
+              color: (change ?? 0) > 0 ? Colors.green : Colors.red,
               fontSize: fontSize,
             ),
           ),
@@ -40,7 +38,7 @@ class ChangeShow extends StatelessWidget {
                 )
               : Icon(
                   Icons.arrow_drop_down,
-                  color: Theme.of(context).primaryColor,
+                  color: Colors.red,
                 ),
         ],
       ),

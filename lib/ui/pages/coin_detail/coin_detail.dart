@@ -159,16 +159,15 @@ class _CoinDetailState extends State<CoinDetail> {
                       imageSrc: coinPrice.image ?? "",
                       controller: _controller,
                     ),
-                    PriceChange(
-                      change: coinPrice.priceChange24h,
-                      price: coinPrice.currentPrice!,
+                    SliverChartBox(
+                      currentPrice: coinPrice.currentPrice!,
+                      chartDataArray: [
+                        state.data!.oneDayChartData,
+                        state.data!.sevenDayChartData,
+                        state.data!.thirtyDayChartData,
+                        state.data!.allTimeChartData,
+                      ],
                     ),
-                    SliverChartBox(chartDataArray: [
-                      state.data!.oneDayChartData,
-                      state.data!.sevenDayChartData,
-                      state.data!.thirtyDayChartData,
-                      state.data!.allTimeChartData,
-                    ]),
                     SliverToBoxAdapter(
                       child: Container(
                         padding: EdgeInsets.all(8),

@@ -400,7 +400,12 @@ class _BuyAndSellState extends State<BuyAndSell> {
                         color: Theme.of(context).backgroundColor,
                         child: CupertinoTheme(
                           data: CupertinoThemeData(
-                              brightness: Theme.of(context).brightness),
+                            textTheme: CupertinoTextThemeData(
+                                dateTimePickerTextStyle: TextStyle(
+                              color: Theme.of(context).colorScheme.onBackground,
+                            )),
+                            brightness: Theme.of(context).brightness,
+                          ),
                           child: CupertinoDatePicker(
                             initialDateTime: state.data?.time,
                             onDateTimeChanged: (value) {
@@ -491,6 +496,15 @@ class _BuyAndSellState extends State<BuyAndSell> {
                             context.read<BuyPagePageDataCubit>().addTransaction(
                                   transactionStatus: widget.status,
                                 );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  "Transaction added",
+                                ),
+                                backgroundColor:
+                                    Theme.of(context).colorScheme.secondary,
+                              ),
+                            );
                           } else {
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(

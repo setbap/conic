@@ -98,11 +98,18 @@ class _FivCoinsState extends State<FivCoins> {
                   dataWidget: (state.data == null || state.data!.isEmpty)
                       ? Center(
                           child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.add_box),
                               Text(
                                 "Fav List is Empty",
                                 style: Theme.of(context).textTheme.headline4,
+                              ),
+                              SizedBox(
+                                height: 32,
+                              ),
+                              Text(
+                                "You Must Start Coins to have in this list",
+                                style: Theme.of(context).textTheme.subtitle1,
                               ),
                             ],
                           ),

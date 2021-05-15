@@ -28,9 +28,11 @@ class _FLChartBoxState extends State<FLChartBox> {
         width: double.infinity,
         decoration: const BoxDecoration(color: Colors.transparent),
         child: Padding(
-            padding: const EdgeInsets.all(8),
-            child: Chartic(
-                chartData: widget.chartData![widget.activeIndex!].prices!)),
+          padding: const EdgeInsets.all(8),
+          child: Chartic(
+            chartData: widget.chartData![widget.activeIndex!].prices!,
+          ),
+        ),
       ),
     );
   }
@@ -136,7 +138,7 @@ class Chartic extends StatelessWidget {
         leftTitles: SideTitles(
           showTitles: true,
           getTextStyles: (value) => TextStyle(
-            color: Theme.of(context).canvasColor,
+            color: Theme.of(context).colorScheme.secondaryVariant,
             fontWeight: FontWeight.bold,
             fontSize: 12,
           ),

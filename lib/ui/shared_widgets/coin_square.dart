@@ -1,4 +1,3 @@
-import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +6,13 @@ import 'package:number_display/number_display.dart';
 class CoinSquare extends StatelessWidget {
   final String coinName;
   final double price;
-  final double change;
+  final Widget subtitle;
   final String imgSrc;
   final VoidCallback onPress;
   const CoinSquare({
     Key? key,
     required this.coinName,
-    required this.change,
+    required this.subtitle,
     required this.imgSrc,
     required this.price,
     required this.onPress,
@@ -62,13 +61,12 @@ class CoinSquare extends StatelessWidget {
                     ),
                     Text(
                       numberDisplay(price),
-                      // TODO : text color
                       style: Theme.of(context).textTheme.caption!.copyWith(),
                     ),
                   ],
                 ),
               ),
-              ChangeShow(change: change)
+              subtitle
             ],
           ),
         ),

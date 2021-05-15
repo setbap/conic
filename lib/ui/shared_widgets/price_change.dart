@@ -17,36 +17,34 @@ class PriceChange extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final numberDisplay = createDisplay(length: 8);
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Current Balance",
-              style: TextStyle(
-                fontWeight: FontWeight.w700,
-                fontSize: 14,
-                color: Theme.of(context).canvasColor,
-              ),
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Current Balance",
+            style: TextStyle(
+              fontWeight: FontWeight.w700,
+              fontSize: 14,
+              color: Theme.of(context).canvasColor,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "${numberDisplay(price)} \$",
-                  style: TextStyle(
-                    fontSize: 28,
-                  ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "${numberDisplay(price)} \$",
+                style: TextStyle(
+                  fontSize: 28,
                 ),
-                ChangeShow(
-                  change: change,
-                )
-              ],
-            ),
-          ],
-        ),
+              ),
+              ChangeShow(
+                change: change,
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

@@ -93,9 +93,7 @@ class _CoinListState extends State<CoinList>
                         itemBuilder: (context, index) {
                           return CoinListItemLoading();
                         },
-                        separatorBuilder: (context, index) => Divider(
-                          color: Colors.amber,
-                        ),
+                        separatorBuilder: (context, index) => Divider(),
                         itemCount: 20,
                       ),
                       dataWidget: ListView.separated(
@@ -124,7 +122,8 @@ class _CoinListState extends State<CoinList>
                           );
                         },
                         separatorBuilder: (context, index) => Divider(
-                          color: Theme.of(context).disabledColor,
+                          color:
+                              Theme.of(context).disabledColor.withOpacity(0.1),
                         ),
                         itemCount: state.data?.topCoinList.length ?? 0,
                       ),

@@ -92,7 +92,7 @@ class _NewsState extends State<News> {
                     ),
                   ),
                   BoxTextTitle(
-                    title: "$filterType News",
+                    title: "${filterType ?? " "} News",
                     subTitle: "Last News about $filterType Coins",
                   ),
                   IndexNewsList(

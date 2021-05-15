@@ -74,8 +74,8 @@ class _PortfolioState extends State<Portfolio> {
               );
             },
             builder: (context, state) {
-              return CupertinoPageScaffold(
-                child: CustomScrollView(
+              return Scaffold(
+                body: CustomScrollView(
                   controller: controller,
                   slivers: [
                     LoadingShimmer(
@@ -97,9 +97,11 @@ class _PortfolioState extends State<Portfolio> {
                       error: false,
                       loading: state.isLoading,
                       loadingWidget: PriceChangeLoading(),
-                      dataWidget: PriceChange(
-                        change: state.data?.priceChange ?? 0,
-                        price: state.data?.currentPrice ?? 0,
+                      dataWidget: SliverToBoxAdapter(
+                        child: PriceChange(
+                          change: state.data?.priceChange ?? 0,
+                          price: state.data?.currentPrice ?? 0,
+                        ),
                       ),
                     ),
                     LoadingShimmer(
@@ -147,16 +149,15 @@ class _PortfolioState extends State<Portfolio> {
                               alignment: AlignmentDirectional.centerStart,
                               color: Theme.of(context).primaryColor,
                               child: Text(
-                                "DELETE ${coinPortfolioInfo.id}",
+                                "Sell All ${coinPortfolioInfo.id}",
                                 style: TextStyle(
                                     fontSize: 16,
-                                    color: Theme.of(context).backgroundColor,
+                                    color: Colors.red,
                                     fontWeight: FontWeight.w700),
                               ),
                             ),
                             onDismissed: (direction) async {
                               if (direction == DismissDirection.startToEnd) {
-                                // TODO: imporve This part
                                 TransactionManager().sellAll(
                                   coinId: coinPortfolioInfo.id,
                                 );
@@ -200,43 +201,28 @@ class _PortfolioState extends State<Portfolio> {
                           32,
                         ),
                       ),
-                    SliverToBoxAdapter(
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          primary: Colors.green,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(12),
-                          child: Text(
-                            "Add Transaction",
-                            style:
-                                TextStyle(color: Theme.of(context).cardColor),
-                          ),
-                        ),
-                        onPressed: () {
-                          Navigator.pushNamed(
-                            context,
-                            AddTransaction.route,
-                          );
-                          // box.put(
-                          //   'bitcoin',
-                          //   PortfolioStorage(
-                          //     id: 'bitcoin',
-                          //     name: 'Bitcoin',
-                          //     image:
-                          //         "https://assets.coingecko.com/coins/images/1/large/bitcoin.png?1547033579",
-                          //     symbol: 'btc',
-                          //     price: 54808,
-                          //     fee: 1,
-                          //     desc: "no null",
-                          //     count: 1,
-                          //   ),
-                          // );
-                        },
+                  ],
+                ),
+                bottomNavigationBar: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.green,
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: Text(
+                        "Add Transaction",
+                        style: TextStyle(color: Theme.of(context).cardColor),
                       ),
                     ),
-                    SliverPadding(padding: EdgeInsets.only(top: 100))
-                  ],
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        AddTransaction.route,
+                      );
+                    },
+                  ),
                 ),
               );
             },

@@ -144,7 +144,10 @@ class CoinListItemData extends StatelessWidget {
                         SizedBox(
                           width: 4,
                         ),
-                        ChangeShow(change: change)
+                        ChangeShow(
+                          change: change,
+                          ending: "%",
+                        )
                       ],
                     ),
                     Text(
@@ -194,7 +197,25 @@ class _CoinStarState extends State<CoinStar> {
             widget.onFavPressed!();
           }
 
-          context.read<FivManager>().toggleFiv(id: widget.id);
+          if (context.read<FivManager>().toggleFiv(id: widget.id)) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Coin Added to Fav List",
+                ),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+              ),
+            );
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  "Coin deleted from Fav List",
+                ),
+                backgroundColor: Theme.of(context).colorScheme.secondary,
+              ),
+            );
+          }
           setState(() {});
         },
         iconSize: 16,

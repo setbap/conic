@@ -85,7 +85,10 @@ class Index extends StatelessWidget {
                   arguments: data.id,
                 );
               },
-              change: data.priceChange24h ?? 0,
+              subtitle: ChangeShow(
+                change: data.priceChangePercentage24h,
+                ending: "%",
+              ),
               coinName: data.name,
               imgSrc: data.image ?? "",
               price: data.currentPrice ?? 0,
@@ -107,7 +110,14 @@ class Index extends StatelessWidget {
                   arguments: data.item.id,
                 );
               },
-              change: data.item.score.toDouble(),
+              subtitle: Container(
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  // color: Theme.of(context).colorScheme.secondaryVariant,
+                ),
+                width: double.infinity,
+              ),
               coinName: data.item.name,
               imgSrc: data.item.large,
               price: data.item.marketCapRank.toDouble(),

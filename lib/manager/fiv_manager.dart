@@ -12,13 +12,15 @@ class FivManager {
 
   FivManager._internal();
 
-  void toggleFiv({
+  bool toggleFiv({
     required String id,
   }) {
     if (fivStorageBox.get(id) == null) {
       fivStorageBox.put(id, id);
+      return true;
     } else {
       fivStorageBox.delete(id);
+      return false;
     }
   }
 

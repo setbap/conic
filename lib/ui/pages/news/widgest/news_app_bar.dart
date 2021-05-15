@@ -68,7 +68,7 @@ class NewsChip extends StatelessWidget {
           labelStyle: TextStyle(
               fontSize: 10,
               color: isActive
-                  ? Theme.of(context).primaryColor
+                  ? Theme.of(context).colorScheme.primary
                   : Theme.of(context).textTheme.caption!.color,
               fontWeight: FontWeight.w500,
               letterSpacing: 1.2),

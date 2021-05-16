@@ -176,7 +176,7 @@ class Tickers {
             ? null
             : ConvertedVolume.fromJson(
                 asT<Map<String, dynamic>>(jsonRes['converted_volume'])!),
-        trustScore: asT<String>(jsonRes['trust_score'])!,
+        trustScore: asT<String>(jsonRes['trust_score']),
         bidAskSpreadPercentage:
             asT<double>(jsonRes['bid_ask_spread_percentage'])!,
         timestamp: asT<String>(jsonRes['timestamp'])!,
@@ -197,7 +197,7 @@ class Tickers {
   final double volume;
   final ConvertedLast? convertedLast;
   final ConvertedVolume? convertedVolume;
-  final String trustScore;
+  final String? trustScore;
   final double bidAskSpreadPercentage;
   final String timestamp;
   final String lastTradedAt;

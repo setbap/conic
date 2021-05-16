@@ -2,21 +2,23 @@ import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
 
-class MarketState extends StatelessWidget {
-  final double? mktCap;
-  final double? sentimentVotesDownPercentage;
+class ExchangeInfoShow extends StatelessWidget {
+  final String trustScore;
+  final String rank;
+  final bool isCentralized;
 
-  final double? coingeckoScore;
-  final double? sentimentVotesUpPercentage;
+  final double btcVolume;
+  final String countery;
+  final String yearEstablished;
 
-  final int? rank;
-  const MarketState({
+  const ExchangeInfoShow({
     Key? key,
-    this.mktCap,
-    this.sentimentVotesDownPercentage,
-    this.coingeckoScore,
-    this.sentimentVotesUpPercentage,
-    this.rank,
+    required this.btcVolume,
+    required this.countery,
+    required this.isCentralized,
+    required this.rank,
+    required this.yearEstablished,
+    required this.trustScore,
   }) : super(key: key);
 
   @override
@@ -24,7 +26,7 @@ class MarketState extends StatelessWidget {
     final numberDisplay = createDisplay(length: 6);
 
     return Container(
-      height: 150,
+      height: 120,
       padding: const EdgeInsets.all(8.0),
       child: Container(
         child: Row(
@@ -35,29 +37,30 @@ class MarketState extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   KeyValueData(
-                    dataKey: "Mkt Cap",
-                    dataValue: numberDisplay(mktCap),
+                    dataKey: "Btc Volume",
+                    dataValue: numberDisplay(btcVolume),
+                    ending: " btc",
                   ),
                   KeyValueDataGeneric(
-                      dataKey: "Up vote (%)",
-                      dataValueWidget: Text(
-                        " ${numberDisplay(sentimentVotesUpPercentage)} \%",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.green,
+                    dataKey: "countery    ",
+                    dataValueWidget: Container(
+                      child: Expanded(
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            countery,
+                            textAlign: TextAlign.end,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
-                      )),
-                  KeyValueDataGeneric(
-                    dataKey: "Rank",
-                    dataValueWidget: Text(
-                      " ${numberDisplay(rank)} ",
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey,
                       ),
                     ),
+                  ),
+                  KeyValueData(
+                    dataKey: "Centralized",
+                    dataValue: isCentralized.toString(),
+                    ending: "",
                   ),
                 ],
               ),
@@ -72,22 +75,19 @@ class MarketState extends StatelessWidget {
               child: Column(
                 children: [
                   KeyValueData(
-                    dataKey: "CG Score",
-                    dataValue: numberDisplay(coingeckoScore),
+                    dataKey: "rank",
+                    dataValue: rank,
+                    ending: "",
                   ),
-                  KeyValueDataGeneric(
-                      dataKey: "Down vote(%)",
-                      dataValueWidget: Text(
-                        " ${numberDisplay(sentimentVotesDownPercentage)} \%",
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.red,
-                        ),
-                      )),
-                  KeyValueDataGeneric(
-                    dataKey: "",
-                    dataValueWidget: Text(""),
+                  KeyValueData(
+                    dataKey: "year established",
+                    dataValue: yearEstablished,
+                    ending: "",
+                  ),
+                  KeyValueData(
+                    dataKey: "trust Score",
+                    dataValue: trustScore,
+                    ending: "",
                   ),
                 ],
               ),

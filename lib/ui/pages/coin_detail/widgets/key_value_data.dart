@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 class KeyValueData extends StatelessWidget {
   final String dataKey;
   final String dataValue;
+  final String ending;
   const KeyValueData({
     Key? key,
     required this.dataKey,
     required this.dataValue,
+    this.ending = "\$",
   }) : super(key: key);
 
   @override
@@ -15,10 +17,12 @@ class KeyValueData extends StatelessWidget {
     return KeyValueDataGeneric(
       dataKey: dataKey,
       dataValueWidget: Text(
-        " $dataValue \$",
+        "$dataValue $ending",
+        maxLines: 1,
+        overflow: TextOverflow.ellipsis,
         style: TextStyle(
-          fontSize: 15,
-          fontWeight: FontWeight.w600,
+          fontSize: 13,
+          fontWeight: FontWeight.w500,
           color: Theme.of(context).cardColor,
         ),
       ),
@@ -44,9 +48,11 @@ class KeyValueDataGeneric extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            dataKey,
-            style: Theme.of(context).textTheme.caption,
+          Container(
+            child: Text(
+              dataKey,
+              style: Theme.of(context).textTheme.caption,
+            ),
           ),
           dataValueWidget,
         ],

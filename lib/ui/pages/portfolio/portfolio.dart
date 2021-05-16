@@ -99,9 +99,10 @@ class _PortfolioState extends State<Portfolio> {
                       loadingWidget: PriceChangeLoading(),
                       dataWidget: SliverToBoxAdapter(
                         child: PriceChange(
+                          title: "Current Balance",
                           change: state.data?.priceChange ?? 0,
                           price: state.data?.currentPrice ?? 0,
-                          showDollar: true,
+                          changeEnding: "\$",
                         ),
                       ),
                     ),

@@ -5,14 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:number_display/number_display.dart';
 
 class PriceChange extends StatelessWidget {
+  final String title;
   final double price;
   final double? change;
-  final bool showDollar;
+  final String? priceEnding;
+  final String? changeEnding;
 
   const PriceChange({
     required this.price,
+    required this.title,
+    this.priceEnding,
+    this.changeEnding,
     this.change,
-    this.showDollar = false,
     Key? key,
   }) : super(key: key);
 
@@ -25,7 +29,7 @@ class PriceChange extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Current Balance",
+            title,
             style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 16,
@@ -35,14 +39,14 @@ class PriceChange extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${numberDisplay(price)} \$",
+                "${numberDisplay(price)} ${priceEnding ?? "\$"}",
                 style: TextStyle(
                   fontSize: 28,
                 ),
               ),
               ChangeShow(
                 change: change,
-                ending: showDollar ? "\$" : "%",
+                ending: changeEnding ?? "%",
                 fontSize: 14,
               )
             ],

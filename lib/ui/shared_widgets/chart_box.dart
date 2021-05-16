@@ -5,11 +5,18 @@ import 'package:flutter/material.dart';
 
 class SliverChartBox extends StatefulWidget {
   final List<CoinChart>? chartDataArray;
+  final String title;
+  final String? priceEnding;
+  final String? changeEnding;
+
   final double currentPrice;
 
   const SliverChartBox({
     Key? key,
     this.chartDataArray,
+    this.priceEnding,
+    this.changeEnding,
+    required this.title,
     required this.currentPrice,
   }) : super(key: key);
 
@@ -26,6 +33,9 @@ class _SliverChartBoxState extends State<SliverChartBox> {
       child: Column(
         children: [
           PriceChange(
+            changeEnding: widget.changeEnding,
+            priceEnding: widget.priceEnding,
+            title: widget.title,
             change: widget.chartDataArray![activeIndex].prices!.last.price -
                 widget.chartDataArray![activeIndex].prices!.first.price,
             price: widget.currentPrice,

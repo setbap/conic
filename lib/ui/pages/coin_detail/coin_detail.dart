@@ -160,6 +160,7 @@ class _CoinDetailState extends State<CoinDetail> {
                       controller: _controller,
                     ),
                     SliverChartBox(
+                      title: "${coinDecription?.name ?? ""} price",
                       currentPrice: coinPrice.currentPrice!,
                       chartDataArray: [
                         state.data!.oneDayChartData,

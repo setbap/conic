@@ -1,29 +1,24 @@
-import 'package:conic/manager/manager.dart';
 import 'package:conic/utils/utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:number_display/number_display.dart';
 
-class CoinDetailAppBar extends StatefulWidget {
+class ExchangeDetailAppBar extends StatefulWidget {
   final ScrollController controller;
-  final String symbol;
-  final String id;
-  final double price;
+
+  final String name;
   final String imageSrc;
-  const CoinDetailAppBar({
+  const ExchangeDetailAppBar({
     Key? key,
-    required this.price,
-    required this.id,
-    required this.symbol,
+    required this.name,
     required this.imageSrc,
     required this.controller,
   }) : super(key: key);
 
   @override
-  _CoinDetailAppBarState createState() => _CoinDetailAppBarState();
+  _ExchangeDetailAppBarState createState() => _ExchangeDetailAppBarState();
 }
 
-class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
+class _ExchangeDetailAppBarState extends State<ExchangeDetailAppBar> {
   double textOpacity = 0;
   bool isPageClosed = false;
   var numberDisply = createDisplay(length: 8);
@@ -66,42 +61,12 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
       leading: BackButton(),
       pinned: true,
       centerTitle: true,
-      actions: [
-        IconButton(
-            onPressed: () {
-              context.read<FivManager>().toggleFiv(id: widget.id);
-              setState(() {});
-            },
-            icon: Icon(
-              context.read<FivManager>().isFiv(id: widget.id)
-                  ? Icons.star_outlined
-                  : Icons.star_outline,
-            ))
-      ],
       title: Transform.translate(
         offset: Offset(0, (50 - (textOpacity * 50)).clamp(0, 50)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Opacity(
-              opacity: textOpacity,
-              child: Row(
-                children: [
-                  FittedBox(
-                    child: Text(
-                      widget.symbol,
-                      style: TextStyle(
-                          color: Theme.of(context).cardColor,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 12,
-                  ),
-                ],
-              ),
-            ),
             CircleAvatar(
               backgroundColor: Colors.transparent,
               child: Image.network(
@@ -117,7 +82,7 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
                     width: 12,
                   ),
                   Text(
-                    "\$${numberDisply(widget.price)}",
+                    "${widget.name}",
                     style: TextStyle(
                       color: Theme.of(context).cardColor,
                       fontWeight: FontWeight.w500,
@@ -133,8 +98,8 @@ class _CoinDetailAppBarState extends State<CoinDetailAppBar> {
   }
 }
 
-class CoinDetailAppBarLoading extends StatelessWidget {
-  const CoinDetailAppBarLoading({Key? key}) : super(key: key);
+class ExchangeDetailAppBarLoading extends StatelessWidget {
+  const ExchangeDetailAppBarLoading({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

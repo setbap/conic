@@ -1,12 +1,14 @@
 import 'package:coingecko/coingecko.dart';
-import 'package:conic/business_logic/business_logic.dart';
-import 'package:conic/models/models.dart';
-import 'package:conic/ui/pages/coin_detail/widgets/widgets.dart';
-import 'package:conic/ui/shared_widgets/shared_widgets.dart';
-import 'package:conic/utils/shimmer_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:conic/business_logic/business_logic.dart';
+import 'package:conic/models/models.dart';
+import 'package:conic/ui/pages/coin_detail/widgets/coin_detail_app_bar.dart';
+import 'package:conic/ui/pages/exchange_detail/widgets/widgets.dart';
+import 'package:conic/ui/shared_widgets/shared_widgets.dart';
+import 'package:conic/utils/utils.dart';
 
 class ExchnageDetail extends StatefulWidget {
   const ExchnageDetail({Key? key, required this.id}) : super(key: key);
@@ -105,7 +107,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                   child: Container(
                     padding: EdgeInsets.all(8),
                     child: Text(
-                      "Price (24H)",
+                      "Links",
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
@@ -120,7 +122,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                   child: Container(
                     padding: EdgeInsets.all(8),
                     child: Text(
-                      "Market State",
+                      "Exchange State",
                       style: Theme.of(context)
                           .textTheme
                           .headline5!
@@ -159,15 +161,16 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                   controller: _controller,
                   physics: BouncingScrollPhysics(),
                   slivers: [
-                    CoinDetailAppBar(
-                      symbol: exchangeDetail.name,
-                      id: exchangeDetail.name,
-                      price: exchangeDetail.tradeVolume24hBtcNormalized,
+                    ExchangeDetailAppBar(
+                      name: exchangeDetail.name,
                       imageSrc: exchangeDetail.image,
                       controller: _controller,
                     ),
                     SliverChartBox(
+                      title: "${exchangeDetail.name} BTC Valoum",
                       currentPrice: exchangeDetail.tradeVolume24hBtcNormalized,
+                      changeEnding: "BTC",
+                      priceEnding: "BTC",
                       chartDataArray: [
                         CoinChart(prices: oneDayChartData.prices),
                         CoinChart(prices: sevenDayChartData.prices),
@@ -190,52 +193,6 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                         ),
                       ),
                     ),
-                    SliverPadding(padding: EdgeInsets.all(8)),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          "Price (24H)",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Theme.of(context).cardColor),
-                        ),
-                      ),
-                    ),
-                    // SliverToBoxAdapter(
-                    //   child: PriceData(
-                    //     ath: coinPrice.ath,
-                    //     high: coinPrice.high24h,
-                    //     changePercentage: coinPrice.priceChangePercentage24h,
-                    //     atl: coinPrice.atl,
-                    //     low: coinPrice.low24h,
-                    //     change: coinPrice.priceChange24h,
-                    //   ),
-                    // ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          "Market State",
-                          style: Theme.of(context)
-                              .textTheme
-                              .headline5!
-                              .copyWith(color: Theme.of(context).cardColor),
-                        ),
-                      ),
-                    ),
-                    // SliverToBoxAdapter(
-                    //   child: MarketState(
-                    //     mktCap: coinPrice.marketCap,
-                    //     sentimentVotesUpPercentage:
-                    //         coinDecription?.sentimentVotesUpPercentage,
-                    //     rank: coinPrice.marketCapRank,
-                    //     coingeckoScore: coinDecription?.coingeckoScore,
-                    //     sentimentVotesDownPercentage:
-                    //         coinDecription?.sentimentVotesDownPercentage,
-                    //   ),
-                    // ),
                     SliverToBoxAdapter(
                       child: Padding(
                         padding: EdgeInsets.only(bottom: 16, right: 8, left: 8),
@@ -244,9 +201,76 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                         ),
                       ),
                     ),
-                    // CoinAbout(
-                    //   coinDecription: coinDecription,
-                    // ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          "Exchange State",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Theme.of(context).cardColor),
+                        ),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: ExchangeInfoShow(
+                        btcVolume: exchangeDetail.tradeVolume24hBtc,
+                        countery: exchangeDetail.country,
+                        isCentralized: exchangeDetail.centralized,
+                        rank: exchangeDetail.trustScoreRank.toString(),
+                        trustScore: exchangeDetail.trustScore.toString(),
+                        yearEstablished:
+                            exchangeDetail.yearEstablished.toString(),
+                      ),
+                    ),
+                    SliverToBoxAdapter(
+                      child: Container(
+                        padding: EdgeInsets.all(8),
+                        child: Text(
+                          "Social Media",
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline5!
+                              .copyWith(color: Theme.of(context).cardColor),
+                        ),
+                      ),
+                    ),
+                    SliverList(
+                      delegate: SliverChildListDelegate(
+                        [
+                          LinkListItem(
+                            netImg: exchangeDetail.image,
+                            iconPath: "assets/img/home.png",
+                            text: "Home",
+                            url: exchangeDetail.url,
+                          ),
+                          LinkListItem(
+                            iconPath: "assets/img/fb.png",
+                            text: "Facebook",
+                            url: exchangeDetail.facebookUrl,
+                          ),
+                          LinkListItem(
+                            iconPath: "assets/img/twtr.png",
+                            text: "Twitter",
+                            url: exchangeDetail.twitterHandle == null
+                                ? null
+                                : "https://twitter.com/${exchangeDetail.twitterHandle}",
+                          ),
+                          LinkListItem(
+                            iconPath: "assets/img/tg.png",
+                            text: "Telegram",
+                            url: exchangeDetail.telegramUrl,
+                          ),
+                          LinkListItem(
+                            iconPath: "assets/img/rdit.png",
+                            text: "Reddit",
+                            url: exchangeDetail.redditUrl,
+                          ),
+                        ],
+                      ),
+                    ),
+                    SliverPadding(padding: EdgeInsets.all(16)),
                   ],
                 );
               },
@@ -255,6 +279,63 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
             error: false,
           );
         },
+      ),
+    );
+  }
+}
+
+class LinkListItem extends StatelessWidget {
+  final String? url;
+  final String? text;
+  final String? netImg;
+  final String iconPath;
+  const LinkListItem({
+    Key? key,
+    this.url,
+    this.text,
+    this.netImg,
+    required this.iconPath,
+  }) : super(key: key);
+
+  Widget build(BuildContext context) {
+    if (url == null || url?.trim() == "") {
+      return Container();
+    }
+    return OutlinedButton(
+      onPressed: () async {
+        final canOpenLink = await canLaunch(url!);
+        if (canOpenLink) {
+          launch(url!);
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(4),
+              child: netImg != null
+                  ? Image.network(
+                      netImg!,
+                      width: 24,
+                      height: 24,
+                    )
+                  : Image.asset(
+                      iconPath,
+                      width: 24,
+                      height: 24,
+                    ),
+            ),
+            SizedBox(
+              width: 16,
+            ),
+            Text(
+              text ?? "",
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -5,6 +5,7 @@ import 'package:conic/repositories/repositories.dart';
 import 'package:conic/ui/pages/add_transaction/add_transaction.dart';
 import 'package:conic/ui/pages/buy_coin/buy_coin.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
+import 'package:conic/ui/pages/exchange_detail/exchange_detail.dart';
 import 'package:conic/ui/pages/fiv_coins/fiv_coins.dart';
 import 'package:conic/ui/pages/landing/landing.dart';
 import 'package:conic/ui/pages/search/search.dart';
@@ -102,6 +103,11 @@ Future<void> main() async {
                 indexDataRepo: context.read<IndexDataRepository>(),
               ),
             ),
+            BlocProvider<ExchangeDetailPageDataCubit>(
+              create: (BuildContext context) => ExchangeDetailPageDataCubit(
+                indexDataRepo: context.read<IndexDataRepository>(),
+              ),
+            ),
           ],
           child: MyApp(),
         ),
@@ -152,6 +158,13 @@ class MyApp extends StatelessWidget {
             final String args = settings.arguments as String;
             return MaterialPageRoute(
               builder: (context) => SingleCoinHistory(
+                id: args,
+              ),
+            );
+          case ExchnageDetail.route:
+            final String args = settings.arguments as String;
+            return MaterialPageRoute(
+              builder: (context) => ExchnageDetail(
                 id: args,
               ),
             );

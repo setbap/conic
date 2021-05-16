@@ -2,6 +2,7 @@ import 'package:conic/business_logic/business_logic.dart';
 import 'package:conic/models/models.dart';
 import 'package:conic/ui/pages/coin_detail/coin_detail.dart';
 import 'package:conic/ui/pages/coin_list/widgets/widgets.dart';
+import 'package:conic/ui/pages/exchange_detail/exchange_detail.dart';
 import 'package:conic/ui/pages/search/search.dart';
 import 'package:conic/ui/shared_widgets/shared_widgets.dart';
 import 'package:conic/utils/utils.dart';
@@ -154,6 +155,14 @@ class _CoinListState extends State<CoinList>
                         itemBuilder: (context, index) {
                           return ExchnageListItem(
                             exchangesItem: state.data!.topExchangeList[index],
+                            onPressed: () {
+                              Navigator.pushNamed(
+                                context,
+                                ExchnageDetail.route,
+                                arguments:
+                                    state.data!.topExchangeList[index].id,
+                              );
+                            },
                           );
                         },
                         separatorBuilder: (context, index) => Divider(),

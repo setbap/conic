@@ -73,6 +73,32 @@ class IndexDataRepository {
     );
   }
 
+  Future<ExchangeDetailPageDataModel> getExchangeDetaiPageInfo(
+      String exchangeId) async {
+    final listPageRawData = await Future.wait([
+      _coinApi.exchangeDetail(exchangeName: exchangeId),
+      _coinApi.exchangeValoumChart(exchangeId: exchangeId, days: 1),
+      _coinApi.exchangeValoumChart(exchangeId: exchangeId, days: 7),
+      _coinApi.exchangeValoumChart(exchangeId: exchangeId, days: 30),
+      _coinApi.exchangeValoumChart(exchangeId: exchangeId, days: 365),
+    ]);
+
+    // ignore: unnecessary_cast
+    final exchangeDetail = listPageRawData[0] as ExchangeDetail;
+    final exchangeValoumChart1day = listPageRawData[1] as ExchangeChart;
+    final exchangeValoumChart7day = listPageRawData[2] as ExchangeChart;
+    final exchangeValoumChart30day = listPageRawData[3] as ExchangeChart;
+    final exchangeValoumChart365day = listPageRawData[4] as ExchangeChart;
+
+    return ExchangeDetailPageDataModel(
+      exchangeDetail: exchangeDetail,
+      oneDayChartData: exchangeValoumChart1day,
+      sevenDayChartData: exchangeValoumChart7day,
+      thirtyDayChartData: exchangeValoumChart30day,
+      allTimeChartData: exchangeValoumChart365day,
+    );
+  }
+
   Future<NewsApiResualt> getNewsPageInfo(NewsFilter newsFilter) async {
     // using filter=(rising|hot|bullish|bearish|important|saved|lol):
     final newsData = await _newsApi

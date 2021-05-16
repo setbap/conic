@@ -5,14 +5,17 @@ import 'package:number_display/number_display.dart';
 
 class ExchnageListItem extends StatelessWidget {
   final ExchangesItem exchangesItem;
+  final VoidCallback onPressed;
 
-  const ExchnageListItem({Key? key, required this.exchangesItem})
+  const ExchnageListItem(
+      {Key? key, required this.exchangesItem, required this.onPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final numberDisplay = createDisplay(length: 4);
     return ListTile(
+      onTap: onPressed,
       contentPadding: EdgeInsets.symmetric(horizontal: 8),
       leading: CircleAvatar(
         radius: 18,

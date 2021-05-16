@@ -9,3 +9,4 @@ export 'hive_models/hive_modals.dart';
 export 'portfolio_page_model.dart';
 export 'buy_page_model.dart';
 export 'search_data.dart';
+export 'exchange_detail_page_model.dart';

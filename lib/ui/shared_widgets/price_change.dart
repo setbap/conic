@@ -7,10 +7,12 @@ import 'package:number_display/number_display.dart';
 class PriceChange extends StatelessWidget {
   final double price;
   final double? change;
+  final bool showDollar;
 
   const PriceChange({
     required this.price,
     this.change,
+    this.showDollar = false,
     Key? key,
   }) : super(key: key);
 
@@ -25,9 +27,8 @@ class PriceChange extends StatelessWidget {
           Text(
             "Current Balance",
             style: TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 14,
-              color: Theme.of(context).canvasColor,
+              fontWeight: FontWeight.w500,
+              fontSize: 16,
             ),
           ),
           Row(
@@ -41,6 +42,8 @@ class PriceChange extends StatelessWidget {
               ),
               ChangeShow(
                 change: change,
+                ending: showDollar ? "\$" : "%",
+                fontSize: 14,
               )
             ],
           ),

@@ -5,19 +5,21 @@ class ChangeShow extends StatelessWidget {
   final MainAxisAlignment mainAxisAlignment;
   final String ending;
   final double fontSize;
+  final int lenCount;
   const ChangeShow({
     Key? key,
     this.mainAxisAlignment = MainAxisAlignment.start,
     this.change,
     this.ending = "\%",
     this.fontSize = 10,
+    this.lenCount = 8,
   }) : super(key: key);
 
   final double? change;
 
   @override
   Widget build(BuildContext context) {
-    final display = createDisplay(length: 8);
+    final display = createDisplay(length: lenCount);
 
     return Container(
       child: Row(

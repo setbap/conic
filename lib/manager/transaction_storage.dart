@@ -25,8 +25,8 @@ class TransactionManager {
         ? -1
         : 1;
     final before = portfolioStorageBox.get(transactionStorage.id);
-    final count = transactionStorage.count * isNegetive;
-    final price = transactionStorage.price * isNegetive;
+    final count = transactionStorage.count;
+    final price = transactionStorage.price * isNegetive * count;
     transactionStorageBox.put(
       transactionStorage.id + "__" + DateTime.now().toString(),
       transactionStorage.copyWith(

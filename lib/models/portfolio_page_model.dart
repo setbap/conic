@@ -51,8 +51,7 @@ class PortfolioPageDataModel {
       ));
       this.currentPrice +=
           coinsList[i].currentPrice! * portfolio[coinsList[i].id]!.count;
-      this.oldPrice +=
-          portfolio[coinsList[i].id]!.price * portfolio[coinsList[i].id]!.count;
+      this.oldPrice += portfolio[coinsList[i].id]!.price;
     }
     this.priceChange = currentPrice - oldPrice;
     this.sparkLine = sumList(sparks);

@@ -123,7 +123,7 @@ class MyLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return Link(
       uri: Uri.parse(path),
-      target: LinkTarget.self,
+      target: LinkTarget.blank,
       builder: (context, followLink) => TextButton(
         onPressed: followLink,
         child: Text(

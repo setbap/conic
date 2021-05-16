@@ -10,7 +10,10 @@ class CustomChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Chip(
-      label: Text(text),
+      label: Text(
+        text,
+        style: Theme.of(context).textTheme.bodyText1,
+      ),
       shape: RoundedRectangleBorder(
         side: BorderSide(
           width: 1,

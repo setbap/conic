@@ -101,6 +101,7 @@ class _PortfolioState extends State<Portfolio> {
                         child: PriceChange(
                           change: state.data?.priceChange ?? 0,
                           price: state.data?.currentPrice ?? 0,
+                          showDollar: true,
                         ),
                       ),
                     ),
@@ -163,8 +164,9 @@ class _PortfolioState extends State<Portfolio> {
                                 );
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content:
-                                        Text("${coinPortfolioInfo.id} deleted"),
+                                    content: Text(
+                                      "${coinPortfolioInfo.id} deleted",
+                                    ),
                                   ),
                                 );
                               }
@@ -173,7 +175,8 @@ class _PortfolioState extends State<Portfolio> {
                             child: PortfolioTableDataRow(
                               change: state.isLoading
                                   ? 0
-                                  : coinPriceInfo!.currentPrice! -
+                                  : coinPriceInfo!.currentPrice! *
+                                          coinPortfolioInfo.count -
                                       coinPortfolioInfo.price,
                               isLoading: state.isLoading,
                               coinCount: coinPortfolioInfo.count,
@@ -195,12 +198,6 @@ class _PortfolioState extends State<Portfolio> {
                         childCount: portfolioItems.length,
                       ),
                     ),
-                    if (portfolioItems.length == 0)
-                      SliverPadding(
-                        padding: EdgeInsets.all(
-                          32,
-                        ),
-                      ),
                   ],
                 ),
                 bottomNavigationBar: Padding(

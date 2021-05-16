@@ -46,13 +46,9 @@ class PriceData extends StatelessWidget {
                   ),
                   KeyValueDataGeneric(
                     dataKey: "Chnage%",
-                    dataValueWidget: Text(
-                      " ${numberDisplay(changePercentage)} \%",
-                      style: TextStyle(
-                        fontSize: 10,
-                        fontWeight: FontWeight.w600,
-                        color: Theme.of(context).cardColor,
-                      ),
+                    dataValueWidget: ChangeShow(
+                      change: changePercentage,
+                      fontSize: 12,
                     ),
                   ),
                 ],
@@ -79,6 +75,8 @@ class PriceData extends StatelessWidget {
                     dataKey: "Change",
                     dataValueWidget: ChangeShow(
                       change: change,
+                      ending: "\$",
+                      fontSize: 12,
                     ),
                   ),
                 ],

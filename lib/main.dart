@@ -39,8 +39,8 @@ Future<void> main() async {
   );
   runApp(
     DevicePreview(
-      // enabled: !kReleaseMode,
-      enabled: false,
+      enabled: !kReleaseMode,
+      // enabled: false,
       builder: (context) => MultiRepositoryProvider(
         providers: [
           RepositoryProvider<IndexDataRepository>(
@@ -115,8 +115,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // locale: DevicePreview.locale(context), // Add the locale here
-      // builder: DevicePreview.appBuilder,
+      locale: DevicePreview.locale(context), // Add the locale here
+      builder: DevicePreview.appBuilder,
       title: 'Conic',
       debugShowCheckedModeBanner: false,
       initialRoute: Landing.route,
@@ -173,6 +173,11 @@ class MyApp extends StatelessWidget {
           error: Colors.red,
           onError: Colors.black,
         ),
+        snackBarTheme: SnackBarThemeData(
+            backgroundColor: Colors.grey.shade900,
+            contentTextStyle: TextStyle(
+              color: Colors.white,
+            )),
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.grey.shade900,
         ),

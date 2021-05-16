@@ -487,10 +487,7 @@ class _BuyAndSellState extends State<BuyAndSell> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     Expanded(
-                      child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                          backgroundColor: Colors.green,
-                        ),
+                      child: ElevatedButton(
                         onPressed: () {
                           if (_formKey.currentState?.validate() ?? false) {
                             context.read<BuyPagePageDataCubit>().addTransaction(
@@ -517,9 +514,13 @@ class _BuyAndSellState extends State<BuyAndSell> {
                             );
                           }
                         },
-                        child: Text(
-                          "Add Transaction",
-                          style: TextStyle(color: Theme.of(context).cardColor),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Add Transaction",
+                            style:
+                                TextStyle(color: Theme.of(context).cardColor),
+                          ),
                         ),
                       ),
                     ),
@@ -541,17 +542,17 @@ class BuyAndSellLoading extends StatelessWidget {
   const BuyAndSellLoading();
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width - 40;
     return MyShimmer(
-      child: Column(
+      child: ListView(
         children: [
           Container(
             padding: EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
               ],
             ),
           ),
@@ -560,8 +561,8 @@ class BuyAndSellLoading extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
               ],
             ),
           ),
@@ -570,8 +571,8 @@ class BuyAndSellLoading extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
-                BoxShimmer(height: 48, width: width / 2 - 40, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
+                BoxShimmer(height: 48, width: width / 2 - 70, radius: 12),
               ],
             ),
           ),
@@ -585,7 +586,7 @@ class BuyAndSellLoading extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                BoxShimmer(height: 48, width: width - 40, radius: 12),
+                BoxShimmer(height: 48, width: width - 140, radius: 12),
               ],
             ),
           ),

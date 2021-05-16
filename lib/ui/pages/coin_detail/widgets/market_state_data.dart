@@ -39,7 +39,7 @@ class MarketState extends StatelessWidget {
                     dataValue: numberDisplay(mktCap),
                   ),
                   KeyValueDataGeneric(
-                      dataKey: "Up vote %",
+                      dataKey: "Up vote (%)",
                       dataValueWidget: Text(
                         " ${numberDisplay(sentimentVotesUpPercentage)} \%",
                         style: TextStyle(
@@ -76,13 +76,13 @@ class MarketState extends StatelessWidget {
                     dataValue: numberDisplay(coingeckoScore),
                   ),
                   KeyValueDataGeneric(
-                      dataKey: "Down vote",
+                      dataKey: "Down vote(%)",
                       dataValueWidget: Text(
                         " ${numberDisplay(sentimentVotesDownPercentage)} \%",
                         style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w600,
-                          color: Theme.of(context).primaryColor,
+                          color: Colors.red,
                         ),
                       )),
                   KeyValueDataGeneric(

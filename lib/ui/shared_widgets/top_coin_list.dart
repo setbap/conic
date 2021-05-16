@@ -26,6 +26,7 @@ class TopCoinList<T> extends StatelessWidget {
           loading: isLoading,
           error: false,
           dataWidget: ListView(
+            physics: BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             children: data.map(dataBuilder).toList(),
           ),

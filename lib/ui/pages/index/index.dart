@@ -48,6 +48,7 @@ class Index extends StatelessWidget {
       );
     }, builder: (context, state) {
       return CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           SliverAppBar(
             title: Text("Index"),
@@ -139,9 +140,9 @@ class Index extends StatelessWidget {
           SeeAllNews(onPress: () {
             controller.index = 3;
           }),
-          SliverPadding(
-            padding: EdgeInsets.symmetric(vertical: 54),
-          )
+          // SliverPadding(
+          //   padding: EdgeInsets.symmetric(vertical: 54),
+          // )
         ],
       );
     });

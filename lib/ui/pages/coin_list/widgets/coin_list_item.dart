@@ -114,7 +114,7 @@ class CoinListItemData extends StatelessWidget {
                     Row(
                       children: [
                         Container(
-                          width: 24,
+                          width: 20,
                           child: Text(
                             '$rank',
                             textAlign: TextAlign.center,
@@ -130,14 +130,15 @@ class CoinListItemData extends StatelessWidget {
                             vertical: 2,
                           ),
                           margin: EdgeInsets.only(
-                            right: 6,
+                            right: 3,
                           ),
                         ),
                         Container(
-                          width: 48,
+                          width: 32,
                           child: Text(
                             symbol,
                             textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
                             style: Theme.of(context).textTheme.caption,
                           ),
                         ),
@@ -147,6 +148,7 @@ class CoinListItemData extends StatelessWidget {
                         ChangeShow(
                           change: change,
                           ending: "%",
+                          lenCount: 5,
                         )
                       ],
                     ),

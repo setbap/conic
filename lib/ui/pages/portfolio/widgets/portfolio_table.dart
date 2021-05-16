@@ -115,6 +115,7 @@ class PortfolioTableDataRow extends StatelessWidget {
                       ChangeShow(
                         change: change,
                         mainAxisAlignment: MainAxisAlignment.center,
+                        ending: "\$",
                       )
                     ],
                   ),

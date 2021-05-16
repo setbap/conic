@@ -239,11 +239,6 @@ class _CoinDetailState extends State<CoinDetail> {
                     CoinAbout(
                       coinDecription: coinDecription,
                     ),
-                    SliverToBoxAdapter(
-                      child: Container(
-                        height: 120,
-                      ),
-                    ),
                   ],
                 );
               },

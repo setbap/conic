@@ -271,6 +271,108 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                       ),
                     ),
                     SliverPadding(padding: EdgeInsets.all(16)),
+                    if (exchangeDetail.statusUpdates.length > 0)
+                      SliverToBoxAdapter(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            "Latest Update",
+                            style:
+                                Theme.of(context).textTheme.headline5!.copyWith(
+                                      color: Theme.of(context).cardColor,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = exchangeDetail.statusUpdates[index];
+                        return Container(
+                          child: Card(
+                            color: Colors.grey,
+                            child: Column(
+                              children: [
+                                Text(item.userTitle),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    children: [
+                                      Image.network(
+                                        item.project.image.small,
+                                        width: 32,
+                                        height: 32,
+                                      ),
+                                      Text(item.project.name),
+                                      Text(item.project.type),
+                                    ],
+                                  ),
+                                ),
+                                Text(item.description),
+                              ],
+                            ),
+                          ),
+                        );
+                      }, childCount: exchangeDetail.statusUpdates.length),
+                    ),
+                    SliverPadding(padding: EdgeInsets.all(16)),
+                    if (exchangeDetail.tickers.length > 0)
+                      SliverToBoxAdapter(
+                        child: Container(
+                          padding: EdgeInsets.all(8),
+                          child: Text(
+                            "Tickers",
+                            style:
+                                Theme.of(context).textTheme.headline5!.copyWith(
+                                      color: Theme.of(context).cardColor,
+                                    ),
+                          ),
+                        ),
+                      ),
+                    SliverList(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        final item = exchangeDetail.tickers[index];
+                        return ListTile(
+                          onTap: () async {
+                            if (item.tradeUrl != null) {
+                              final x = await canLaunch(item.tradeUrl!);
+                              if (x) {
+                                await launch(item.tradeUrl!);
+                              }
+                            }
+                          },
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${item.base} ->",
+                              ),
+                              Text(
+                                " ${item.target}",
+                              ),
+                            ],
+                          ),
+                          subtitle: Row(
+                            children: [
+                              Text(
+                                "${item.convertedLast?.usd} \$",
+                              ),
+                            ],
+                          ),
+                          trailing: Text(
+                            "val :${item.convertedVolume?.usd}",
+                          ),
+                          leading: CircleAvatar(
+                            radius: 16,
+                            backgroundColor: item.trustScore == "green"
+                                ? Colors.green
+                                : Colors.red,
+                            child: Container(),
+                          ),
+                        );
+                      }, childCount: exchangeDetail.tickers.length),
+                    ),
+                    SliverPadding(padding: EdgeInsets.all(48)),
                   ],
                 );
               },

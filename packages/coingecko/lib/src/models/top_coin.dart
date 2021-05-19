@@ -5,6 +5,8 @@ void tryCatch(Function? f) {
   try {
     f?.call();
   } catch (e, stack) {
+    print(e);
+    print(stack);
     log('$e');
     log('$stack');
   }

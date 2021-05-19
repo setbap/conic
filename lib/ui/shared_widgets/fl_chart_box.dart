@@ -140,7 +140,7 @@ class Chartic extends StatelessWidget {
           getTextStyles: (value) => TextStyle(
             color: Theme.of(context).colorScheme.secondaryVariant,
             fontWeight: FontWeight.bold,
-            fontSize: 12,
+            fontSize: 10,
           ),
           interval: (priceRange / 4),
           getTitles: (value) {

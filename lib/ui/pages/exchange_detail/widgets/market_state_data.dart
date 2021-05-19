@@ -14,7 +14,7 @@ class ExchangeInfoShow extends StatelessWidget {
   const ExchangeInfoShow({
     Key? key,
     required this.btcVolume,
-    required this.countery,
+    this.countery = "  ",
     required this.isCentralized,
     required this.rank,
     required this.yearEstablished,

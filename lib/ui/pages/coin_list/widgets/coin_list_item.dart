@@ -38,8 +38,9 @@ class CoinListItemData extends StatelessWidget {
   Widget build(BuildContext context) {
     final display = createDisplay(length: 8);
 
-    return InkWell(
-      onTap: onPressed,
+    return CupertinoButton(
+      onPressed: onPressed,
+      padding: EdgeInsets.zero,
       child: Container(
         height: 70,
         padding: const EdgeInsets.symmetric(
@@ -70,11 +71,7 @@ class CoinListItemData extends StatelessWidget {
                         name,
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1,
-                          fontSize: 12,
-                        ),
+                        style: Theme.of(context).textTheme.bodyText1,
                       ),
                     ),
                     Expanded(
@@ -94,13 +91,12 @@ class CoinListItemData extends StatelessWidget {
                     ),
                     SizedBox(),
                     Container(
-                      width: 60,
+                      width: 70,
                       child: Text(
                         "${display(price)}\$",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 1,
-                            fontSize: 10),
+                        textAlign: TextAlign.end,
+                        style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                            color: Theme.of(context).colorScheme.onBackground),
                       ),
                     ),
                   ],
@@ -118,9 +114,12 @@ class CoinListItemData extends StatelessWidget {
                           child: Text(
                             '$rank',
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 9,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.caption!.copyWith(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .onBackground,
+                                    ),
                           ),
                           decoration: BoxDecoration(
                             color: Theme.of(context).colorScheme.secondary,

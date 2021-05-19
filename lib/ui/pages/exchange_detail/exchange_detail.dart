@@ -162,13 +162,14 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                   physics: BouncingScrollPhysics(),
                   slivers: [
                     ExchangeDetailAppBar(
-                      name: exchangeDetail.name,
-                      imageSrc: exchangeDetail.image,
+                      name: exchangeDetail.name ?? "",
+                      imageSrc: exchangeDetail.image ?? "",
                       controller: _controller,
                     ),
                     SliverChartBox(
-                      title: "${exchangeDetail.name} BTC Valoum",
-                      currentPrice: exchangeDetail.tradeVolume24hBtcNormalized,
+                      title: "${exchangeDetail.name} BTC Volume",
+                      currentPrice:
+                          exchangeDetail.tradeVolume24hBtcNormalized ?? 0,
                       changeEnding: "BTC",
                       priceEnding: "BTC",
                       chartDataArray: [
@@ -215,13 +216,13 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                     ),
                     SliverToBoxAdapter(
                       child: ExchangeInfoShow(
-                        btcVolume: exchangeDetail.tradeVolume24hBtc,
-                        countery: exchangeDetail.country,
-                        isCentralized: exchangeDetail.centralized,
+                        btcVolume: exchangeDetail.tradeVolume24hBtc ?? 0,
+                        countery: exchangeDetail.country ?? "   ",
+                        isCentralized: exchangeDetail.centralized ?? true,
                         rank: exchangeDetail.trustScoreRank.toString(),
                         trustScore: exchangeDetail.trustScore.toString(),
                         yearEstablished:
-                            exchangeDetail.yearEstablished.toString(),
+                            exchangeDetail.yearEstablished?.toString() ?? "__",
                       ),
                     ),
                     SliverToBoxAdapter(
@@ -271,7 +272,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                       ),
                     ),
                     SliverPadding(padding: EdgeInsets.all(16)),
-                    if (exchangeDetail.statusUpdates.length > 0)
+                    if ((exchangeDetail.statusUpdates?.length ?? 0) > 0)
                       SliverToBoxAdapter(
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -286,7 +287,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                       ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        final item = exchangeDetail.statusUpdates[index];
+                        final item = exchangeDetail.statusUpdates![index];
                         return Container(
                           child: Card(
                             color: Colors.grey,
@@ -298,7 +299,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                                   child: Row(
                                     children: [
                                       Image.network(
-                                        item.project.image.small,
+                                        item.project.image.small ?? "",
                                         width: 32,
                                         height: 32,
                                       ),
@@ -312,10 +313,10 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                             ),
                           ),
                         );
-                      }, childCount: exchangeDetail.statusUpdates.length),
+                      }, childCount: exchangeDetail.statusUpdates?.length),
                     ),
                     SliverPadding(padding: EdgeInsets.all(16)),
-                    if (exchangeDetail.tickers.length > 0)
+                    if ((exchangeDetail.tickers?.length ?? 0) > 0)
                       SliverToBoxAdapter(
                         child: Container(
                           padding: EdgeInsets.all(8),
@@ -330,7 +331,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                       ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        final item = exchangeDetail.tickers[index];
+                        final item = exchangeDetail.tickers![index];
                         return ListTile(
                           onTap: () async {
                             if (item.tradeUrl != null) {
@@ -370,7 +371,7 @@ class _ExchnageDetailState extends State<ExchnageDetail> {
                             child: Container(),
                           ),
                         );
-                      }, childCount: exchangeDetail.tickers.length),
+                      }, childCount: exchangeDetail.tickers?.length),
                     ),
                     SliverPadding(padding: EdgeInsets.all(48)),
                   ],

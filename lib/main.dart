@@ -173,9 +173,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme(
           brightness: Brightness.dark,
-          primary: Colors.red,
+          primary: Colors.orange.shade500,
           onPrimary: Colors.white,
-          primaryVariant: Colors.red.shade200,
+          primaryVariant: Colors.yellow.shade200,
           secondary: Colors.grey.shade900,
           onSecondary: Colors.white,
           secondaryVariant: Colors.grey.shade600,
@@ -207,7 +207,7 @@ class MyApp extends StatelessWidget {
         backgroundColor: Colors.black,
         iconTheme: IconThemeData(color: Colors.white),
         cupertinoOverrideTheme: CupertinoThemeData(
-          primaryColor: Colors.red,
+          primaryColor: Colors.orange.shade500,
           brightness: Brightness.dark,
         ),
         hintColor: Colors.lightBlue.shade200,

@@ -186,13 +186,20 @@ class CoinGeckoClient {
     return ExchangeChart.fromJson(exchangeValoumChartRaw);
   }
 
-  Future<ExchangeDetail> exchangeDetail({
+  Future<ExchangeDetail?> exchangeDetail({
     required String exchangeName,
   }) async {
     final exchangeDetailRaw = await _genericGet(
       path: Endpoints.exchangesId(id: exchangeName),
     );
-    return ExchangeDetail.fromJson(exchangeDetailRaw);
+
+    try {
+      final x = ExchangeDetail.fromJson(exchangeDetailRaw);
+      return x;
+    } catch (e) {
+      print("errr");
+      print(e);
+    }
   }
 
   Future<List<ExchangesItem>> topExchangesInfo({

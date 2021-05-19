@@ -3,12 +3,12 @@ import 'models.dart';
 
 class ExchangeDetail {
   ExchangeDetail({
-    required this.name,
-    required this.yearEstablished,
-    required this.country,
-    required this.description,
-    required this.url,
-    required this.image,
+    this.name,
+    this.yearEstablished,
+    this.country,
+    this.description = "",
+    this.url,
+    this.image,
     this.facebookUrl,
     this.redditUrl,
     this.telegramUrl,
@@ -17,15 +17,14 @@ class ExchangeDetail {
     this.otherUrl2,
     this.twitterHandle,
     this.hasTradingIncentive,
-    required this.centralized,
-    required this.publicNotice,
+    this.centralized,
     this.alertNotice,
-    required this.trustScore,
-    required this.trustScoreRank,
-    required this.tradeVolume24hBtc,
-    required this.tradeVolume24hBtcNormalized,
-    required this.tickers,
-    required this.statusUpdates,
+    this.trustScore,
+    this.trustScoreRank,
+    this.tradeVolume24hBtc,
+    this.tradeVolume24hBtcNormalized,
+    this.tickers,
+    this.statusUpdates,
   });
 
   factory ExchangeDetail.fromJson(Map<String, dynamic> jsonRes) {
@@ -54,12 +53,12 @@ class ExchangeDetail {
       }
     }
     return ExchangeDetail(
-      name: asT<String>(jsonRes['name'])!,
-      yearEstablished: asT<int>(jsonRes['year_established'])!,
-      country: asT<String>(jsonRes['country'])!,
-      description: asT<String>(jsonRes['description'])!,
-      url: asT<String>(jsonRes['url'])!,
-      image: asT<String>(jsonRes['image'])!,
+      name: asT<String>(jsonRes['name']),
+      yearEstablished: asT<int>(jsonRes['year_established']),
+      country: asT<String>(jsonRes['country']),
+      description: asT<String>(jsonRes['description']),
+      url: asT<String>(jsonRes['url']),
+      image: asT<String>(jsonRes['image']),
       facebookUrl: asT<String?>(jsonRes['facebook_url']),
       redditUrl: asT<String?>(jsonRes['reddit_url']),
       telegramUrl: asT<String?>(jsonRes['telegram_url']),
@@ -68,25 +67,24 @@ class ExchangeDetail {
       otherUrl2: asT<String?>(jsonRes['other_url_2']),
       twitterHandle: asT<String?>(jsonRes['twitter_handle']),
       hasTradingIncentive: asT<bool?>(jsonRes['has_trading_incentive']),
-      centralized: asT<bool>(jsonRes['centralized'])!,
-      publicNotice: asT<String>(jsonRes['public_notice'])!,
+      centralized: asT<bool>(jsonRes['centralized']),
       alertNotice: asT<String?>(jsonRes['alert_notice']),
-      trustScore: asT<int>(jsonRes['trust_score'])!,
-      trustScoreRank: asT<int>(jsonRes['trust_score_rank'])!,
-      tradeVolume24hBtc: asT<double>(jsonRes['trade_volume_24h_btc'])!,
+      trustScore: asT<int>(jsonRes['trust_score']),
+      trustScoreRank: asT<int>(jsonRes['trust_score_rank']),
+      tradeVolume24hBtc: asT<double>(jsonRes['trade_volume_24h_btc']),
       tradeVolume24hBtcNormalized:
-          asT<double>(jsonRes['trade_volume_24h_btc_normalized'])!,
-      tickers: tickers!,
-      statusUpdates: statusUpdates!,
+          asT<double>(jsonRes['trade_volume_24h_btc_normalized']),
+      tickers: tickers,
+      statusUpdates: statusUpdates,
     );
   }
 
-  final String name;
-  final int yearEstablished;
-  final String country;
-  final String description;
-  final String url;
-  final String image;
+  final String? name;
+  final int? yearEstablished;
+  final String? country;
+  final String? description;
+  final String? url;
+  final String? image;
   final String? facebookUrl;
   final String? redditUrl;
   final String? telegramUrl;
@@ -95,15 +93,15 @@ class ExchangeDetail {
   final String? otherUrl2;
   final String? twitterHandle;
   final bool? hasTradingIncentive;
-  final bool centralized;
-  final String publicNotice;
+  final bool? centralized;
+
   final String? alertNotice;
-  final int trustScore;
-  final int trustScoreRank;
-  final double tradeVolume24hBtc;
-  final double tradeVolume24hBtcNormalized;
-  final List<Tickers> tickers;
-  final List<StatusUpdates> statusUpdates;
+  final int? trustScore;
+  final int? trustScoreRank;
+  final double? tradeVolume24hBtc;
+  final double? tradeVolume24hBtcNormalized;
+  final List<Tickers>? tickers;
+  final List<StatusUpdates>? statusUpdates;
 
   @override
   String toString() {
@@ -126,7 +124,6 @@ class ExchangeDetail {
         'twitter_handle': twitterHandle,
         'has_trading_incentive': hasTradingIncentive,
         'centralized': centralized,
-        'public_notice': publicNotice,
         'alert_notice': alertNotice,
         'trust_score': trustScore,
         'trust_score_rank': trustScoreRank,
@@ -153,9 +150,9 @@ class Tickers {
     required this.bidAskSpreadPercentage,
     required this.timestamp,
     required this.lastTradedAt,
-    required this.lastFetchAt,
-    required this.isAnomaly,
-    required this.isStale,
+    this.lastFetchAt,
+    this.isAnomaly,
+    this.isStale,
     this.tradeUrl,
     this.tokenInfoUrl,
     this.coinId,
@@ -178,12 +175,12 @@ class Tickers {
                 asT<Map<String, dynamic>>(jsonRes['converted_volume'])!),
         trustScore: asT<String>(jsonRes['trust_score']),
         bidAskSpreadPercentage:
-            asT<double>(jsonRes['bid_ask_spread_percentage'])!,
+            asT<double>(jsonRes['bid_ask_spread_percentage']),
         timestamp: asT<String>(jsonRes['timestamp'])!,
-        lastTradedAt: asT<String>(jsonRes['last_traded_at'])!,
-        lastFetchAt: asT<String>(jsonRes['last_fetch_at'])!,
-        isAnomaly: asT<bool>(jsonRes['is_anomaly'])!,
-        isStale: asT<bool>(jsonRes['is_stale'])!,
+        lastTradedAt: asT<String>(jsonRes['last_traded_at']),
+        lastFetchAt: asT<String>(jsonRes['last_fetch_at']),
+        isAnomaly: asT<bool>(jsonRes['is_anomaly']),
+        isStale: asT<bool>(jsonRes['is_stale']),
         tradeUrl: asT<String?>(jsonRes['trade_url']),
         tokenInfoUrl: asT<Object?>(jsonRes['token_info_url']),
         coinId: asT<String?>(jsonRes['coin_id']),
@@ -198,12 +195,12 @@ class Tickers {
   final ConvertedLast? convertedLast;
   final ConvertedVolume? convertedVolume;
   final String? trustScore;
-  final double bidAskSpreadPercentage;
-  final String timestamp;
-  final String lastTradedAt;
-  final String lastFetchAt;
-  final bool isAnomaly;
-  final bool isStale;
+  final double? bidAskSpreadPercentage;
+  final String? timestamp;
+  final String? lastTradedAt;
+  final String? lastFetchAt;
+  final bool? isAnomaly;
+  final bool? isStale;
   final String? tradeUrl;
   final Object? tokenInfoUrl;
   final String? coinId;
@@ -241,20 +238,20 @@ class Tickers {
 
 class Market {
   Market({
-    required this.name,
-    required this.identifier,
-    required this.hasTradingIncentive,
+    this.name,
+    this.identifier,
+    this.hasTradingIncentive,
   });
 
   factory Market.fromJson(Map<String, dynamic> jsonRes) => Market(
-        name: asT<String>(jsonRes['name'])!,
-        identifier: asT<String>(jsonRes['identifier'])!,
-        hasTradingIncentive: asT<bool>(jsonRes['has_trading_incentive'])!,
+        name: asT<String>(jsonRes['name']),
+        identifier: asT<String>(jsonRes['identifier']),
+        hasTradingIncentive: asT<bool>(jsonRes['has_trading_incentive']),
       );
 
-  final String name;
-  final String identifier;
-  final bool hasTradingIncentive;
+  final String? name;
+  final String? identifier;
+  final bool? hasTradingIncentive;
 
   @override
   String toString() {
@@ -424,9 +421,9 @@ class Project {
 
 class ExchangeImage {
   ExchangeImage({
-    required this.thumb,
-    required this.small,
-    required this.large,
+    this.thumb,
+    this.small,
+    this.large,
   });
 
   factory ExchangeImage.fromJson(Map<String, dynamic> jsonRes) => ExchangeImage(
@@ -435,9 +432,9 @@ class ExchangeImage {
         large: asT<String>(jsonRes['large'])!,
       );
 
-  final String thumb;
-  final String small;
-  final String large;
+  final String? thumb;
+  final String? small;
+  final String? large;
 
   @override
   String toString() {

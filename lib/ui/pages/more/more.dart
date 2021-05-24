@@ -1,6 +1,5 @@
 import 'package:conic/business_logic/theme_cubit/theme_data_cubit.dart';
 import 'package:conic/manager/manager.dart';
-import 'package:conic/manager/transaction_storage.dart';
 import 'package:conic/models/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,22 +14,31 @@ class More extends StatelessWidget {
       appBar: AppBar(),
       body: ListView(
         children: [
-          ListTile(
-            title: Text("Theme Mode"),
-            trailing: CupertinoSlidingSegmentedControl<AppThemeMode>(
-                thumbColor: Theme.of(context).colorScheme.primary,
-                groupValue: RepositoryProvider.of<AppThemeModeManager>(context)
-                    .getThemeMode(),
-                padding: EdgeInsets.all(4),
-                onValueChanged: (value) {
-                  if (value != null)
-                    context.read<ThemeDataCubit>().changeTheme(mode: value);
-                },
-                children: const <AppThemeMode, Widget>{
-                  AppThemeMode.Dark: Text('Dark'),
-                  AppThemeMode.Light: Text('Light'),
-                }),
-          )
+          ValueListenableBuilder<Box<AppThemeMode>>(
+              valueListenable: Hive.box<AppThemeMode>(appThemeKey).listenable(),
+              builder: (context, box, child) {
+                return ListTile(
+                  title: Text("Theme Mode"),
+                  trailing: CupertinoSlidingSegmentedControl<AppThemeMode>(
+                      thumbColor: Theme.of(context).colorScheme.primary,
+                      groupValue:
+                          RepositoryProvider.of<AppThemeModeManager>(context)
+                              .getThemeMode(),
+                      padding: EdgeInsets.all(4),
+                      onValueChanged: (value) {
+                        print(value);
+                        if (value != null)
+                          context
+                              .read<ThemeDataCubit>()
+                              .changeTheme(mode: value);
+                      },
+                      children: const <AppThemeMode, Widget>{
+                        AppThemeMode.System: Text('System'),
+                        AppThemeMode.Dark: Text('Dark'),
+                        AppThemeMode.Light: Text('Light'),
+                      }),
+                );
+              })
         ],
       ),
     );

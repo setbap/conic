@@ -23,7 +23,7 @@ class AppThemeModeManager {
   }
 
   AppThemeMode getThemeMode() {
-    return appThemeStorageBox.get("mode") ?? AppThemeMode.Dark;
+    return appThemeStorageBox.get("mode") ?? AppThemeMode.System;
   }
 
   ThemeData getTheme() {

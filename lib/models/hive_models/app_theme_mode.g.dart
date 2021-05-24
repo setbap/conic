@@ -17,6 +17,8 @@ class AppThemeModeAdapter extends TypeAdapter<AppThemeMode> {
         return AppThemeMode.Light;
       case 1:
         return AppThemeMode.Dark;
+      case 2:
+        return AppThemeMode.System;
       default:
         return AppThemeMode.Light;
     }
@@ -30,6 +32,9 @@ class AppThemeModeAdapter extends TypeAdapter<AppThemeMode> {
         break;
       case AppThemeMode.Dark:
         writer.writeByte(1);
+        break;
+      case AppThemeMode.System:
+        writer.writeByte(2);
         break;
     }
   }

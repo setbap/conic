@@ -111,83 +111,88 @@ Future<void> main() async {
           ),
         ),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   ));
 }
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
+
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Box<AppThemeMode>>(
         valueListenable: Hive.box<AppThemeMode>(appThemeKey).listenable(),
         builder: (context, box, child) {
           return MaterialApp(
-              title: 'Conic',
-              debugShowCheckedModeBanner: false,
-              initialRoute: Landing.route,
-              onGenerateRoute: (settings) {
-                switch (settings.name) {
-                  case Landing.route:
-                    return MaterialPageRoute(builder: (context) => Landing());
-                  case MyHomePage.route:
-                    return MaterialPageRoute(
-                        builder: (context) => MyHomePage());
-                  case AddTransaction.route:
-                    return MaterialPageRoute(
-                        builder: (context) => AddTransaction());
-                  case Search.route:
-                    return MaterialPageRoute(builder: (context) => Search());
-                  case FivCoins.route:
-                    return MaterialPageRoute(builder: (context) => FivCoins());
-                  case BuyCoin.route:
-                    final String args = settings.arguments as String;
-                    return MaterialPageRoute(
-                      builder: (context) => BuyCoin(
-                        coinId: args,
-                      ),
-                    );
-                  case CoinDetail.route:
-                    final String args = settings.arguments as String;
-                    return MaterialPageRoute(
-                      builder: (context) => CoinDetail(
-                        id: args,
-                      ),
-                    );
+            title: 'Conic',
+            debugShowCheckedModeBanner: false,
+            initialRoute: Landing.route,
+            onGenerateRoute: (settings) {
+              switch (settings.name) {
+                case Landing.route:
+                  return MaterialPageRoute(builder: (context) => Landing());
+                case MyHomePage.route:
+                  return MaterialPageRoute(
+                    builder: (context) => const MyHomePage(),
+                  );
+                case AddTransaction.route:
+                  return MaterialPageRoute(
+                      builder: (context) => AddTransaction());
+                case Search.route:
+                  return MaterialPageRoute(builder: (context) => Search());
+                case FivCoins.route:
+                  return MaterialPageRoute(builder: (context) => FivCoins());
+                case BuyCoin.route:
+                  final String args = settings.arguments as String;
+                  return MaterialPageRoute(
+                    builder: (context) => BuyCoin(
+                      coinId: args,
+                    ),
+                  );
+                case CoinDetail.route:
+                  final String args = settings.arguments as String;
+                  return MaterialPageRoute(
+                    builder: (context) => CoinDetail(
+                      id: args,
+                    ),
+                  );
 
-                  case SingleCoinHistory.route:
-                    final String args = settings.arguments as String;
-                    return MaterialPageRoute(
-                      builder: (context) => SingleCoinHistory(
-                        id: args,
-                      ),
-                    );
-                  case ExchnageDetail.route:
-                    final String args = settings.arguments as String;
-                    return MaterialPageRoute(
-                      builder: (context) => ExchnageDetail(
-                        id: args,
-                      ),
-                    );
-                }
-              },
-              theme: (box.get("mode") ?? AppThemeMode.Dark) == AppThemeMode.Dark
-                  ? darkTheme
-                  : lightTheme);
+                case SingleCoinHistory.route:
+                  final String args = settings.arguments as String;
+                  return MaterialPageRoute(
+                    builder: (context) => SingleCoinHistory(
+                      id: args,
+                    ),
+                  );
+                case ExchnageDetail.route:
+                  final String args = settings.arguments as String;
+                  return MaterialPageRoute(
+                    builder: (context) => ExchnageDetail(
+                      id: args,
+                    ),
+                  );
+              }
+            },
+            theme: lightTheme,
+            darkTheme: darkTheme,
+            themeMode:
+                (box.get("mode") ?? AppThemeMode.System) == AppThemeMode.System
+                    ? ThemeMode.system
+                    : box.get("mode") == AppThemeMode.Light
+                        ? ThemeMode.light
+                        : ThemeMode.dark,
+          );
         });
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MyHomePage extends StatelessWidget {
   static const String route = "/";
   static String get routeRegEx => "/";
-  MyHomePage({Key? key}) : super(key: key);
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
+  const MyHomePage({Key? key}) : super(key: key);
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Material(

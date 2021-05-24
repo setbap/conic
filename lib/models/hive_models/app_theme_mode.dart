@@ -8,4 +8,6 @@ enum AppThemeMode {
   Light,
   @HiveField(1)
   Dark,
+  @HiveField(2)
+  System,
 }

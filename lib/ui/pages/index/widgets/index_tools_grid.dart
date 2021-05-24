@@ -7,11 +7,11 @@ class IndexToolsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<Widget> items = [
       IndexToolsItem(
-        backgroundColor: Color(0xff8A3FFC),
+        backgroundColor: Color(0xff7A6FFC),
         text: 'Fav list',
         icon: Icon(
-          Icons.backup_table_outlined,
-          color: Theme.of(context).cardColor,
+          Icons.favorite,
+          color: Theme.of(context).colorScheme.primary,
         ),
         onPress: () {
           Navigator.pushNamed(context, FivCoins.route);
@@ -67,10 +67,10 @@ class IndexToolsItem extends StatelessWidget {
       clipBehavior: Clip.antiAlias,
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(12),
       ),
       child: Material(
+        color: Theme.of(context).colorScheme.secondary,
         child: InkWell(
           onTap: onPress,
           child: Row(

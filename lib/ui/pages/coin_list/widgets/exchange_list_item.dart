@@ -15,14 +15,18 @@ class ExchnageListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final numberDisplay = createDisplay(length: 4);
     return CupertinoButton(
+      color: Colors.transparent,
       onPressed: onPressed,
       padding: EdgeInsets.zero,
       child: ListTile(
         contentPadding: EdgeInsets.symmetric(horizontal: 8),
-        leading: CircleAvatar(
-          radius: 18,
-          child: Image.network(
-            exchangesItem.image!,
+        leading: Container(
+          color: Colors.red,
+          child: CircleAvatar(
+            radius: 18,
+            child: Image.network(
+              exchangesItem.image!,
+            ),
           ),
         ),
         title: Padding(
@@ -48,7 +52,7 @@ class ExchnageListItem extends StatelessWidget {
                 style: TextStyle(
                   color: (exchangesItem.trustScore ?? 0) > 5
                       ? Colors.green
-                      : Theme.of(context).primaryColor,
+                      : Colors.red,
                 ),
               ),
             ),

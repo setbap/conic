@@ -64,7 +64,7 @@ class Chartic extends StatelessWidget {
     return LineChart(LineChartData(
       lineTouchData: LineTouchData(
         touchTooltipData: LineTouchTooltipData(
-            tooltipBgColor: Theme.of(context).canvasColor,
+            tooltipBgColor: Theme.of(context).cardColor,
             getTooltipItems: (List<LineBarSpot> touchedBarSpots) {
               return touchedBarSpots.map((barSpot) {
                 final flSpot = barSpot;

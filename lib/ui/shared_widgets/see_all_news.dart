@@ -13,14 +13,6 @@ class SeeAllNews extends StatelessWidget {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: ElevatedButton(
-          onPressed: onPress,
-          child: Text(
-            "See All news",
-            style:
-                Theme.of(context).textTheme.bodyText2!.copyWith(fontSize: 12),
-          ),
-        ),
       ),
     );
   }

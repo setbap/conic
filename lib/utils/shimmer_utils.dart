@@ -11,8 +11,8 @@ class MyShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Shimmer.fromColors(
-      highlightColor: shimmerHighlightColor,
-      baseColor: shimmerBaseColor,
+      highlightColor: Theme.of(context).colorScheme.primary,
+      baseColor: Theme.of(context).colorScheme.secondary,
       child: child,
     );
   }
@@ -104,4 +104,3 @@ class BoxShimmer extends StatelessWidget {
 }
 
 final Color shimmerHighlightColor = Colors.orange.shade700;
-final Color shimmerBaseColor = Color(0xFF222222);

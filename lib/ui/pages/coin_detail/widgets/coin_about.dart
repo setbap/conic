@@ -26,7 +26,7 @@ class CoinAbout extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "About ${coinDecription!.name}",
+              " About ${coinDecription!.name}",
               style: Theme.of(context).textTheme.headline5,
             ),
             SizedBox(
@@ -50,6 +50,7 @@ class CoinAbout extends StatelessWidget {
                 SizedBox(height: 16),
                 Wrap(
                   spacing: 8,
+                  runSpacing: 8,
                   crossAxisAlignment: WrapCrossAlignment.start,
                   children: (coinDecription?.categories ?? [])
                       .map((e) => CustomChip(text: e))

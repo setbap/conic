@@ -518,8 +518,6 @@ class _BuyAndSellState extends State<BuyAndSell> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             "Add Transaction",
-                            style:
-                                TextStyle(color: Theme.of(context).cardColor),
                           ),
                         ),
                       ),

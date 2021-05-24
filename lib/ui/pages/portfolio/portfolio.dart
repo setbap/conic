@@ -211,7 +211,6 @@ class _PortfolioState extends State<Portfolio> {
                       padding: const EdgeInsets.all(12),
                       child: Text(
                         "Add Transaction",
-                        style: TextStyle(color: Theme.of(context).cardColor),
                       ),
                     ),
                     onPressed: () {

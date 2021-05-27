@@ -23,6 +23,6 @@ jobs:
         with:
           artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GH_TOKEN }}
-          tag: ${{ 0.0.2 }}
+          tag: "0.0.2"
           commit: ${{ github.sha }}
           prerelease: true

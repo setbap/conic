@@ -1,0 +1,132 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.elsina.conic"
+4    android:versionCode="4001"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+8-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="30" />
+9-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:3:6-68
+11-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:3:23-65
+12    <!-- Nest within the manifest element, not the application element -->
+13    <queries>
+13-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:5:5-18:15
+14        <intent>
+14-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:6:9-9:18
+15            <action android:name="android.intent.action.VIEW" />
+15-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:7:13-65
+15-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:7:21-62
+16
+17            <data android:scheme="https" />
+17-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:8:13-44
+17-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:8:19-41
+18        </intent>
+19        <intent>
+19-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:10:9-13:18
+20            <action android:name="android.intent.action.DIAL" />
+20-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:11:13-65
+20-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:11:21-62
+21
+22            <data android:scheme="tel" />
+22-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:8:13-44
+22-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:8:19-41
+23        </intent>
+24        <intent>
+24-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:14:9-17:18
+25            <action android:name="android.intent.action.SEND" />
+25-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:15:13-65
+25-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:15:21-62
+26
+27            <data android:mimeType="*/*" />
+27-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:8:13-44
+27-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:16:19-41
+28        </intent>
+29    </queries>
+30
+31    <application
+31-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:19:4-57:19
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.1.0] /home/runner/.gradle/caches/transforms-2/files-2.1/2e94107f30f39be366a17347c2bf100b/core-1.1.0/AndroidManifest.xml:24:18-86
+33        android:icon="@mipmap/ic_launcher"
+33-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:21:9-43
+34        android:label="conic" >
+34-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:20:9-30
+35        <activity
+35-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:22:9-51:20
+36            android:name="com.elsina.conic.MainActivity"
+36-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:23:13-41
+37            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+37-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:26:13-163
+38            android:hardwareAccelerated="true"
+38-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:27:13-47
+39            android:launchMode="singleTop"
+39-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:24:13-43
+40            android:theme="@style/LaunchTheme"
+40-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:25:13-47
+41            android:windowSoftInputMode="adjustResize" >
+41-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:28:13-55
+42
+43            <!--
+44                 Specifies an Android theme to apply to this Activity as soon as
+45                 the Android process has started. This theme is visible to the user
+46                 while the Flutter UI initializes. After that, this theme continues
+47                 to determine the Window background behind the Flutter UI.
+48            -->
+49            <meta-data
+49-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:34:13-37:17
+50                android:name="io.flutter.embedding.android.NormalTheme"
+50-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:35:15-70
+51                android:resource="@style/NormalTheme" />
+51-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:36:15-52
+52            <!--
+53                 Displays an Android View that continues showing the launch screen
+54                 Drawable until Flutter paints its first frame, then this splash
+55                 screen fades out. A splash screen is useful to avoid any visual
+56                 gap between the end of Android's launch screen and the painting of
+57                 Flutter's first frame.
+58            -->
+59            <meta-data
+59-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:43:13-46:17
+60                android:name="io.flutter.embedding.android.SplashScreenDrawable"
+60-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:44:15-79
+61                android:resource="@drawable/launch_background" />
+61-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:45:15-61
+62
+63            <intent-filter>
+63-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:47:13-50:29
+64                <action android:name="android.intent.action.MAIN" />
+64-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:48:17-68
+64-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:48:25-66
+65
+66                <category android:name="android.intent.category.LAUNCHER" />
+66-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:49:17-76
+66-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:49:27-74
+67            </intent-filter>
+68        </activity>
+69        <!--
+70             Don't delete the meta-data below.
+71             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+72        -->
+73        <meta-data
+73-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:54:9-56:33
+74            android:name="flutterEmbedding"
+74-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:55:13-44
+75            android:value="2" />
+75-->/home/runner/work/conic/conic/android/app/src/main/AndroidManifest.xml:56:13-30
+76
+77        <activity
+77-->[:url_launcher] /home/runner/work/conic/conic/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:8:9-11:74
+78            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+78-->[:url_launcher] /home/runner/work/conic/conic/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:9:13-74
+79            android:exported="false"
+79-->[:url_launcher] /home/runner/work/conic/conic/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:10:13-37
+80            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+80-->[:url_launcher] /home/runner/work/conic/conic/build/url_launcher/intermediates/library_manifest/release/AndroidManifest.xml:11:13-71
+81    </application>
+82
+83</manifest>

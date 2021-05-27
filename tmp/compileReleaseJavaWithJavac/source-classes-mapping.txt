@@ -1,0 +1,4 @@
+io/flutter/plugins/GeneratedPluginRegistrant.java
+ io.flutter.plugins.GeneratedPluginRegistrant
+com/elsina/conic/BuildConfig.java
+ com.elsina.conic.BuildConfig

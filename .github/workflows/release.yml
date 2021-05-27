@@ -2,7 +2,8 @@ name: Demo Conic Release
 
 on:
   push:
-    branches: [main]
+    tags:
+      - "*"
 
 jobs:
   build:
@@ -12,7 +13,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-java@v1
         with:
-          java-version: '12.x'
+          java-version: "12.x"
       - uses: subosito/flutter-action@v1
         with:
           channel: "master"
@@ -24,7 +25,7 @@ jobs:
         with:
           artifacts: "build/app/outputs/apk/release/*.apk,build/app/outputs/bundle/release/app-release.aab"
           token: ${{ secrets.GH_TOKEN }}
-          tag: "0.0.2"
+          tag: ${{ steps.version.outputs.content }}
           commit: ${{ github.sha }}
           prerelease: true
       - name: deploy_gh
@@ -32,4 +33,3 @@ jobs:
         with:
           github_token: ${{ secrets.GH_TOKEN }}
           publish_dir: ./build/app/
-          

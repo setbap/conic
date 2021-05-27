@@ -18,6 +18,7 @@ jobs:
           channel: "master"
       - run: flutter pub get
       - run: flutter build apk --release --split-per-abi
+      - run: flutter build web
       - name: Create a Release in GitHub
         uses: ncipollo/release-action@v1
         with:
@@ -26,3 +27,9 @@ jobs:
           tag: "0.0.2"
           commit: ${{ github.sha }}
           prerelease: true
+      - name: deploy_gh
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GH_TOKEN }}
+          publish_dir: ./build/app/
+          
